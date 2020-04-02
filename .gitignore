@@ -1,0 +1,7 @@
+Makefile*
+object_script*
+*.pro.user
+.qmake*
+debug/
+release/
+
