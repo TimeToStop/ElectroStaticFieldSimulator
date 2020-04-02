@@ -15,6 +15,7 @@ Engine::Engine(int w, int h, QWidget *parent):
     m_default_time(10.f),
     m_main_timer(),
     m_lambda(0.1f),
+    m_dielectric(1.f),
     m_charges()
 {
     m_main_timer.start(m_default_time);
@@ -22,14 +23,13 @@ Engine::Engine(int w, int h, QWidget *parent):
     setFocusPolicy(Qt::StrongFocus);
     setMinimumSize(w, h);
 
-    m_charges.push_back(std::unique_ptr<Charge>(new Charge(1.f, Vector(), this)));
-    m_charges.push_back(std::unique_ptr<Charge>(new Charge(1.f, Vector(1, 0), this)));
+    m_charges.push_back(std::unique_ptr<Charge>(new Charge(1.f, Vector(3, 3), this)));
+    m_charges.push_back(std::unique_ptr<Charge>(new Charge(1.f, Vector(2, -1), this)));
     m_charges.push_back(std::unique_ptr<Charge>(new Charge(1.f, Vector(-1, 0), this)));
 
-    m_charges[0]->setVelocity(Vector(0, 40));
-    m_charges[0]->addForce(Vector(0, -10));
-    m_charges[1]->addForce(Vector(0, -9.8));
-    m_charges[2]->addForce(Vector(0, -9.8));
+    m_charges[0]->setCharge(-0.00001);
+    m_charges[1]->setCharge(0.00001);
+    m_charges[2]->setCharge(0.00001);
 }
 
 Engine::~Engine()
@@ -119,23 +119,60 @@ void Engine::drawBorder(QPainter& painter)
 
 void Engine::drawCharges(QPainter& painter)
 {
-//    QElapsedTimer timer;
-//    timer.start();
+    QElapsedTimer timer;
+    timer.start();
+
+    for(size_t i = 0; i < m_charges.size(); i++)
+    {
+        applyCharge(i);
+    }
 
     for(std::unique_ptr<Charge>& charge : m_charges)
     {
         charge->tick(painter, m_default_time/1000);
     }
 
-//    qDebug() << timer.elapsed();
+    qDebug() << timer.elapsed();
 }
 
 void Engine::drawSelectingRect(QPainter& painter)
 {
     painter.setPen(QPen(Qt::blue, 3, Qt::SolidLine));
     painter.setBrush(QBrush(QColor(0, 0, 255, 80), Qt::SolidPattern));
-
     painter.drawRect(QRect(m_pos_left_mouse_clicked, m_current_cursor_pos));
+}
+
+void Engine::applyCharge(size_t i)
+{
+    static const float k = 9000000000;
+    m_charges[i]->setForce(Vector(0, 0));
+
+    for(size_t j = 0; j < m_charges.size(); j++)
+    {
+        if(i != j)
+        {
+            const float dx = m_charges[j]->pos().x() - m_charges[i]->pos().x();
+            const float dy = m_charges[j]->pos().y() - m_charges[i]->pos().y();
+            const float r = sqrt(dx*dx+dy*dy);
+            const float f = k*abs(m_charges[i]->charge()*m_charges[j]->charge())/(r*r*m_dielectric);
+            const float fx = f*abs(dx)/r;
+            const float fy = f*abs(dy)/r;
+
+            if(m_charges[i]->charge() * m_charges[j]->charge() > 0)
+            {
+                m_charges[i]->addForce(Vector(-sign(dx)*fx, -sign(dy)*fy));
+            }
+            else
+            {
+                m_charges[i]->addForce(Vector(sign(dx)*fx, sign(dy)*fy));
+            }
+        }
+    }
+}
+
+int Engine::sign(float x)
+{
+    return (x > 0) ? 1 : -1;
 }
 
 Vector Engine::toXOY(const Vector& vec) const

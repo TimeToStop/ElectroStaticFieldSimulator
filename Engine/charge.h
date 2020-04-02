@@ -31,6 +31,7 @@ public:
     void setPos(const Vector&);
     void setVelocity(const Vector&);
     void setAcceleration(const Vector&);
+    void setForce(const Vector&);
     void setMass(float);
     void setCharge(float);
 

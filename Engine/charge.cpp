@@ -7,7 +7,7 @@ const int Charge::m_radius = 5;
 Charge::Charge(Engine* const engine):
     m_engine(engine),
     m_charge(0.f),
-    m_mass(0.f),
+    m_mass(1.f),
     m_pos(),
     m_velocity(),
     m_acceleration()
@@ -47,6 +47,11 @@ void Charge::setVelocity(const Vector& v)
 void Charge::setAcceleration(const Vector& a)
 {
     m_acceleration = a;
+}
+
+void Charge::setForce(const Vector& f)
+{
+    m_acceleration = f/m_mass;
 }
 
 void Charge::setMass(float m)
@@ -103,6 +108,6 @@ void Charge::draw(QPainter& painter) const
 
 void Charge::tick(float deltatime)
 {
-    m_pos += m_velocity * deltatime;
     m_velocity += m_acceleration * deltatime;
+    m_pos += m_velocity * deltatime;
 }

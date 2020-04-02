@@ -30,6 +30,7 @@ class Engine : public QWidget
     QTimer m_main_timer;
 
     float m_lambda;
+    float m_dielectric;
 
     std::vector<std::unique_ptr<Charge>> m_charges;
 
@@ -56,6 +57,10 @@ private:
     void drawBorder(QPainter&);
     void drawCharges(QPainter&);
     void drawSelectingRect(QPainter&);
+
+    void applyCharge(size_t);
+
+    static int sign(float);
 };
 
 #endif // ENGINE_H
