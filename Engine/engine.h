@@ -23,7 +23,7 @@ class Engine : public QWidget
 
     QPoint m_current_cursor_pos;
     QPoint m_pos_left_mouse_clicked;
-    QPoint m_previous_pos_right_mus_clicked;
+    QPoint m_previous_pos_right_mouse_clicked;
     QPoint m_diff_from_start;
 
     const float m_default_time;

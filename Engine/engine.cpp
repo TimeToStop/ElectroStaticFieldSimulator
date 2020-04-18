@@ -10,7 +10,7 @@ Engine::Engine(int w, int h, QWidget *parent):
     m_is_right_mouse_pressed(false),
     m_current_cursor_pos(),
     m_pos_left_mouse_clicked(),
-    m_previous_pos_right_mus_clicked(),
+    m_previous_pos_right_mouse_clicked(),
     m_diff_from_start(),
     m_default_time(10.f),
     m_main_timer(),
@@ -67,7 +67,7 @@ void Engine::mousePressEvent(QMouseEvent* e)
     else if(e->button() == Qt::RightButton)
     {
         m_is_right_mouse_pressed = true;
-        m_previous_pos_right_mus_clicked = e->pos();
+        m_previous_pos_right_mouse_clicked = e->pos();
     }
 
     m_current_cursor_pos = e->pos();
@@ -78,8 +78,8 @@ void Engine::mouseMoveEvent(QMouseEvent* e)
 {
     if(m_is_right_mouse_pressed)
     {
-        m_diff_from_start += e->pos() - m_previous_pos_right_mus_clicked;
-        m_previous_pos_right_mus_clicked = e->pos();
+        m_diff_from_start += e->pos() - m_previous_pos_right_mouse_clicked;
+        m_previous_pos_right_mouse_clicked = e->pos();
     }
 
     m_current_cursor_pos = e->pos();
@@ -132,7 +132,7 @@ void Engine::drawCharges(QPainter& painter)
         charge->tick(painter, m_default_time/1000);
     }
 
-    qDebug() << timer.elapsed();
+    //qDebug() << timer.elapsed();
 }
 
 void Engine::drawSelectingRect(QPainter& painter)
@@ -177,7 +177,7 @@ int Engine::sign(float x)
 
 Vector Engine::toXOY(const Vector& vec) const
 {
-    return (Vector(vec.x(), -vec.y()) + m_diff_from_start - size()/2) * m_lambda;
+    return Vector(vec.x() - size().width()/2 - m_diff_from_start.x(), -vec.y() + size().height()/2 + m_diff_from_start.y())*m_lambda;
 }
 
 Vector Engine::fromXOY(const Vector& vec) const
