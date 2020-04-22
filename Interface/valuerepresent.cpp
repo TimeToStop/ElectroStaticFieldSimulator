@@ -5,6 +5,7 @@
 #include <QLabel>
 
 ValueRepresent::ValueRepresent(const QString& name, const QString& measure, double val, QWidget *parent):
+    QWidget(parent),
     m_edit(nullptr),
     m_measure_label(nullptr),
     m_name(name),
