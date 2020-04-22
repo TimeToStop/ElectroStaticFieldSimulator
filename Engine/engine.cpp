@@ -6,7 +6,7 @@
 
 const float Engine::SCALE = 1.f;
 
-Engine::Engine(int w, int h, QWidget *parent):
+Engine::Engine(QWidget *parent):
     QWidget(parent),
     m_draw_grid(true),
     m_is_left_mouse_pressed(false),
@@ -24,13 +24,13 @@ Engine::Engine(int w, int h, QWidget *parent):
     m_main_timer.start(m_default_time);
     connect(&m_main_timer, SIGNAL(timeout()), this, SLOT(redraw()));
     setFocusPolicy(Qt::StrongFocus);
-    setMinimumSize(w, h);
+    setMinimumSize(400, 400);
 
-//    m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(3, 3), this)));
+    m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(3, 3), this)));
 //    m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(2, -1), this)));
-    //m_charges.push_back(std::unique_ptr<Charge>(new Charge(1.f, Vector(-1, 0), this)));
+//    m_charges.push_back(std::unique_ptr<Charge>(new Charge(1.f, Vector(-1, 0), this)));
 
-//    m_charges[0]->setCharge(0.0001);
+    m_charges[0]->setCharge(0.0001);
 //    m_charges[1]->setCharge(0.0001);
 //    m_charges[2]->setCharge(0.00001);
 }

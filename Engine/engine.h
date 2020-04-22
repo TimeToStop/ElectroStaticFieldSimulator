@@ -39,7 +39,7 @@ class Engine : public QWidget
     std::vector<std::unique_ptr<Charge>> m_charges;
 
 public:
-    explicit Engine(int, int, QWidget *parent = nullptr);
+    explicit Engine(QWidget *parent = nullptr);
     virtual ~Engine();
 
     Vector toXOY(float, float) const;
