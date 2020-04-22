@@ -15,7 +15,7 @@ Engine::Engine(QWidget *parent):
     m_pos_left_mouse_clicked(),
     m_previous_pos_right_mouse_clicked(),
     m_diff_from_start(),
-    m_default_time(100.f),
+    m_default_time(10.f),
     m_main_timer(),
     m_lambda(0.1f),
     m_dielectric(1.f),
@@ -27,12 +27,12 @@ Engine::Engine(QWidget *parent):
     setMinimumSize(400, 400);
 
     m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(3, 3), this)));
-//    m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(2, -1), this)));
-//    m_charges.push_back(std::unique_ptr<Charge>(new Charge(1.f, Vector(-1, 0), this)));
+    m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(2, -1), this)));
+    m_charges.push_back(std::unique_ptr<Charge>(new Charge(1.f, Vector(-1, 0), this)));
 
-    m_charges[0]->setCharge(0.0001);
-//    m_charges[1]->setCharge(0.0001);
-//    m_charges[2]->setCharge(0.00001);
+    m_charges[0]->setCharge(0.00001);
+    m_charges[1]->setCharge(-0.00001);
+    m_charges[2]->setCharge(0.00001);
 }
 
 Engine::~Engine()
@@ -192,14 +192,7 @@ Vector Engine::applyCharge(size_t i)
             const float fx = f*abs(dx)/r;
             const float fy = f*abs(dy)/r;
 
-            if(m_charges[i]->charge() * m_charges[j]->charge() > 0)
-            {
-                res += Vector(-sign(dx)*fx, -sign(dy)*fy);
-            }
-            else
-            {
-                res += Vector(sign(dx)*fx, sign(dy)*fy);
-            }
+            res += Vector(sign(dx)*fx, sign(dy)*fy) * (-sign(m_charges[i]->charge() * m_charges[j]->charge()));
         }
     }
 
