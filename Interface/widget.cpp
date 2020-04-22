@@ -26,6 +26,8 @@ Widget::Widget(QWidget *parent):
     Engine* engine = new Engine();
 
     // Main UI Buttons
+    QWidget* widget = new QWidget();
+
     QVBoxLayout* settings = new QVBoxLayout();
 
     // Working with charges
@@ -173,8 +175,10 @@ Widget::Widget(QWidget *parent):
     additional->setLayout(additional_layout);
     settings->addWidget(additional);
 
+    widget->setLayout(settings);
+    widget->setMaximumSize(400, 525);
     main->addWidget(engine);
-    main->addLayout(settings);
+    main->addWidget(widget);
 }
 
 Widget::~Widget()
