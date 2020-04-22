@@ -4,7 +4,7 @@
 #include <QPainter>
 #include <QPointF>
 
-#include "Engine/vector.h"
+#include "vector.h"
 
 class Engine;
 
@@ -43,6 +43,8 @@ public:
     Vector acceleration() const;
     float mass() const;
     float charge() const;
+
+    int radius() const;
 
 private:
     void draw(QPainter&) const;

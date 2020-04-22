@@ -19,6 +19,7 @@ SOURCES += \
     Engine/charge.cpp \
     Engine/engine.cpp \
     Engine/vector.cpp \
+    Interface/valuerepresent.cpp \
     Interface/widget.cpp \
     main.cpp
 
@@ -26,6 +27,7 @@ HEADERS += \
     Engine/charge.h \
     Engine/engine.h \
     Engine/vector.h \
+    Interface/valuerepresent.h \
     Interface/widget.h
 
 # Default rules for deployment.

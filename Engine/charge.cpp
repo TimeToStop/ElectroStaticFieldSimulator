@@ -1,6 +1,6 @@
 #include "charge.h"
 
-#include "Engine/engine.h"
+#include "engine.h"
 
 const int Charge::m_radius = 5;
 
@@ -97,6 +97,11 @@ float Charge::mass() const
 float Charge::charge() const
 {
     return m_charge;
+}
+
+int Charge::radius() const
+{
+    return m_radius * m_engine->lambda();
 }
 
 void Charge::draw(QPainter& painter) const
