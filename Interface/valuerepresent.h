@@ -18,7 +18,7 @@ class ValueRepresent : public QWidget
 
 
 public:
-    ValueRepresent(const QString& name, const QString& measure, double val = 0.0, QWidget *parent = nullptr);
+    ValueRepresent(const QString& name, const QString& measure, int left_diff = 0, double val = 0.0, QWidget *parent = nullptr);
     virtual ~ValueRepresent();
 
     void setReadOnly(bool);
@@ -26,6 +26,8 @@ public:
     void setInvisible(bool);
 
     void setValue(double);
+
+    float value() const;
 
 signals:
     void valueEdited(double);

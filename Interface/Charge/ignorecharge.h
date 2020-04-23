@@ -1,13 +1,16 @@
 #ifndef IGNORECHARGE_H
 #define IGNORECHARGE_H
 
-#include <QWidget>
+#include <QDialog>
 
-class IgnoreCharge : public QWidget
+class IgnoreCharge : public QDialog
 {
     Q_OBJECT
 public:
-    explicit IgnoreCharge(QWidget *parent = nullptr);
+    explicit IgnoreCharge(const QStringList&, QWidget *parent = nullptr);
+    virtual ~IgnoreCharge();
+
+    std::vector<size_t> indexToIgnore() const;
 
 signals:
 

@@ -10,9 +10,11 @@ class Engine;
 
 class Charge
 {
-    Engine* const m_engine;
-
     static const int m_radius;
+    static long long m_amount;
+
+    Engine* const m_engine;
+    QString m_name;
 
     float m_charge;
     float m_mass;
@@ -24,9 +26,11 @@ class Charge
 public:
     Charge(Engine* const);
     Charge(float, Vector, Engine * const);
+    Charge(const QString&, float, float, Vector, Engine* const);
     ~Charge();
 
-    void tick(QPainter&, float);
+    void draw(QPainter&);
+    void tick(float);
 
     void setPos(const Vector&);
     void setVelocity(const Vector&);
@@ -38,6 +42,7 @@ public:
     void movePos(const Vector&);
     void addForce(const Vector&);
 
+    QString name() const;
     Vector pos() const;
     Vector velocity() const;
     Vector acceleration() const;
@@ -46,9 +51,7 @@ public:
 
     int radius() const;
 
-private:
-    void draw(QPainter&) const;
-    void tick(float);
+    static long long amount();
 };
 
 #endif // CHARGE_H

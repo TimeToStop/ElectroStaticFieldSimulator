@@ -1,7 +1,7 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
-#include "Engine/engine.h"
+#include "Interface/enginewidget.h"
 #include "Interface/valuerepresent.h"
 
 #include <QWidget>
@@ -11,7 +11,7 @@ class Widget : public QWidget
 {
     Q_OBJECT
 
-    Engine* m_engine;
+    EngineWidget* m_engine;
 
     QCheckBox* m_tension_use_cursor;
     ValueRepresent* m_tension_pos_x;

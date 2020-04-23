@@ -3,8 +3,9 @@
 #include <QHBoxLayout>
 #include <QDoubleValidator>
 #include <QLabel>
+#include <QSpacerItem>
 
-ValueRepresent::ValueRepresent(const QString& name, const QString& measure, double val, QWidget *parent):
+ValueRepresent::ValueRepresent(const QString& name, const QString& measure, int left_diff, double val, QWidget *parent):
     QWidget(parent),
     m_edit(nullptr),
     m_measure_label(nullptr),
@@ -13,11 +14,13 @@ ValueRepresent::ValueRepresent(const QString& name, const QString& measure, doub
 {
     QHBoxLayout* layout = new QHBoxLayout(this);
 
+    QSpacerItem* spacer = new QSpacerItem(left_diff, 0);
     QLabel* label = new QLabel(name + " = ");
     QLineEdit* edit = new QLineEdit();
     edit->setValidator(new QDoubleValidator());
     QLabel* measure_label = new QLabel(measure);
 
+    layout->addSpacerItem(spacer);
     layout->addWidget(label);
     layout->addWidget(edit);
     layout->addWidget(measure_label);
@@ -47,7 +50,12 @@ void ValueRepresent::setInvisible(bool b)
 
 void ValueRepresent::setValue(double d)
 {
-     m_edit->setText(QString::number(d));
+    m_edit->setText(QString::number(d));
+}
+
+float ValueRepresent::value() const
+{
+    return m_edit->text().toDouble();
 }
 
 void ValueRepresent::editNewValue()

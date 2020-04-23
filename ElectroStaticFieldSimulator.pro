@@ -22,6 +22,7 @@ SOURCES += \
     Interface/Charge/createcharge.cpp \
     Interface/Charge/ignorecharge.cpp \
     Interface/Charge/selectcharge.cpp \
+    Interface/enginewidget.cpp \
     Interface/valuerepresent.cpp \
     Interface/widget.cpp \
     main.cpp
@@ -33,6 +34,7 @@ HEADERS += \
     Interface/Charge/createcharge.h \
     Interface/Charge/ignorecharge.h \
     Interface/Charge/selectcharge.h \
+    Interface/enginewidget.h \
     Interface/valuerepresent.h \
     Interface/widget.h
 

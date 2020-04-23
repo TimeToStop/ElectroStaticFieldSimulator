@@ -1,5 +1,9 @@
 #include "widget.h"
 
+#include "Interface/Charge/createcharge.h"
+#include "Interface/Charge/ignorecharge.h"
+#include "Interface/Charge/selectcharge.h"
+
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
@@ -29,8 +33,8 @@ Widget::Widget(QWidget *parent):
 {
     QHBoxLayout* main = new QHBoxLayout(this);
 
-    // Engine Widget
-    Engine* engine = new Engine();
+    // Engine
+    EngineWidget* engine = new EngineWidget();
     // Main UI Buttons
     QWidget* widget = new QWidget();
 
@@ -110,8 +114,8 @@ Widget::Widget(QWidget *parent):
     tension_box->setLayout(tension_res_layout);
 
     ValueRepresent* tension_val = new ValueRepresent("E", "Н/м");
-    ValueRepresent* tension_x = new ValueRepresent("Ex", "Н/м");
-    ValueRepresent* tension_y = new ValueRepresent("Ey", "Н/м");
+    ValueRepresent* tension_x = new ValueRepresent("Ex", "Н/м", 50);
+    ValueRepresent* tension_y = new ValueRepresent("Ey", "Н/м", 50);
     tension_val->setReadOnly(true);
     tension_x->setReadOnly(true);
     tension_y->setReadOnly(true);
@@ -188,6 +192,8 @@ Widget::Widget(QWidget *parent):
     QCheckBox* show_tension = new QCheckBox("Show tension lines");
     info->addWidget(show_grid);
     info->addWidget(show_tension);
+    show_grid->setChecked(true);
+    show_tension->setChecked(false);
     connect(show_grid, SIGNAL(stateChanged(int)), this, SLOT(showGrid(int)));
     connect(show_tension, SIGNAL(stateChanged(int)), this, SLOT(showTension(int)));
 
@@ -210,12 +216,36 @@ Widget::~Widget()
 
 void Widget::addCharge()
 {
+    CreateCharge d(this);
 
+    if(d.exec() == QDialog::Accepted)
+    {
+        m_engine->addCharge(std::unique_ptr<Charge>(new Charge(d.name(), d.charge(), d.mass(), d.pos(), m_engine)));
+    }
 }
 
 void Widget::editCharge()
 {
+    if(m_engine->hasCharges())
+    {
+        SelectCharge d(m_engine->chargeNames(), this);
 
+        if(d.exec() == QDialog::Accepted)
+        {
+            CreateCharge d1(this);
+
+            d1.setName(m_engine->getCharge(d.getSelected())->name());
+            d1.setPos(m_engine->getCharge(d.getSelected())->pos());
+            d1.setMass(m_engine->getCharge(d.getSelected())->mass());
+            d1.setCharge(m_engine->getCharge(d.getSelected())->charge());
+
+            if(d1.exec() == QDialog::Accepted)
+            {
+                m_engine->rmCharge(d.getSelected());
+                m_engine->addCharge(std::unique_ptr<Charge>(new Charge(d1.name(), d1.charge(), d1.mass(), d1.pos(), m_engine)));
+            }
+        }
+    }
 }
 
 void Widget::ignoreCharge()
@@ -225,32 +255,37 @@ void Widget::ignoreCharge()
 
 void Widget::rmCharge()
 {
+    if(m_engine->hasCharges())
+    {
+        SelectCharge d(m_engine->chargeNames(), this);
 
+        if(d.exec() == QDialog::Accepted)
+        {
+            m_engine->rmCharge(d.getSelected());
+        }
+    }
 }
 
-void Widget::showGrid(int)
+void Widget::showGrid(int val)
 {
-
+    m_engine->setDrawGrid(val == Qt::Checked);
+    m_engine->repaint();
 }
 
 void Widget::showTension(int)
 {
-
 }
 
 void Widget::scaleChanged(int)
 {
-
 }
 
 void Widget::changeCamera(int)
 {
-
 }
 
 void Widget::changeScene(int)
 {
-
 }
 
 void Widget::useCursorPosition(int val)
