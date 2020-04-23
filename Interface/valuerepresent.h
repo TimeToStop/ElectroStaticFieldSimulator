@@ -23,6 +23,7 @@ public:
 
     void setReadOnly(bool);
     void setDefaultMeasure(bool);
+    void setInvisible(bool);
 
     void setValue(double);
 

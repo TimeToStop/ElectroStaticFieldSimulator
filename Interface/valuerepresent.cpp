@@ -40,6 +40,11 @@ void ValueRepresent::setDefaultMeasure(bool)
 {
 }
 
+void ValueRepresent::setInvisible(bool b)
+{
+    m_edit->setVisible(!b);
+}
+
 void ValueRepresent::setValue(double d)
 {
      m_edit->setText(QString::number(d));

@@ -1,8 +1,5 @@
 #include "widget.h"
 
-#include "Engine/engine.h"
-#include "Interface/valuerepresent.h"
-
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
@@ -12,13 +9,23 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QLineEdit>
-#include <QCheckBox>
 #include <QGroupBox>
 #include <QComboBox>
 #include <QSlider>
 
 Widget::Widget(QWidget *parent):
-    QWidget(parent)
+    QWidget(parent),
+    m_engine(nullptr),
+    m_tension_use_cursor(nullptr),
+    m_tension_pos_x(nullptr),
+    m_tension_pos_y(nullptr),
+    m_tension_val(nullptr),
+    m_tension_val_x(nullptr),
+    m_tension_val_y(nullptr),
+    m_potential_use_cursor(nullptr),
+    m_potential_pos_x(nullptr),
+    m_potential_pos_y(nullptr),
+    m_potential_val(nullptr)
 {
     QHBoxLayout* main = new QHBoxLayout(this);
 
@@ -53,6 +60,11 @@ Widget::Widget(QWidget *parent):
     charges_buttons->addWidget(ignore_charges);
     charges_buttons->addWidget(edit_charge);
     charges_buttons->addWidget(rm_charge);
+
+    connect(add_charge, SIGNAL(clicked()), this, SLOT(addCharge()));
+    connect(ignore_charges, SIGNAL(clicked()), this, SLOT(ignoreCharge()));
+    connect(edit_charge, SIGNAL(clicked()), this, SLOT(editCharge()));
+    connect(rm_charge, SIGNAL(clicked()), this, SLOT(rmCharge()));
     // End of working with charges
 
     // Tab: E Y A W
@@ -78,6 +90,7 @@ Widget::Widget(QWidget *parent):
     tension_layout->addLayout(tension_pos);
     QCheckBox* tension_check = new QCheckBox("Use cursor position");
     tension_pos->addWidget(tension_check);
+    connect(tension_check, SIGNAL(stateChanged(int)), this, SLOT(useCursorPosition(int)));
 
     QGroupBox* tension_pos_box = new QGroupBox("Position");
     QVBoxLayout* tension_position = new QVBoxLayout();
@@ -99,6 +112,9 @@ Widget::Widget(QWidget *parent):
     ValueRepresent* tension_val = new ValueRepresent("E", "Н/м");
     ValueRepresent* tension_x = new ValueRepresent("Ex", "Н/м");
     ValueRepresent* tension_y = new ValueRepresent("Ey", "Н/м");
+    tension_val->setReadOnly(true);
+    tension_x->setReadOnly(true);
+    tension_y->setReadOnly(true);
     tension_res_layout->addWidget(tension_val);
     tension_res_layout->addWidget(tension_x);
     tension_res_layout->addWidget(tension_y);
@@ -115,6 +131,7 @@ Widget::Widget(QWidget *parent):
 
     QCheckBox* potential_check = new QCheckBox("Use cursor position");
     potential_pos->addWidget(potential_check);
+    connect(potential_check, SIGNAL(stateChanged(int)), this, SLOT(useCursorPosition(int)));
 
     QGroupBox* potential_pos_box = new QGroupBox("Position");
     potential_pos->addWidget(potential_pos_box);
@@ -131,6 +148,7 @@ Widget::Widget(QWidget *parent):
     potential_layout->addLayout(potential_value);
 
     ValueRepresent* potential_val = new ValueRepresent("Y", "В");
+    potential_val->setReadOnly(true);
     QSpacerItem* spacer1 = new QSpacerItem(1, 100);
     potential_value->addWidget(potential_val);
     potential_value->addSpacerItem(spacer1);
@@ -164,13 +182,91 @@ Widget::Widget(QWidget *parent):
     QSlider* scale_slider = new QSlider(Qt::Horizontal);
     info->addWidget(scale_label);
     info->addWidget(scale_slider);
+    connect(scale_slider, SIGNAL(valueChanged(int)), this, SLOT(scaleChanged(int)));
 
     QCheckBox* show_grid = new QCheckBox("Show grid");
     QCheckBox* show_tension = new QCheckBox("Show tension lines");
     info->addWidget(show_grid);
     info->addWidget(show_tension);
+    connect(show_grid, SIGNAL(stateChanged(int)), this, SLOT(showGrid(int)));
+    connect(show_tension, SIGNAL(stateChanged(int)), this, SLOT(showTension(int)));
+
+    m_engine = engine;
+    m_tension_use_cursor = tension_check;
+    m_tension_pos_x = tension_pos_x;
+    m_tension_pos_y = tension_pos_y;
+    m_tension_val = tension_val;
+    m_tension_val_x = tension_x;
+    m_tension_val_y = tension_y;
+    m_potential_use_cursor = potential_check;
+    m_potential_pos_x = potential_pos_x;
+    m_potential_pos_y = potential_pos_y;
+    m_potential_val = potential_val;
 }
 
 Widget::~Widget()
 {
+}
+
+void Widget::addCharge()
+{
+
+}
+
+void Widget::editCharge()
+{
+
+}
+
+void Widget::ignoreCharge()
+{
+
+}
+
+void Widget::rmCharge()
+{
+
+}
+
+void Widget::showGrid(int)
+{
+
+}
+
+void Widget::showTension(int)
+{
+
+}
+
+void Widget::scaleChanged(int)
+{
+
+}
+
+void Widget::changeCamera(int)
+{
+
+}
+
+void Widget::changeScene(int)
+{
+
+}
+
+void Widget::useCursorPosition(int val)
+{
+    if(m_tension_use_cursor->checkState() != val)
+    {
+        m_tension_use_cursor->setCheckState((val == Qt::Checked) ? Qt::Checked : Qt::Unchecked);
+    }
+
+    if(m_potential_use_cursor->checkState() != val)
+    {
+        m_potential_use_cursor->setCheckState((val == Qt::Checked) ? Qt::Checked : Qt::Unchecked);
+    }
+
+    m_tension_pos_x->setReadOnly(val == Qt::Checked);
+    m_tension_pos_y->setReadOnly(val == Qt::Checked);
+    m_potential_pos_x->setReadOnly(val == Qt::Checked);
+    m_potential_pos_y->setReadOnly(val == Qt::Checked);
 }
