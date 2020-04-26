@@ -7,31 +7,32 @@ long long Charge::m_amount = 0;
 
 Charge::Charge(Engine* const engine):
     m_engine(engine),
-    m_name("Charge " + QString::number(m_amount)),
+    m_name("Charge " + QString::number(m_amount++)),
+    m_is_ignored(false),
     m_charge(0.f),
     m_mass(1.f),
     m_pos(),
     m_velocity(),
     m_acceleration()
 {
-    m_amount++;
 }
 
 Charge::Charge(float mass, Vector pos, Engine * const engine):
     m_engine(engine),
-    m_name("Charge " + QString::number(m_amount)),
+    m_name("Charge " + QString::number(m_amount++)),
+    m_is_ignored(false),
     m_charge(0.f),
     m_mass(mass),
     m_pos(pos),
     m_velocity(),
     m_acceleration()
 {
-    m_amount++;
 }
 
 Charge::Charge(const QString& name, float q, float mass, Vector pos, Engine * const engine):
     m_engine(engine),
     m_name(name),
+    m_is_ignored(false),
     m_charge(q),
     m_mass(mass),
     m_pos(pos),
@@ -57,6 +58,11 @@ void Charge::tick(float deltatime)
 {
     m_velocity += m_acceleration * deltatime;
     m_pos += m_velocity * deltatime;
+}
+
+void Charge::setIgnore(bool b)
+{
+    m_is_ignored = b;
 }
 
 void Charge::setPos(const Vector& pos)
@@ -97,6 +103,11 @@ void Charge::movePos(const Vector& pos)
 void Charge::addForce(const Vector& force)
 {
     m_acceleration += force/m_mass;
+}
+
+bool Charge::is_ignored() const
+{
+    return m_is_ignored;
 }
 
 QString Charge::name() const

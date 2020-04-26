@@ -22,12 +22,15 @@ class EngineWidget:
 
     const float m_default_time;
     QTimer m_main_timer;
+    
+    mutable int m_camera;
 
 public:
     explicit EngineWidget(QWidget *parent = nullptr);
     virtual ~EngineWidget();
 
     void setDrawGrid(bool);
+    void setCamera(int);
 
     virtual Vector toXOY(const Vector&) const override;
     virtual Vector fromXOY(const Vector&) const override;

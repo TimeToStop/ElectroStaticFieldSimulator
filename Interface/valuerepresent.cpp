@@ -23,7 +23,7 @@ ValueRepresent::ValueRepresent(const QString& name, const QString& measure, int 
     layout->addSpacerItem(spacer);
     layout->addWidget(label);
     layout->addWidget(edit);
-    layout->addWidget(measure_label);
+    layout->addWidget(measure_label);    
 
     m_edit = edit;
     m_measure_label = measure_label;
@@ -55,10 +55,10 @@ void ValueRepresent::setValue(double d)
 
 float ValueRepresent::value() const
 {
-    return m_edit->text().toDouble();
+    return m_edit->text().toFloat();
 }
 
 void ValueRepresent::editNewValue()
 {
-    emit(valueEdited(m_edit->text().toDouble()));
+    emit(valueEdited(m_edit->text().toFloat()));
 }

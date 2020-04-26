@@ -29,7 +29,8 @@ Widget::Widget(QWidget *parent):
     m_potential_use_cursor(nullptr),
     m_potential_pos_x(nullptr),
     m_potential_pos_y(nullptr),
-    m_potential_val(nullptr)
+    m_potential_val(nullptr),
+    m_camera_change(nullptr)
 {
     QHBoxLayout* main = new QHBoxLayout(this);
 
@@ -38,7 +39,7 @@ Widget::Widget(QWidget *parent):
     // Main UI Buttons
     QWidget* widget = new QWidget();
 
-    widget->setMaximumSize(400, 550);
+    widget->setMaximumSize(500, 600);
 
     main->addWidget(engine);
     main->addWidget(widget);
@@ -158,6 +159,81 @@ Widget::Widget(QWidget *parent):
     potential_value->addSpacerItem(spacer1);
     // End of potential
 
+    // Work
+    QHBoxLayout* work_layout = new QHBoxLayout();
+    work->setLayout(work_layout);
+
+    QVBoxLayout* work_start_pos_layout = new QVBoxLayout();
+    work_layout->addLayout(work_start_pos_layout);
+
+    QCheckBox* work_check_start_pos = new QCheckBox("Use Cursor Position");
+    work_start_pos_layout->addWidget(work_check_start_pos);
+
+    QGroupBox* work_start_position = new QGroupBox("Start");
+    work_start_pos_layout->addWidget(work_start_position);
+
+    QVBoxLayout* work_start_position_layout = new QVBoxLayout();
+
+    ValueRepresent* work_start_pos_x = new ValueRepresent("X", "м");
+    work_start_position_layout->addWidget(work_start_pos_x);
+    ValueRepresent* work_start_pos_y = new ValueRepresent("Y", "м");
+    work_start_position_layout->addWidget(work_start_pos_y);
+
+    work_start_position->setLayout(work_start_position_layout);
+
+
+    QVBoxLayout* work_destination_pos_layout = new QVBoxLayout();
+    work_layout->addLayout(work_destination_pos_layout);
+
+    QCheckBox* work_check_destination_pos = new QCheckBox("Use Cursor Position");
+    work_destination_pos_layout->addWidget(work_check_destination_pos);
+
+    QGroupBox* work_destination_position = new QGroupBox("Destination");
+    work_destination_pos_layout->addWidget(work_destination_position);
+
+    QVBoxLayout* work_destination_position_layout = new QVBoxLayout();
+
+    ValueRepresent* work_destination_pos_x = new ValueRepresent("X", "м");
+    work_destination_position_layout->addWidget(work_destination_pos_x);
+    ValueRepresent* work_destination_pos_y = new ValueRepresent("Y", "м");
+    work_destination_position_layout->addWidget(work_destination_pos_y);
+
+    work_destination_position->setLayout(work_destination_position_layout);
+
+    QVBoxLayout* calculated =  new QVBoxLayout();
+
+    ValueRepresent* work_charge = new ValueRepresent("q", "Кл");
+    calculated->addWidget(work_charge);
+
+    ValueRepresent* work_calculated = new ValueRepresent("A", "Дж");
+    calculated->addWidget(work_calculated);
+
+    work_layout->addLayout(calculated);
+
+
+    // End of Work
+
+    // Player
+    QHBoxLayout* player = new QHBoxLayout();
+
+    QPushButton* play = new QPushButton("Play");
+    QPushButton* stop = new QPushButton("Pause");
+    QPushButton* speed_x_2 = new QPushButton("Speed x2");
+    QPushButton* edit = new QPushButton("Edit");
+
+    player->addWidget(play);
+    player->addWidget(stop);
+    player->addWidget(speed_x_2);
+    player->addWidget(edit);
+
+    connect(play, SIGNAL(clicked()), this, SLOT(play()));
+    connect(stop, SIGNAL(clicked()), this, SLOT(stop()));
+    connect(speed_x_2, SIGNAL(clicked()), this, SLOT(speed_x_2()));
+    connect(edit, SIGNAL(clicked()), this, SLOT(edit()));
+
+    settings->addLayout(player);
+    // End of player
+
     QGroupBox* additional = new QGroupBox("Additional");
     settings->addWidget(additional);
     QVBoxLayout* additional_layout = new QVBoxLayout();
@@ -170,6 +246,11 @@ Widget::Widget(QWidget *parent):
     QComboBox* camera_combo = new QComboBox();
     camera->addWidget(camera_at);
     camera->addWidget(camera_combo);
+
+    camera_combo->addItem("default");
+    camera_combo->addItems(engine->chargeNames());
+
+    connect(camera_combo, SIGNAL(currentIndexChanged(int)), this, SLOT(changeCamera(int)));
 
     QHBoxLayout* scene = new QHBoxLayout();
     additional_layout->addLayout(scene);
@@ -208,10 +289,31 @@ Widget::Widget(QWidget *parent):
     m_potential_pos_x = potential_pos_x;
     m_potential_pos_y = potential_pos_y;
     m_potential_val = potential_val;
+    m_camera_change = camera_combo;
 }
 
 Widget::~Widget()
 {
+}
+
+void Widget::play()
+{
+    m_engine->setEngineState(EngineState::PLAY);
+}
+
+void Widget::stop()
+{
+    m_engine->setEngineState(EngineState::PAUSE);
+}
+
+void Widget::speed_x_2()
+{
+    m_engine->setEngineState(EngineState::SPEED_2);
+}
+
+void Widget::edit()
+{
+    m_engine->setEngineState(EngineState::EDIT);
 }
 
 void Widget::addCharge()
@@ -221,6 +323,7 @@ void Widget::addCharge()
     if(d.exec() == QDialog::Accepted)
     {
         m_engine->addCharge(std::unique_ptr<Charge>(new Charge(d.name(), d.charge(), d.mass(), d.pos(), m_engine)));
+        m_camera_change->addItem(d.name());
     }
 }
 
@@ -228,6 +331,7 @@ void Widget::editCharge()
 {
     if(m_engine->hasCharges())
     {
+        m_engine->setEngineState(EngineState::PAUSE);
         SelectCharge d(m_engine->chargeNames(), this);
 
         if(d.exec() == QDialog::Accepted)
@@ -245,6 +349,7 @@ void Widget::editCharge()
                 m_engine->addCharge(std::unique_ptr<Charge>(new Charge(d1.name(), d1.charge(), d1.mass(), d1.pos(), m_engine)));
             }
         }
+        m_engine->setEngineState(EngineState::PLAY);
     }
 }
 
@@ -262,6 +367,7 @@ void Widget::rmCharge()
         if(d.exec() == QDialog::Accepted)
         {
             m_engine->rmCharge(d.getSelected());
+            m_camera_change->removeItem(d.getSelected() + 1);
         }
     }
 }
@@ -280,8 +386,9 @@ void Widget::scaleChanged(int)
 {
 }
 
-void Widget::changeCamera(int)
+void Widget::changeCamera(int indx)
 {
+    m_engine->setCamera(indx - 1);
 }
 
 void Widget::changeScene(int)
@@ -290,18 +397,20 @@ void Widget::changeScene(int)
 
 void Widget::useCursorPosition(int val)
 {
+    bool is_checked = (val == Qt::Checked);
+
     if(m_tension_use_cursor->checkState() != val)
     {
-        m_tension_use_cursor->setCheckState((val == Qt::Checked) ? Qt::Checked : Qt::Unchecked);
+        m_tension_use_cursor->setChecked(is_checked);
     }
 
     if(m_potential_use_cursor->checkState() != val)
     {
-        m_potential_use_cursor->setCheckState((val == Qt::Checked) ? Qt::Checked : Qt::Unchecked);
+        m_potential_use_cursor->setChecked(is_checked);
     }
 
-    m_tension_pos_x->setReadOnly(val == Qt::Checked);
-    m_tension_pos_y->setReadOnly(val == Qt::Checked);
-    m_potential_pos_x->setReadOnly(val == Qt::Checked);
-    m_potential_pos_y->setReadOnly(val == Qt::Checked);
+    m_tension_pos_x->setReadOnly(is_checked);
+    m_tension_pos_y->setReadOnly(is_checked);
+    m_potential_pos_x->setReadOnly(is_checked);
+    m_potential_pos_y->setReadOnly(is_checked);
 }

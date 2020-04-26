@@ -7,7 +7,8 @@
 Engine::Engine():
     m_lambda(0.1f),
     m_dielectric(1.f),
-    m_charges()
+    m_charges(),
+    m_engine_state(EngineState::PLAY)
 {
     m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(3, 3), this)));
     m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(2, -1), this)));
@@ -121,4 +122,9 @@ Vector Engine::applyCharge(size_t i)
 int Engine::sign(float x)
 {
     return (x > 0) ? 1 : -1;
+}
+
+void Engine::setEngineState(EngineState state)
+{
+    m_engine_state = state;
 }

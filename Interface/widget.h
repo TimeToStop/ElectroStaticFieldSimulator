@@ -6,6 +6,7 @@
 
 #include <QWidget>
 #include <QCheckBox>
+#include <QComboBox>
 
 class Widget : public QWidget
 {
@@ -27,6 +28,8 @@ class Widget : public QWidget
 
     ValueRepresent* m_potential_val;
 
+    QComboBox* m_camera_change;
+
 public:
     explicit Widget(QWidget *parent = nullptr);
     virtual ~Widget();
@@ -34,6 +37,11 @@ public:
 signals:
 
 public slots:
+    void play();
+    void stop();
+    void speed_x_2();
+    void edit();
+
     void addCharge();
     void editCharge();
     void ignoreCharge();

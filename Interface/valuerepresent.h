@@ -5,8 +5,6 @@
 #include <QLineEdit>
 #include <QLabel>
 
-// ToDo:
-
 class ValueRepresent : public QWidget
 {
     Q_OBJECT

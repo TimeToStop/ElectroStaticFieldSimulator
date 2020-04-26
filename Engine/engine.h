@@ -12,6 +12,14 @@
 #include "vector.h"
 #include <QTimer>
 
+enum EngineState
+{
+    PLAY,
+    PAUSE,
+    SPEED_2,
+    EDIT
+};
+
 class Charge;
 
 class Engine
@@ -21,6 +29,8 @@ protected:
     float m_dielectric;
 
     std::vector<std::unique_ptr<Charge>> m_charges;
+
+    EngineState m_engine_state;
 
 public:
     Engine();
@@ -47,6 +57,8 @@ public:
 
     Vector applyCharge(size_t);
     static int sign(float);
+
+    void setEngineState(EngineState);
 };
 
 #endif // ENGINE_H
