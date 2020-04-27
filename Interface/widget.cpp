@@ -102,8 +102,8 @@ Widget::Widget(QWidget *parent):
     tension_pos_box->setLayout(tension_position);
     tension_pos->addWidget(tension_pos_box);
 
-    ValueRepresent* tension_pos_x = new ValueRepresent("X", "м");
-    ValueRepresent* tension_pos_y = new ValueRepresent("Y", "м");
+    ValueEdit* tension_pos_x = new ValueEdit("X", "м");
+    ValueEdit* tension_pos_y = new ValueEdit("Y", "м");
     tension_position->addWidget(tension_pos_x);
     tension_position->addWidget(tension_pos_y);
     // End of Working with position
@@ -114,12 +114,9 @@ Widget::Widget(QWidget *parent):
     QVBoxLayout* tension_res_layout = new QVBoxLayout();
     tension_box->setLayout(tension_res_layout);
 
-    ValueRepresent* tension_val = new ValueRepresent("E", "Н/м");
-    ValueRepresent* tension_x = new ValueRepresent("Ex", "Н/м", 50);
-    ValueRepresent* tension_y = new ValueRepresent("Ey", "Н/м", 50);
-    tension_val->setReadOnly(true);
-    tension_x->setReadOnly(true);
-    tension_y->setReadOnly(true);
+    ValueWriter* tension_val = new ValueWriter("E", "Н/м");
+    ValueWriter* tension_x = new ValueWriter("Ex", "Н/м", 50);
+    ValueWriter* tension_y = new ValueWriter("Ey", "Н/м", 50);
     tension_res_layout->addWidget(tension_val);
     tension_res_layout->addWidget(tension_x);
     tension_res_layout->addWidget(tension_y);
@@ -143,8 +140,8 @@ Widget::Widget(QWidget *parent):
     QVBoxLayout* potential_position = new QVBoxLayout();
     potential_pos_box->setLayout(potential_position);
 
-    ValueRepresent* potential_pos_x = new ValueRepresent("X", "м");
-    ValueRepresent* potential_pos_y = new ValueRepresent("Y", "м");
+    ValueEdit* potential_pos_x = new ValueEdit("X", "м");
+    ValueEdit* potential_pos_y = new ValueEdit("Y", "м");
     potential_position->addWidget(potential_pos_x);
     potential_position->addWidget(potential_pos_y);
     // End of Working with position
@@ -154,8 +151,7 @@ Widget::Widget(QWidget *parent):
 
     QSpacerItem* spacer6 = new QSpacerItem(0, 10);
     potential_value->addSpacerItem(spacer6);
-    ValueRepresent* potential_val = new ValueRepresent("Y", "В");
-    potential_val->setReadOnly(true);
+    ValueWriter* potential_val = new ValueWriter("Y", "В");
     potential_value->addWidget(potential_val);
     QSpacerItem* spacer1 = new QSpacerItem(1, 100);
     potential_value->addSpacerItem(spacer1);
@@ -176,9 +172,9 @@ Widget::Widget(QWidget *parent):
 
     QVBoxLayout* work_start_position_layout = new QVBoxLayout();
 
-    ValueRepresent* work_start_pos_x = new ValueRepresent("X", "м");
+    ValueEdit* work_start_pos_x = new ValueEdit("X", "м");
     work_start_position_layout->addWidget(work_start_pos_x);
-    ValueRepresent* work_start_pos_y = new ValueRepresent("Y", "м");
+    ValueEdit* work_start_pos_y = new ValueEdit("Y", "м");
     work_start_position_layout->addWidget(work_start_pos_y);
 
     work_start_position->setLayout(work_start_position_layout);
@@ -195,9 +191,9 @@ Widget::Widget(QWidget *parent):
 
     QVBoxLayout* work_destination_position_layout = new QVBoxLayout();
 
-    ValueRepresent* work_destination_pos_x = new ValueRepresent("X", "м");
+    ValueEdit* work_destination_pos_x = new ValueEdit("X", "м");
     work_destination_position_layout->addWidget(work_destination_pos_x);
-    ValueRepresent* work_destination_pos_y = new ValueRepresent("Y", "м");
+    ValueEdit* work_destination_pos_y = new ValueEdit("Y", "м");
     work_destination_position_layout->addWidget(work_destination_pos_y);
 
     work_destination_position->setLayout(work_destination_position_layout);
@@ -206,9 +202,9 @@ Widget::Widget(QWidget *parent):
 
     QSpacerItem* spacer4 = new QSpacerItem(0, 10);
     calculated->addSpacerItem(spacer4);
-    ValueRepresent* work_charge = new ValueRepresent("q", "Кл");
+    ValueEdit* work_charge = new ValueEdit("q", "Кл");
     calculated->addWidget(work_charge);
-    ValueRepresent* work_calculated = new ValueRepresent("A", "Дж");
+    ValueWriter* work_calculated = new ValueWriter("A", "Дж");
     calculated->addWidget(work_calculated);
     QSpacerItem* spacer5 = new QSpacerItem(0, 10);
     calculated->addSpacerItem(spacer5);
@@ -231,9 +227,9 @@ Widget::Widget(QWidget *parent):
 
     QVBoxLayout* energy_start_position_layout = new QVBoxLayout();
 
-    ValueRepresent* energy_start_pos_x = new ValueRepresent("X", "м");
+    ValueEdit* energy_start_pos_x = new ValueEdit("X", "м");
     energy_start_position_layout->addWidget(energy_start_pos_x);
-    ValueRepresent* energy_start_pos_y = new ValueRepresent("Y", "м");
+    ValueEdit* energy_start_pos_y = new ValueEdit("Y", "м");
     energy_start_position_layout->addWidget(energy_start_pos_y);
 
     energy_position->setLayout(energy_start_position_layout);
@@ -242,11 +238,11 @@ Widget::Widget(QWidget *parent):
 
     QSpacerItem* spacer2 = new QSpacerItem(0, 23);
     energy_val_layout->addSpacerItem(spacer2);
-    ValueRepresent* energy_of_pos = new ValueRepresent("W", "Дж");
+    ValueWriter* energy_of_pos = new ValueWriter("W", "Дж");
     energy_val_layout->addWidget(energy_of_pos);
-    ValueRepresent* energy_of_system = new ValueRepresent("W sys", "Дж");
+    ValueWriter* energy_of_system = new ValueWriter("W sys", "Дж");
     energy_val_layout->addWidget(energy_of_system);
-    ValueRepresent* kinetic_energy_of_system = new ValueRepresent("Ek", "Дж");
+    ValueWriter* kinetic_energy_of_system = new ValueWriter("Ek", "Дж");
     energy_val_layout->addWidget(kinetic_energy_of_system);
     QSpacerItem* spacer3 = new QSpacerItem(0, 20);
     energy_val_layout->addSpacerItem(spacer3);
@@ -450,8 +446,8 @@ void Widget::useCursorPosition(int val)
         m_potential_use_cursor->setChecked(is_checked);
     }
 
-    m_tension_pos_x->setReadOnly(is_checked);
-    m_tension_pos_y->setReadOnly(is_checked);
-    m_potential_pos_x->setReadOnly(is_checked);
-    m_potential_pos_y->setReadOnly(is_checked);
+    m_tension_pos_x->setDisabled(is_checked);
+    m_tension_pos_y->setDisabled(is_checked);
+    m_potential_pos_x->setDisabled(is_checked);
+    m_potential_pos_y->setDisabled(is_checked);
 }

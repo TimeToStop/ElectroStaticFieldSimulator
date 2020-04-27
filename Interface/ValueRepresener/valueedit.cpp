@@ -1,11 +1,11 @@
 #include "valueedit.h"
 
-ValueEdit::ValueEdit(const QString& name, const QString& measure, QWidget* parent):
-    ValueRepresenter(name, measure, parent),
+ValueEdit::ValueEdit(const QString& name, const QString& measure, int left_diff,  QWidget* parent):
+    ValueRepresenter(name, measure,left_diff, parent),
     m_edit(new QLineEdit())
 {
     m_edit->setValidator(new QDoubleValidator());
-    m_layout->insertWidget(1, m_edit);
+    m_layout->insertWidget(2, m_edit);
     setValue(0.f);
 }
 
@@ -23,7 +23,7 @@ void ValueEdit::setDisabled(bool b)
     m_edit->setDisabled(b);
 }
 
-float ValueEdit::value() const
+float ValueEdit::valueOnly() const
 {
-    return m_edit->text().toDouble() * power(m_curr_index);
+    return m_edit->text().toDouble();
 }

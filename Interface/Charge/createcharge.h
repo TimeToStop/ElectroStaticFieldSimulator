@@ -2,7 +2,7 @@
 #define CREATECHARGE_H
 
 #include "Engine/charge.h"
-#include "Interface/valuerepresent.h"
+#include "Interface/ValueRepresener/valueedit.h"
 
 #include <QDialog>
 
@@ -11,10 +11,10 @@ class CreateCharge : public QDialog
     Q_OBJECT
 
     QLineEdit* m_name;
-    ValueRepresent* m_pos_x;
-    ValueRepresent* m_pos_y;
-    ValueRepresent* m_mass;
-    ValueRepresent* m_charge;
+    ValueEdit* m_pos_x;
+    ValueEdit* m_pos_y;
+    ValueEdit* m_mass;
+    ValueEdit* m_charge;
 
 public:
     explicit CreateCharge(QWidget *parent = nullptr);

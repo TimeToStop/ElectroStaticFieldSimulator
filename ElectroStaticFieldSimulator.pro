@@ -26,7 +26,6 @@ SOURCES += \
     Interface/ValueRepresener/valuerepresenter.cpp \
     Interface/ValueRepresener/valuewriter.cpp \
     Interface/enginewidget.cpp \
-    Interface/valuerepresent.cpp \
     Interface/widget.cpp \
     main.cpp
 
@@ -41,7 +40,6 @@ HEADERS += \
     Interface/ValueRepresener/valuerepresenter.h \
     Interface/ValueRepresener/valuewriter.h \
     Interface/enginewidget.h \
-    Interface/valuerepresent.h \
     Interface/widget.h
 
 # Default rules for deployment.

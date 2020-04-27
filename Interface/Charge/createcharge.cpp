@@ -3,6 +3,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QLabel>
 
 CreateCharge::CreateCharge(QWidget *parent):
     QDialog(parent),
@@ -16,8 +17,8 @@ CreateCharge::CreateCharge(QWidget *parent):
 
     QHBoxLayout* name = new QHBoxLayout();
     QHBoxLayout* pos = new QHBoxLayout();
-    ValueRepresent* mass = new ValueRepresent("m", "kg");
-    ValueRepresent* charge = new ValueRepresent("q", "kl");
+    ValueEdit* mass = new ValueEdit("m", "kg");
+    ValueEdit* charge = new ValueEdit("q", "kl");
     QHBoxLayout* buttons = new QHBoxLayout();
 
     main->addLayout(name);
@@ -42,8 +43,8 @@ CreateCharge::CreateCharge(QWidget *parent):
 
     QVBoxLayout* pos_layout = new QVBoxLayout();
     pos->addLayout(pos_layout);
-    ValueRepresent* position_x = new ValueRepresent("X", "м", 30);
-    ValueRepresent* position_y = new ValueRepresent("Y", "м", 30);
+    ValueEdit* position_x = new ValueEdit("X", "м", 30);
+    ValueEdit* position_y = new ValueEdit("Y", "м", 30);
     pos_layout->addWidget(position_x);
     pos_layout->addWidget(position_y);
 

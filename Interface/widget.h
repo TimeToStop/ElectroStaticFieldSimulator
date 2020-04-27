@@ -2,7 +2,8 @@
 #define WIDGET_H
 
 #include "Interface/enginewidget.h"
-#include "Interface/valuerepresent.h"
+#include "Interface/ValueRepresener/valueedit.h"
+#include "Interface/ValueRepresener/valuewriter.h"
 
 #include <QWidget>
 #include <QCheckBox>
@@ -15,18 +16,18 @@ class Widget : public QWidget
     EngineWidget* m_engine;
 
     QCheckBox* m_tension_use_cursor;
-    ValueRepresent* m_tension_pos_x;
-    ValueRepresent* m_tension_pos_y;
+    ValueEdit* m_tension_pos_x;
+    ValueEdit* m_tension_pos_y;
 
-    ValueRepresent* m_tension_val;
-    ValueRepresent* m_tension_val_x;
-    ValueRepresent* m_tension_val_y;
+    ValueWriter* m_tension_val;
+    ValueWriter* m_tension_val_x;
+    ValueWriter* m_tension_val_y;
 
     QCheckBox* m_potential_use_cursor;
-    ValueRepresent* m_potential_pos_x;
-    ValueRepresent* m_potential_pos_y;
+    ValueEdit* m_potential_pos_x;
+    ValueEdit* m_potential_pos_y;
 
-    ValueRepresent* m_potential_val;
+    ValueWriter* m_potential_val;
 
     QComboBox* m_camera_change;
 

@@ -16,12 +16,14 @@ protected:
 
 
 public:
-    explicit ValueRepresenter(const QString&, const QString&, QWidget *parent = nullptr);
+    explicit ValueRepresenter(const QString&, const QString&, int= 0, QWidget *parent = nullptr);
     virtual ~ValueRepresenter();
 
     virtual void setValue(float) = 0;
     virtual void setDisabled(bool) = 0;
-    virtual float value() const = 0;
+    virtual float valueOnly() const = 0;
+
+    float value() const;
 
 signals:
     void valueChanged();

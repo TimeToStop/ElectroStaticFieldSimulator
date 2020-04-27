@@ -13,12 +13,12 @@ class ValueEdit: public ValueRepresenter
     QLineEdit* m_edit;
 
 public:
-    explicit ValueEdit(const QString&, const QString&, QWidget* parent = nullptr);
+    explicit ValueEdit(const QString&, const QString&, int left_diff =0,  QWidget* parent = nullptr);
     virtual ~ValueEdit();
 
     virtual void setValue(float) override;
     virtual void setDisabled(bool) override;
-    virtual float value() const override;
+    virtual float valueOnly() const override;
 };
 
 #endif // VALUEEDIT_H

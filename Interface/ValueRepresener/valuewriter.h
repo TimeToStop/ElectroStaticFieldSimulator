@@ -11,12 +11,12 @@ class ValueWriter : public ValueRepresenter
     QLabel* m_label;
 
 public:
-    explicit ValueWriter(const QString&, const QString&, QWidget* parent = nullptr);
+    explicit ValueWriter(const QString&, const QString&, int left_diff =0, QWidget* parent = nullptr);
     virtual ~ValueWriter();
 
     virtual void setValue(float) override;
     virtual void setDisabled(bool) override;
-    virtual float value() const override;
+    virtual float valueOnly() const override;
 };
 
 #endif // VALUEWRITER_H
