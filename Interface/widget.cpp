@@ -334,11 +334,9 @@ Widget::Widget(QWidget *parent):
     m_potential_pos_x = potential_pos_x;
     m_potential_pos_y = potential_pos_y;
     m_potential_val = potential_val;
-<<<<<<< HEAD
     m_camera_change = camera_combo;
-=======
+
     m_use_cursor = false;
->>>>>>> dd343ba0336d19d43a49488ce5d9b486443af23b
 }
 
 Widget::~Widget()
@@ -433,41 +431,49 @@ void Widget::showElectrostaticField(int val)
    m_engine->repaint();
 }
 
-void Widget::calculateTension() {
+void Widget::calculateTension()
+{
     calculateTension(m_tension_pos_x->value(), m_tension_pos_y->value());
 }
 
-void Widget::calculateTension(float x, float y) {
+void Widget::calculateTension(float x, float y)
+{
     Vector tension = m_engine->calculateTension(x, y);
     m_tension_val_x->setValue(tension.x());
     m_tension_val_y->setValue(tension.y());
 }
 
-void Widget::calculateTensionByMouse(const QPoint& point) {
-    if (m_use_cursor) {
-      Vector cursor_pos(m_engine->toXOY(Vector(point.x(), point.y())));
-      m_tension_pos_x->setValue(cursor_pos.x());
-      m_tension_pos_y->setValue(cursor_pos.y());
-      Vector tension(m_engine->calculateTension(cursor_pos.x(), cursor_pos.y()));
-      m_tension_val_x->setValue(tension.x());
-      m_tension_val_y->setValue(tension.y());
+void Widget::calculateTensionByMouse(const QPoint& point)
+{
+    if (m_use_cursor)
+    {
+        Vector cursor_pos(m_engine->toXOY(Vector(point.x(), point.y())));
+        m_tension_pos_x->setValue(cursor_pos.x());
+        m_tension_pos_y->setValue(cursor_pos.y());
+        Vector tension(m_engine->calculateTension(cursor_pos.x(), cursor_pos.y()));
+        m_tension_val_x->setValue(tension.x());
+        m_tension_val_y->setValue(tension.y());
     }
 }
 
-void Widget::calculatePotential() {
+void Widget::calculatePotential()
+{
     calculatePotential(m_potential_pos_x->value(), m_potential_pos_y->value());
 }
 
-void Widget::calculatePotential(float x, float y) {
+void Widget::calculatePotential(float x, float y)
+{
     m_potential_val->setValue(m_engine->calculatePotential(x, y));
 }
 
-void Widget::calculatePotentialByMouse(const QPoint& point) {
-    if (m_use_cursor) {
-      Vector cursor_pos(point.x(), point.y());
-      m_potential_pos_x->setValue(m_engine->toXOY(cursor_pos).x());
-      m_potential_pos_y->setValue(m_engine->toXOY(cursor_pos).y());
-      m_potential_val->setValue(m_engine->calculatePotential(cursor_pos.x(), cursor_pos.y()));
+void Widget::calculatePotentialByMouse(const QPoint& point)
+{
+    if (m_use_cursor)
+    {
+        Vector cursor_pos(point.x(), point.y());
+        m_potential_pos_x->setValue(m_engine->toXOY(cursor_pos).x());
+        m_potential_pos_y->setValue(m_engine->toXOY(cursor_pos).y());
+        m_potential_val->setValue(m_engine->calculatePotential(cursor_pos.x(), cursor_pos.y()));
     }
 }
 
@@ -486,11 +492,8 @@ void Widget::changeScene(int)
 
 void Widget::useCursorPosition(int val)
 {
-<<<<<<< HEAD
     bool is_checked = (val == Qt::Checked);
-=======
-    m_use_cursor = (val == Qt::Checked);
->>>>>>> dd343ba0336d19d43a49488ce5d9b486443af23b
+    m_use_cursor = is_checked;
 
     if(m_tension_use_cursor->checkState() != val)
     {
@@ -502,16 +505,9 @@ void Widget::useCursorPosition(int val)
         m_potential_use_cursor->setChecked(is_checked);
     }
 
-<<<<<<< HEAD
     m_tension_pos_x->setDisabled(is_checked);
     m_tension_pos_y->setDisabled(is_checked);
     m_potential_pos_x->setDisabled(is_checked);
     m_potential_pos_y->setDisabled(is_checked);
-=======
-    m_tension_pos_x->setDisabled(val == Qt::Checked);
-    m_tension_pos_y->setDisabled(val == Qt::Checked);
-    m_potential_pos_x->setDisabled(val == Qt::Checked);
-    m_potential_pos_y->setDisabled(val == Qt::Checked);
->>>>>>> dd343ba0336d19d43a49488ce5d9b486443af23b
 }
 

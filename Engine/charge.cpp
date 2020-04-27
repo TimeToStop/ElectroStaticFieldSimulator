@@ -1,6 +1,7 @@
 #include "charge.h"
 
 #include "engine.h"
+#include <QDebug>
 
 const int Charge::m_radius = 5;
 long long Charge::m_amount = 0;

@@ -36,32 +36,30 @@ public:
     Engine();
     virtual ~Engine();
 
+    virtual Vector fromXOY(const Vector&) const = 0;
+    virtual Vector toXOY(const Vector&) const = 0;
+    Vector toXOY(float, float) const;
+    Vector fromXOY(float, float) const;
+
     void drawCharges(QPainter&);
     void tick(float);
+
+    void setEngineState(EngineState);
 
     void addCharge(std::unique_ptr<Charge>&&);
     void rmCharge(size_t);
 
     size_t chargesNum() const;
     bool hasCharges() const;
-
     const std::unique_ptr<Charge>& getCharge(size_t i) const;
-
     QStringList chargeNames() const;
     float lambda() const;
 
     Vector calculateTension(float x, float y);
     float calculatePotential(float x, float y);
 
-    Vector toXOY(float, float) const;
-    virtual Vector toXOY(const Vector&) const = 0;
-    Vector fromXOY(float, float) const;
-    virtual Vector fromXOY(const Vector&) const = 0;
-
     Vector applyCharge(size_t);
     static int sign(float);
-
-    void setEngineState(EngineState);
 };
 
 #endif // ENGINE_H

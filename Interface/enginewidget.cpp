@@ -30,29 +30,20 @@ void EngineWidget::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
 
-<<<<<<< HEAD
-=======
     drawBorder(painter);
     Engine::drawCharges(painter);
 
->>>>>>> dd343ba0336d19d43a49488ce5d9b486443af23b
     if(m_draw_grid)
     {
         drawGrid(painter);
     }
 
-<<<<<<< HEAD
-    drawBorder(painter);
-    calculateTension(painter);
-    Engine::drawCharges(painter);
-} 
-=======
     if(m_draw_field)
     {
-        drawElectrostaticField(painter);
+        // To able this function, increase m_default_time otherwise it will crash
+        //drawElectrostaticField(painter);
     }
 }
->>>>>>> dd343ba0336d19d43a49488ce5d9b486443af23b
 
 void EngineWidget::mousePressEvent(QMouseEvent* e)
 {
@@ -88,7 +79,6 @@ void EngineWidget::mouseMoveEvent(QMouseEvent* e)
     }
 
     m_current_cursor_pos = e->pos();
-    qDebug() << e->pos().x();
     emit(cursorMoved(e->pos()));
     repaint();
 }
@@ -167,9 +157,11 @@ void EngineWidget::drawGrid(QPainter& painter)
 void EngineWidget::drawElectrostaticField(QPainter& painter) { //Перевести в координаты
     const int stepX = 5;
     const int stepY = 5;
-    for(int x = 0; x <= width(); x += stepX) {
-        for(int y = 0; y <= height(); y -= stepY) {
-            painter.setPen(QPen(Qt::black, 1, Qt::SolidLine));
+    painter.setPen(QPen(Qt::black, 1, Qt::SolidLine));
+    for(int x = 0; x <= width(); x += stepX)
+    {
+        for(int y = 0; y <= height(); y -= stepY)
+        {
             const Vector tension(Engine::calculateTension(x, y));
             painter.drawLine(fromXOY(Vector(x, y)).x(), fromXOY(Vector(x, y)).y(), fromXOY(Vector(x, y)).x() + tension.x() / m_lambda, fromXOY(Vector(x, y)).y() + tension.y() / m_lambda);
         }
@@ -181,7 +173,6 @@ void EngineWidget::setDrawGrid(bool b)
     m_draw_grid = b;
 }
 
-<<<<<<< HEAD
 void EngineWidget::setCamera(int camera)
 {
     m_camera = camera;
@@ -189,14 +180,16 @@ void EngineWidget::setCamera(int camera)
     {
         m_diff_from_start = QPoint(0, 0);
     }
-=======
-void EngineWidget::setDrawField(bool b) {
+}
+
+void EngineWidget::setDrawField(bool b)
+{
     m_draw_field = b;
 }
 
-QPoint EngineWidget::current_cursos_pos() {
+QPoint EngineWidget::current_cursos_pos() const
+{
     return m_current_cursor_pos;
->>>>>>> dd343ba0336d19d43a49488ce5d9b486443af23b
 }
 
 Vector EngineWidget::toXOY(const Vector& vec) const

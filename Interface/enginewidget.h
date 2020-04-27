@@ -31,13 +31,10 @@ public:
     virtual ~EngineWidget();
 
     void setDrawGrid(bool);
-<<<<<<< HEAD
     void setCamera(int);
-=======
     void setDrawField(bool);
 
-    QPoint current_cursos_pos();
->>>>>>> dd343ba0336d19d43a49488ce5d9b486443af23b
+    QPoint current_cursos_pos() const;
 
     virtual Vector toXOY(const Vector&) const override;
     virtual Vector fromXOY(const Vector&) const override;
