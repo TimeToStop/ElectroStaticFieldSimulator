@@ -1,6 +1,6 @@
 #include "enginewidget.h"
-
 #include "Engine/charge.h"
+#include <QDebug>
 
 EngineWidget::EngineWidget(QWidget *parent):
     QWidget(parent),
@@ -30,12 +30,16 @@ void EngineWidget::paintEvent(QPaintEvent*)
     QPainter painter(this);
 
     drawBorder(painter);
-    calculateTension(painter);
     Engine::drawCharges(painter);
 
     if(m_draw_grid)
     {
         drawGrid(painter);
+    }
+
+    if(m_draw_field)
+    {
+        drawElectrostaticField(painter);
     }
 }
 
@@ -73,6 +77,8 @@ void EngineWidget::mouseMoveEvent(QMouseEvent* e)
     }
 
     m_current_cursor_pos = e->pos();
+    qDebug() << e->pos().x();
+    emit(cursorMoved(e->pos()));
     repaint();
 }
 
@@ -132,17 +138,29 @@ void EngineWidget::drawGrid(QPainter& painter)
     }
 }
 
-void EngineWidget::calculateTension(QPainter&)
-{
-}
-
-void EngineWidget::drawTension(QPainter&, const Vector&, const Vector&)
-{
+void EngineWidget::drawElectrostaticField(QPainter& painter) { //Перевести в координаты
+    const int stepX = 5;
+    const int stepY = 5;
+    for(int x = 0; x <= width(); x += stepX) {
+        for(int y = 0; y <= height(); y -= stepY) {
+            painter.setPen(QPen(Qt::black, 1, Qt::SolidLine));
+            const Vector tension(Engine::calculateTension(x, y));
+            painter.drawLine(fromXOY(Vector(x, y)).x(), fromXOY(Vector(x, y)).y(), fromXOY(Vector(x, y)).x() + tension.x() / m_lambda, fromXOY(Vector(x, y)).y() + tension.y() / m_lambda);
+        }
+    }
 }
 
 void EngineWidget::setDrawGrid(bool b)
 {
     m_draw_grid = b;
+}
+
+void EngineWidget::setDrawField(bool b) {
+    m_draw_field = b;
+}
+
+QPoint EngineWidget::current_cursos_pos() {
+    return m_current_cursor_pos;
 }
 
 Vector EngineWidget::toXOY(const Vector& vec) const

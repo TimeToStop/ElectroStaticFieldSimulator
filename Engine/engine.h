@@ -40,6 +40,9 @@ public:
     QStringList chargeNames() const;
     float lambda() const;
 
+    Vector calculateTension(float x, float y);
+    float calculatePotential(float x, float y);
+
     Vector toXOY(float, float) const;
     virtual Vector toXOY(const Vector&) const = 0;
     Vector fromXOY(float, float) const;

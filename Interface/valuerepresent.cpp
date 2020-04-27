@@ -5,7 +5,7 @@
 #include <QLabel>
 #include <QSpacerItem>
 
-ValueRepresent::ValueRepresent(const QString& name, const QString& measure, int left_diff, double val, QWidget *parent):
+ValueRepresent::ValueRepresent(const QString& name, const QString& measure, int left_diff, float val, QWidget *parent):
     QWidget(parent),
     m_edit(nullptr),
     m_measure_label(nullptr),
@@ -28,6 +28,8 @@ ValueRepresent::ValueRepresent(const QString& name, const QString& measure, int 
     m_edit = edit;
     m_measure_label = measure_label;
     setValue(val);
+
+    connect(edit, SIGNAL(editingFinished()), this, SLOT(editNewValue()));
 }
 
 ValueRepresent::~ValueRepresent()
@@ -48,17 +50,20 @@ void ValueRepresent::setInvisible(bool b)
     m_edit->setVisible(!b);
 }
 
-void ValueRepresent::setValue(double d)
+void ValueRepresent::setValue(float d)
 {
     m_edit->setText(QString::number(d));
+
 }
 
 float ValueRepresent::value() const
 {
-    return m_edit->text().toDouble();
+    return m_edit->text().toFloat();
 }
 
 void ValueRepresent::editNewValue()
 {
-    emit(valueEdited(m_edit->text().toDouble()));
+    emit(valueEdited(m_edit->text().toFloat()));
+    emit(valueChanged());
 }
+
