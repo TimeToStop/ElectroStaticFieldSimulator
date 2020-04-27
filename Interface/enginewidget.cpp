@@ -1,6 +1,5 @@
 #include "enginewidget.h"
 #include "Engine/charge.h"
-#include <QDebug>
 
 EngineWidget::EngineWidget(QWidget *parent):
     QWidget(parent),
@@ -31,8 +30,6 @@ void EngineWidget::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
 
-    qDebug() << Engine::toXOY(width()/2, 0).toPointF();
-
     drawBorder(painter);
     Engine::drawCharges(painter);
 
@@ -43,7 +40,6 @@ void EngineWidget::paintEvent(QPaintEvent*)
 
     if(m_draw_field)
     {
-        // To able this function, increase m_default_time otherwise it will crash
         drawElectrostaticField(painter);
     }
 }
@@ -177,22 +173,28 @@ void EngineWidget::drawGrid(QPainter& painter)
 
     stepVector = fromXOY(Vector(5, 0));
     step = stepVector.x() - startVector.x();
-    for (int i = startX % step; i < width(); i += step) {
+    for (int i = startX % step; i < width(); i += step)
+    {
         painter.drawLine(i, startY - 5, i, startY + 5);
     }
 
     // ОТРИСОВКА ПОЛОСОК КАЖДЫЕ 5 ЕДИНИЦ ПО У
-    for (int i = startY % step; i < height(); i += step) {
+    for (int i = startY % step; i < height(); i += step)
+    {
         painter.drawLine(startX - 5, i, startX + 5, i);
     }
 
     // ОТРИСОВКА ЧИСЕЛ ПО Х
     Vector vectorX = toXOY(Vector(0, height() / 2));
-    for (int i = vectorX.x() - (int)vectorX.x() % 5; fromXOY(Vector(i, startY)).x() < width(); i += 5) {
+    for (int i = vectorX.x() - (int)vectorX.x() % 5; fromXOY(Vector(i, startY)).x() < width(); i += 5)
+    {
         painter.drawText(fromXOY(Vector(i, 0)).x(), startY - 10, QString::number(i));
-        if (Engine::toXOY(0, 0).y() < 0) {
+        if (Engine::toXOY(0, 0).y() < 0)
+        {
             painter.drawText(Engine::fromXOY(i, 0).x(), 15, QString::number(i));
-        } else if (Engine::toXOY(0, height()).y() > 0) {
+        }
+        else if (Engine::toXOY(0, height()).y() > 0)
+        {
             painter.drawText(Engine::fromXOY(i, 0).x(), height() - 10, QString::number(i));
         }
 
@@ -200,14 +202,20 @@ void EngineWidget::drawGrid(QPainter& painter)
 
     // ОТРИСОВКА ЧИСЕЛ ПО У
     Vector vectorY = toXOY(Vector(width() / 2, 0));
-    qDebug() << vectorY.toPointF();
 
-    for (int i = vectorY.y() - (int)vectorY.y() % 5; fromXOY(Vector(startX, i)).y() < height(); i -= 5) {
+    for (int i = vectorY.y() - (int)vectorY.y() % 5; fromXOY(Vector(startX, i)).y() < height(); i -= 5)
+    {
         if (i != 0)
-            painter.drawText(startX + 10, fromXOY(Vector(startX, i)).y(), QString::number(i));
-        if (Engine::fromXOY(0,0).x() < 0) {
+        {
+             painter.drawText(startX + 10, fromXOY(Vector(startX, i)).y(), QString::number(i));
+        }
+
+        if (Engine::fromXOY(0,0).x() < 0)
+        {
             painter.drawText(4, Engine::fromXOY(0, i).y(), QString::number(i));
-        } else if (Engine::toXOY(width(), 0).x() < 0) {
+        }
+        else if (Engine::toXOY(width(), 0).x() < 0)
+        {
             painter.drawText(width() - 25, Engine::fromXOY(0, i).y(), QString::number(i));
         }
     }
