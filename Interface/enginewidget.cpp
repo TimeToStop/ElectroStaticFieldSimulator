@@ -143,17 +143,73 @@ void EngineWidget::drawSelectingRect(QPainter& painter)
 
 void EngineWidget::drawGrid(QPainter& painter)
 {
-    const int step = width() / 25;
-    painter.setPen(QPen(QColor(100, 100, 100, 120), 1, Qt::SolidLine));
+    Vector startVector = fromXOY(Vector(0, 0));
+    const int startX = startVector.x();
+    const int startY = startVector.y();
+    Vector stepVector;
+    int step;
 
-    for(int i = m_diff_from_start.x() % step; i < width(); i += step)
+    painter.setPen(QPen(QColor(100, 100, 100, 60), 1, Qt::SolidLine));
+
+    // ОТРИСОВКА СЕТКИ
+    stepVector = fromXOY(Vector(1, 0));
+    step = stepVector.x() - startVector.x();
+    for(int i = startX % step; i < width(); i += step)
     {
         painter.drawLine(i, 0, i, height());
     }
 
-    for(int i = m_diff_from_start.y() % step; i < height(); i += step)
+    for(int i = startY % step; i < height(); i += step)
     {
         painter.drawLine(0, i, width(), i);
+    }
+
+    painter.setPen(QPen(QColor(0, 0, 0), 2, Qt::SolidLine));
+    // ОТРИСОВКА ОСЕЙ
+    painter.drawLine(startX, 0, startX, height());
+    painter.drawLine(width(), startY, 0, startY);
+
+    QFont font = painter.font();
+    font.setPixelSize(12);
+    painter.setFont(font);
+
+    // ОТРИСОВКА ПОЛОСОК КАЖДЫЕ 5 ЕДИНИЦ ПО Х
+
+    stepVector = fromXOY(Vector(5, 0));
+    step = stepVector.x() - startVector.x();
+    for (int i = startX % step; i < width(); i += step) {
+        painter.drawLine(i, startY - 5, i, startY + 5);
+    }
+
+    // ОТРИСОВКА ПОЛОСОК КАЖДЫЕ 5 ЕДИНИЦ ПО У
+    for (int i = startY % step; i < height(); i += step) {
+        painter.drawLine(startX - 5, i, startX + 5, i);
+    }
+
+    // ОТРИСОВКА ЧИСЕЛ ПО Х
+    Vector vectorX = toXOY(Vector(0, height() / 2));
+    for (int i = vectorX.x() - (int)vectorX.x() % 5; fromXOY(Vector(i, startY)).x() < width(); i += 5) {
+        painter.drawText(fromXOY(Vector(i, 0)).x(), startY - 10, QString::number(i));
+        if (Engine::toXOY(0, 0).y() < 0) {
+            painter.drawText(Engine::fromXOY(i, 0).x(), 15, QString::number(i));
+        } else if (Engine::toXOY(0, height()).y() > 0) {
+            painter.drawText(Engine::fromXOY(i, 0).x(), height() - 10, QString::number(i));
+        }
+
+    }
+
+    // ОТРИСОВКА ЧИСЕЛ ПО У
+    Vector vectorY = toXOY(Vector(width() / 2, 0));
+    qDebug() << vectorY.toPointF();
+
+    for (int i = vectorY.y() - (int)vectorY.y() % 5; fromXOY(Vector(startX, i)).y() < height(); i -= 5) {
+        if (i != 0)
+            painter.drawText(startX + 10, fromXOY(Vector(startX, i)).y(), QString::number(i));
+        if (Engine::fromXOY(0,0).x() < 0) {
+            painter.drawText(4, Engine::fromXOY(0, i).y(), QString::number(i));
+        } else if (Engine::toXOY(width(), 0).x() < 0) {
+            painter.drawText(width() - 25, Engine::fromXOY(0, i).y(), QString::number(i));
+        }
     }
 }
 
