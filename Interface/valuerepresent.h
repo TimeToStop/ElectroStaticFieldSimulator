@@ -18,19 +18,20 @@ class ValueRepresent : public QWidget
 
 
 public:
-    ValueRepresent(const QString& name, const QString& measure, int left_diff = 0, double val = 0.0, QWidget *parent = nullptr);
+    ValueRepresent(const QString& name, const QString& measure, int left_diff = 0, float val = 0.0, QWidget *parent = nullptr);
     virtual ~ValueRepresent();
 
     void setReadOnly(bool);
     void setDefaultMeasure(bool);
     void setInvisible(bool);
 
-    void setValue(double);
+    void setValue(float);
 
     float value() const;
 
 signals:
-    void valueEdited(double);
+    void valueEdited(float);
+    void valueChanged();
 
 public slots:
     void editNewValue();
