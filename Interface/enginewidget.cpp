@@ -6,6 +6,7 @@ EngineWidget::EngineWidget(QWidget *parent):
     QWidget(parent),
     Engine(),
     m_draw_grid(true),
+    m_draw_field(false),
     m_is_left_mouse_pressed(false),
     m_is_right_mouse_pressed(false),
     m_current_cursor_pos(),
@@ -29,6 +30,8 @@ EngineWidget::~EngineWidget()
 void EngineWidget::paintEvent(QPaintEvent*)
 {
     QPainter painter(this);
+
+    qDebug() << Engine::toXOY(width()/2, 0).toPointF();
 
     drawBorder(painter);
     Engine::drawCharges(painter);
@@ -154,18 +157,21 @@ void EngineWidget::drawGrid(QPainter& painter)
     }
 }
 
-void EngineWidget::drawElectrostaticField(QPainter& painter) { //Перевести в координаты
+void EngineWidget::drawElectrostaticField(QPainter& painter)
+{
     const int stepX = 1;
     const int stepY = 1;
     Vector window_size(toXOY(Vector(width(), height())));
     painter.setPen(QPen(Qt::red, 1.5, Qt::SolidLine));
-    qDebug() << window_size.x();
-    qDebug() << window_size.y();
-    for(int x = toXOY(Vector(0, 0)).x(); x <= window_size.x(); x += stepX) {
-        for(int y = toXOY(Vector(0, 0)).y(); y >= window_size.y(); y -= stepY) {
+    for(int x = toXOY(Vector(0, 0)).x(); x <= window_size.x(); x += stepX)
+    {
+        for(int y = toXOY(Vector(0, 0)).y(); y >= window_size.y(); y -= stepY)
+        {
             const Vector tension(Engine::calculateTension(x, y));
             Vector pos(fromXOY(Vector(x, y)));
-            painter.drawLine(pos.x(), pos.y(), pos.x() + tension.x()/m_lambda, pos.y() + tension.y()/m_lambda);
+            Vector t = tension/ tension.module();
+            t *= 7.f;
+            painter.drawLine(pos.x(), pos.y(), pos.x() + t.x(), pos.y() + t.y());
         }
     }
 }
@@ -198,7 +204,7 @@ Vector EngineWidget::toXOY(const Vector& vec) const
 {
     if(m_camera == -1)
     {
-        return Vector(vec.x() - size().width()/2 - m_diff_from_start.x(), -vec.y() + size().height()/2 - m_diff_from_start.y())*m_lambda;
+        return Vector(vec.x() - size().width()/2 - m_diff_from_start.x(), -vec.y() + size().height()/2 + m_diff_from_start.y())*m_lambda;
     }
     else
     {
