@@ -7,6 +7,7 @@ ValueEdit::ValueEdit(const QString& name, const QString& measure, int left_diff,
     m_edit->setValidator(new QDoubleValidator());
     m_layout->insertWidget(2, m_edit);
     setValue(0.f);
+    connect(m_edit, SIGNAL(editingFinished()), this, SLOT(newValueEdited()));
 }
 
 ValueEdit::~ValueEdit()
