@@ -11,6 +11,7 @@ class EngineWidget:
     Q_OBJECT
 
     bool m_draw_grid;
+    bool m_draw_field;
 
     bool m_is_left_mouse_pressed;
     bool m_is_right_mouse_pressed;
@@ -28,6 +29,9 @@ public:
     virtual ~EngineWidget();
 
     void setDrawGrid(bool);
+    void setDrawField(bool);
+
+    QPoint current_cursos_pos();
 
     virtual Vector toXOY(const Vector&) const override;
     virtual Vector fromXOY(const Vector&) const override;
@@ -40,6 +44,7 @@ protected:
     virtual void mouseReleaseEvent(QMouseEvent*) override;
 
 signals:
+    void cursorMoved(const QPoint&);
 
 public slots:
     void timeTick();
@@ -49,9 +54,7 @@ private:
     void drawCharges(QPainter&);
     void drawSelectingRect(QPainter&);
     void drawGrid(QPainter&);
-
-    void calculateTension(QPainter&);
-    void drawTension(QPainter&, const Vector&, const Vector&);
+    void drawElectrostaticField(QPainter&);
 };
 
 #endif // ENGINEWIDGET_H
