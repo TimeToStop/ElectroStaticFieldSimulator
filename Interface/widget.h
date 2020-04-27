@@ -31,6 +31,9 @@ class Widget : public QWidget
 
     QComboBox* m_camera_change;
 
+    bool m_use_cursor;
+
+
 public:
     explicit Widget(QWidget *parent = nullptr);
     virtual ~Widget();
@@ -49,7 +52,14 @@ public slots:
     void rmCharge();
 
     void showGrid(int);
-    void showTension(int);
+    void showElectrostaticField(int);
+
+    void calculateTension();
+    void calculateTension(float x, float y);
+    void calculateTensionByMouse(const QPoint&);
+    void calculatePotential();
+    void calculatePotential(float x, float y);
+    void calculatePotentialByMouse(const QPoint&);
 
     void scaleChanged(int);
 

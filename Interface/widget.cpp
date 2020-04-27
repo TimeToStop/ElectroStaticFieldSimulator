@@ -16,6 +16,7 @@
 #include <QGroupBox>
 #include <QComboBox>
 #include <QSlider>
+#include <QDebug>
 
 Widget::Widget(QWidget *parent):
     QWidget(parent),
@@ -36,6 +37,9 @@ Widget::Widget(QWidget *parent):
 
     // Engine
     EngineWidget* engine = new EngineWidget();
+    connect(engine, SIGNAL(cursorMoved(const QPoint&)), this, SLOT(calculateTensionByMouse(const QPoint&)));
+    connect(engine, SIGNAL(cursorMoved(const QPoint&)), this, SLOT(calculatePotentialByMouse(const QPoint&)));
+
     // Main UI Buttons
     QWidget* widget = new QWidget();
 
@@ -106,6 +110,8 @@ Widget::Widget(QWidget *parent):
     ValueEdit* tension_pos_y = new ValueEdit("Y", "м");
     tension_position->addWidget(tension_pos_x);
     tension_position->addWidget(tension_pos_y);
+    connect(tension_pos_x, SIGNAL(valueChanged()), this, SLOT(calculateTension()));
+    connect(tension_pos_y, SIGNAL(valueChanged()), this, SLOT(calculateTension()));
     // End of Working with position
 
     // Calculated Result of tension
@@ -144,6 +150,8 @@ Widget::Widget(QWidget *parent):
     ValueEdit* potential_pos_y = new ValueEdit("Y", "м");
     potential_position->addWidget(potential_pos_x);
     potential_position->addWidget(potential_pos_y);
+    connect(potential_pos_x, SIGNAL(valueChanged()), this, SLOT(calculatePotential()));
+    connect(potential_pos_y, SIGNAL(valueChanged()), this, SLOT(calculatePotential()));
     // End of Working with position
 
     QVBoxLayout* potential_value = new QVBoxLayout();
@@ -307,13 +315,13 @@ Widget::Widget(QWidget *parent):
     connect(scale_slider, SIGNAL(valueChanged(int)), this, SLOT(scaleChanged(int)));
 
     QCheckBox* show_grid = new QCheckBox("Show grid");
-    QCheckBox* show_tension = new QCheckBox("Show tension lines");
+    QCheckBox* show_tension = new QCheckBox("Show electrostatic field");
     info->addWidget(show_grid);
     info->addWidget(show_tension);
     show_grid->setChecked(true);
     show_tension->setChecked(false);
     connect(show_grid, SIGNAL(stateChanged(int)), this, SLOT(showGrid(int)));
-    connect(show_tension, SIGNAL(stateChanged(int)), this, SLOT(showTension(int)));
+    connect(show_tension, SIGNAL(stateChanged(int)), this, SLOT(showElectrostaticField(int)));
 
     m_engine = engine;
     m_tension_use_cursor = tension_check;
@@ -326,7 +334,11 @@ Widget::Widget(QWidget *parent):
     m_potential_pos_x = potential_pos_x;
     m_potential_pos_y = potential_pos_y;
     m_potential_val = potential_val;
+<<<<<<< HEAD
     m_camera_change = camera_combo;
+=======
+    m_use_cursor = false;
+>>>>>>> dd343ba0336d19d43a49488ce5d9b486443af23b
 }
 
 Widget::~Widget()
@@ -415,8 +427,48 @@ void Widget::showGrid(int val)
     m_engine->repaint();
 }
 
-void Widget::showTension(int)
+void Widget::showElectrostaticField(int val)
 {
+   m_engine->setDrawField(val == Qt::Checked);
+   m_engine->repaint();
+}
+
+void Widget::calculateTension() {
+    calculateTension(m_tension_pos_x->value(), m_tension_pos_y->value());
+}
+
+void Widget::calculateTension(float x, float y) {
+    Vector tension = m_engine->calculateTension(x, y);
+    m_tension_val_x->setValue(tension.x());
+    m_tension_val_y->setValue(tension.y());
+}
+
+void Widget::calculateTensionByMouse(const QPoint& point) {
+    if (m_use_cursor) {
+      Vector cursor_pos(m_engine->toXOY(Vector(point.x(), point.y())));
+      m_tension_pos_x->setValue(cursor_pos.x());
+      m_tension_pos_y->setValue(cursor_pos.y());
+      Vector tension(m_engine->calculateTension(cursor_pos.x(), cursor_pos.y()));
+      m_tension_val_x->setValue(tension.x());
+      m_tension_val_y->setValue(tension.y());
+    }
+}
+
+void Widget::calculatePotential() {
+    calculatePotential(m_potential_pos_x->value(), m_potential_pos_y->value());
+}
+
+void Widget::calculatePotential(float x, float y) {
+    m_potential_val->setValue(m_engine->calculatePotential(x, y));
+}
+
+void Widget::calculatePotentialByMouse(const QPoint& point) {
+    if (m_use_cursor) {
+      Vector cursor_pos(point.x(), point.y());
+      m_potential_pos_x->setValue(m_engine->toXOY(cursor_pos).x());
+      m_potential_pos_y->setValue(m_engine->toXOY(cursor_pos).y());
+      m_potential_val->setValue(m_engine->calculatePotential(cursor_pos.x(), cursor_pos.y()));
+    }
 }
 
 void Widget::scaleChanged(int)
@@ -434,7 +486,11 @@ void Widget::changeScene(int)
 
 void Widget::useCursorPosition(int val)
 {
+<<<<<<< HEAD
     bool is_checked = (val == Qt::Checked);
+=======
+    m_use_cursor = (val == Qt::Checked);
+>>>>>>> dd343ba0336d19d43a49488ce5d9b486443af23b
 
     if(m_tension_use_cursor->checkState() != val)
     {
@@ -446,8 +502,16 @@ void Widget::useCursorPosition(int val)
         m_potential_use_cursor->setChecked(is_checked);
     }
 
+<<<<<<< HEAD
     m_tension_pos_x->setDisabled(is_checked);
     m_tension_pos_y->setDisabled(is_checked);
     m_potential_pos_x->setDisabled(is_checked);
     m_potential_pos_y->setDisabled(is_checked);
+=======
+    m_tension_pos_x->setDisabled(val == Qt::Checked);
+    m_tension_pos_y->setDisabled(val == Qt::Checked);
+    m_potential_pos_x->setDisabled(val == Qt::Checked);
+    m_potential_pos_y->setDisabled(val == Qt::Checked);
+>>>>>>> dd343ba0336d19d43a49488ce5d9b486443af23b
 }
+
