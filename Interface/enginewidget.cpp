@@ -13,8 +13,9 @@ EngineWidget::EngineWidget(QWidget *parent):
     m_previous_pos_right_mouse_clicked(),
     m_diff_from_start(),
     m_default_time(1.f),
-    m_main_timer()
-{
+    m_main_timer(),
+    m_camera(-1)
+{    
     m_main_timer.start(m_default_time);
     connect(&m_main_timer, SIGNAL(timeout()), this, SLOT(timeTick()));
     setFocusPolicy(Qt::StrongFocus);
@@ -39,6 +40,7 @@ void EngineWidget::paintEvent(QPaintEvent*)
 
     if(m_draw_field)
     {
+        // To able this function, increase m_default_time otherwise it will crash
         drawElectrostaticField(painter);
     }
 }
@@ -70,14 +72,13 @@ void EngineWidget::mousePressEvent(QMouseEvent* e)
 
 void EngineWidget::mouseMoveEvent(QMouseEvent* e)
 {
-    if(m_is_right_mouse_pressed)
+    if(m_is_right_mouse_pressed && m_camera == -1)
     {
         m_diff_from_start += e->pos() - m_previous_pos_right_mouse_clicked;
         m_previous_pos_right_mouse_clicked = e->pos();
     }
 
     m_current_cursor_pos = e->pos();
-    qDebug() << e->pos().x();
     emit(cursorMoved(e->pos()));
     repaint();
 }
@@ -99,7 +100,22 @@ void EngineWidget::mouseReleaseEvent(QMouseEvent* e)
 
 void EngineWidget::timeTick()
 {
-    Engine::tick(m_default_time/1000.f);
+    // TODO: Count tick
+    float tick = m_default_time/1000.f;
+
+    switch (m_engine_state)
+    {
+    case PAUSE:
+    case EDIT:
+        return;
+    case SPEED_2:
+        tick *= 2;
+        break;
+    case PLAY:
+        break;
+    }
+
+    Engine::tick(tick);
     repaint();
 }
 
@@ -159,20 +175,55 @@ void EngineWidget::setDrawGrid(bool b)
     m_draw_grid = b;
 }
 
-void EngineWidget::setDrawField(bool b) {
+void EngineWidget::setCamera(int camera)
+{
+    m_camera = camera;
+    if(m_camera != -1)
+    {
+        m_diff_from_start = QPoint(0, 0);
+    }
+}
+
+void EngineWidget::setDrawField(bool b)
+{
     m_draw_field = b;
 }
 
-QPoint EngineWidget::current_cursos_pos() {
+QPoint EngineWidget::current_cursos_pos() const
+{
     return m_current_cursor_pos;
 }
 
 Vector EngineWidget::toXOY(const Vector& vec) const
 {
-    return Vector(vec.x() - size().width()/2 - m_diff_from_start.x(), -vec.y() + size().height()/2 + m_diff_from_start.y())*m_lambda;
+    if(m_camera == -1)
+    {
+        return Vector(vec.x() - size().width()/2 - m_diff_from_start.x(), -vec.y() + size().height()/2 - m_diff_from_start.y())*m_lambda;
+    }
+    else
+    {
+        int temp = m_camera;
+        Vector v;
+        m_camera = -1;
+        v = toXOY(vec - fromXOY(m_charges[temp]->pos()));
+        m_camera = temp;
+        return v;
+    }
 }
 
 Vector EngineWidget::fromXOY(const Vector& vec) const
 {
-    return Vector(vec.x(), -vec.y())/m_lambda + size()/2 + m_diff_from_start;
+    if(m_camera == -1)
+    {
+        return Vector(vec.x(), -vec.y())/m_lambda + size()/2 + m_diff_from_start;
+    }
+    else
+    {
+        int temp = m_camera;
+        Vector v;
+        m_camera = -1;
+        v = fromXOY(vec - m_charges[temp]->pos());
+        m_camera = temp;
+        return v;
+    }
 }
