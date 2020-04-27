@@ -13,9 +13,9 @@ Engine::Engine():
     m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(2, -1), this)));
     m_charges.push_back(std::unique_ptr<Charge>(new Charge(1.f, Vector(-1, 0), this)));
 
-    m_charges[0]->setCharge(0.00001);
-    m_charges[1]->setCharge(-0.00001);
-    m_charges[2]->setCharge(0.00001);
+    m_charges[0]->setCharge(0.000000001);
+    m_charges[1]->setCharge(-0.000000001);
+    m_charges[2]->setCharge(0.000000001);
 }
 
 Engine::~Engine()
@@ -78,6 +78,41 @@ QStringList Engine::chargeNames() const
     }
 
     return names;
+}
+
+Vector Engine::calculateTension(float x, float y) {
+    const long long k = 9000000000.l;
+    float res_tension_x = 0;
+    float res_tension_y = 0;
+    for (int i = 0; i < m_charges.size(); ++i) {
+        const float dx = x - m_charges[i]->pos().x();
+        const float dy = y - m_charges[i]->pos().y();
+        const double distance = sqrt(dx * dx + dy * dy);
+        if (m_charges[i]->charge() < 0 && m_charges[i]->radius() >= distance) {
+            break;
+        }
+        else {
+            const double tension = (k * (double)m_charges[i]->charge()) / (distance * distance);
+            const float tension_x = tension * dx / distance;
+            const float tension_y = tension * dy / distance;
+            res_tension_x += tension_x;
+            res_tension_y += tension_y;
+        }
+    }
+    return Vector(res_tension_x, res_tension_y);
+}
+
+float Engine::calculatePotential(float x, float y){
+    const long long k = 9000000000.l;
+    float res_potential = 0;
+    for (int i = 0; i < m_charges.size(); ++i) {
+        const float dx = x - m_charges[i]->pos().x();
+        const float dy = y - m_charges[i]->pos().y();
+        const double distance = sqrt(dx * dx + dy * dy);
+        const double potential = (k * (double)m_charges[i]->charge()) / distance;
+        res_potential += potential;
+    }
+    return res_potential;
 }
 
 Vector Engine::toXOY(float x, float y) const
