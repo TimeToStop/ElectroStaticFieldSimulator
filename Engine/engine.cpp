@@ -15,7 +15,7 @@ Engine::Engine():
     m_charges.push_back(std::unique_ptr<Charge>(new Charge(1.f, Vector(-1, 0), this)));
 
     m_charges[0]->setCharge(0.00001);
-    m_charges[1]->setCharge(-0.00001);
+    m_charges[1]->setCharge(0.00001);
     m_charges[2]->setCharge(0.00001);
 }
 
