@@ -86,7 +86,7 @@ Vector Engine::calculateTension(float x, float y) {
     float res_tension_y = 0;
     for (int i = 0; i < m_charges.size(); ++i) {
         const float dx = x - m_charges[i]->pos().x();
-        const float dy = y - m_charges[i]->pos().y();
+        const float dy = m_charges[i]->pos().y() - y;
         const double distance = sqrt(dx * dx + dy * dy);
         if (m_charges[i]->charge() < 0 && m_charges[i]->radius() >= distance) {
             break;
@@ -107,7 +107,7 @@ float Engine::calculatePotential(float x, float y){
     float res_potential = 0;
     for (int i = 0; i < m_charges.size(); ++i) {
         const float dx = x - m_charges[i]->pos().x();
-        const float dy = y - m_charges[i]->pos().y();
+        const float dy = m_charges[i]->pos().y() - y;
         const double distance = sqrt(dx * dx + dy * dy);
         const double potential = (k * (double)m_charges[i]->charge()) / distance;
         res_potential += potential;
