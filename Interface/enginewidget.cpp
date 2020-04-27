@@ -41,7 +41,7 @@ void EngineWidget::paintEvent(QPaintEvent*)
     if(m_draw_field)
     {
         // To able this function, increase m_default_time otherwise it will crash
-        //drawElectrostaticField(painter);
+        drawElectrostaticField(painter);
     }
 }
 
@@ -155,15 +155,17 @@ void EngineWidget::drawGrid(QPainter& painter)
 }
 
 void EngineWidget::drawElectrostaticField(QPainter& painter) { //Перевести в координаты
-    const int stepX = 5;
-    const int stepY = 5;
-    painter.setPen(QPen(Qt::black, 1, Qt::SolidLine));
-    for(int x = 0; x <= width(); x += stepX)
-    {
-        for(int y = 0; y <= height(); y -= stepY)
-        {
+    const int stepX = 1;
+    const int stepY = 1;
+    Vector window_size(toXOY(Vector(width(), height())));
+    painter.setPen(QPen(Qt::red, 1.5, Qt::SolidLine));
+    qDebug() << window_size.x();
+    qDebug() << window_size.y();
+    for(int x = toXOY(Vector(0, 0)).x(); x <= window_size.x(); x += stepX) {
+        for(int y = toXOY(Vector(0, 0)).y(); y >= window_size.y(); y -= stepY) {
             const Vector tension(Engine::calculateTension(x, y));
-            painter.drawLine(fromXOY(Vector(x, y)).x(), fromXOY(Vector(x, y)).y(), fromXOY(Vector(x, y)).x() + tension.x() / m_lambda, fromXOY(Vector(x, y)).y() + tension.y() / m_lambda);
+            Vector pos(fromXOY(Vector(x, y)));
+            painter.drawLine(pos.x(), pos.y(), pos.x() + tension.x()/m_lambda, pos.y() + tension.y()/m_lambda);
         }
     }
 }
