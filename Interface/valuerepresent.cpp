@@ -36,7 +36,7 @@ ValueRepresent::~ValueRepresent()
 
 void ValueRepresent::setReadOnly(bool b)
 {
-    m_edit->setReadOnly(b);
+    m_edit->setDisabled(b);
 }
 
 void ValueRepresent::setDefaultMeasure(bool)
@@ -45,7 +45,6 @@ void ValueRepresent::setDefaultMeasure(bool)
 
 void ValueRepresent::setInvisible(bool b)
 {
-    m_edit->setVisible(!b);
 }
 
 void ValueRepresent::setValue(double d)

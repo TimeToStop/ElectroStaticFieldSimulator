@@ -22,6 +22,9 @@ SOURCES += \
     Interface/Charge/createcharge.cpp \
     Interface/Charge/ignorecharge.cpp \
     Interface/Charge/selectcharge.cpp \
+    Interface/ValueRepresener/valueedit.cpp \
+    Interface/ValueRepresener/valuerepresenter.cpp \
+    Interface/ValueRepresener/valuewriter.cpp \
     Interface/enginewidget.cpp \
     Interface/valuerepresent.cpp \
     Interface/widget.cpp \
@@ -34,6 +37,9 @@ HEADERS += \
     Interface/Charge/createcharge.h \
     Interface/Charge/ignorecharge.h \
     Interface/Charge/selectcharge.h \
+    Interface/ValueRepresener/valueedit.h \
+    Interface/ValueRepresener/valuerepresenter.h \
+    Interface/ValueRepresener/valuewriter.h \
     Interface/enginewidget.h \
     Interface/valuerepresent.h \
     Interface/widget.h

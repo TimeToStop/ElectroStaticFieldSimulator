@@ -16,7 +16,7 @@ EngineWidget::EngineWidget(QWidget *parent):
     m_default_time(1.f),
     m_main_timer(),
     m_camera(-1)
-{
+{    
     m_main_timer.start(m_default_time);
     connect(&m_main_timer, SIGNAL(timeout()), this, SLOT(timeTick()));
     setFocusPolicy(Qt::StrongFocus);

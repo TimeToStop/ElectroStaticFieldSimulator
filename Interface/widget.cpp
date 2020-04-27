@@ -152,10 +152,12 @@ Widget::Widget(QWidget *parent):
     QVBoxLayout* potential_value = new QVBoxLayout();
     potential_layout->addLayout(potential_value);
 
+    QSpacerItem* spacer6 = new QSpacerItem(0, 10);
+    potential_value->addSpacerItem(spacer6);
     ValueRepresent* potential_val = new ValueRepresent("Y", "В");
     potential_val->setReadOnly(true);
-    QSpacerItem* spacer1 = new QSpacerItem(1, 100);
     potential_value->addWidget(potential_val);
+    QSpacerItem* spacer1 = new QSpacerItem(1, 100);
     potential_value->addSpacerItem(spacer1);
     // End of potential
 
@@ -202,16 +204,55 @@ Widget::Widget(QWidget *parent):
 
     QVBoxLayout* calculated =  new QVBoxLayout();
 
+    QSpacerItem* spacer4 = new QSpacerItem(0, 10);
+    calculated->addSpacerItem(spacer4);
     ValueRepresent* work_charge = new ValueRepresent("q", "Кл");
     calculated->addWidget(work_charge);
-
     ValueRepresent* work_calculated = new ValueRepresent("A", "Дж");
     calculated->addWidget(work_calculated);
+    QSpacerItem* spacer5 = new QSpacerItem(0, 10);
+    calculated->addSpacerItem(spacer5);
 
     work_layout->addLayout(calculated);
-
-
     // End of Work
+
+    // Work
+    QHBoxLayout* energy_layout = new QHBoxLayout();
+    energy->setLayout(energy_layout);
+
+    QVBoxLayout* energy_pos_layout = new QVBoxLayout();
+    energy_layout->addLayout(energy_pos_layout);
+
+    QCheckBox* energy_check_pos = new QCheckBox("Use Cursor Position");
+    energy_pos_layout->addWidget(energy_check_pos);
+
+    QGroupBox* energy_position = new QGroupBox("Start");
+    energy_pos_layout->addWidget(energy_position);
+
+    QVBoxLayout* energy_start_position_layout = new QVBoxLayout();
+
+    ValueRepresent* energy_start_pos_x = new ValueRepresent("X", "м");
+    energy_start_position_layout->addWidget(energy_start_pos_x);
+    ValueRepresent* energy_start_pos_y = new ValueRepresent("Y", "м");
+    energy_start_position_layout->addWidget(energy_start_pos_y);
+
+    energy_position->setLayout(energy_start_position_layout);
+
+    QVBoxLayout* energy_val_layout = new QVBoxLayout();
+
+    QSpacerItem* spacer2 = new QSpacerItem(0, 23);
+    energy_val_layout->addSpacerItem(spacer2);
+    ValueRepresent* energy_of_pos = new ValueRepresent("W", "Дж");
+    energy_val_layout->addWidget(energy_of_pos);
+    ValueRepresent* energy_of_system = new ValueRepresent("W sys", "Дж");
+    energy_val_layout->addWidget(energy_of_system);
+    ValueRepresent* kinetic_energy_of_system = new ValueRepresent("Ek", "Дж");
+    energy_val_layout->addWidget(kinetic_energy_of_system);
+    QSpacerItem* spacer3 = new QSpacerItem(0, 20);
+    energy_val_layout->addSpacerItem(spacer3);
+
+    energy_layout->addLayout(energy_val_layout);
+    // End of work
 
     // Player
     QHBoxLayout* player = new QHBoxLayout();
@@ -247,7 +288,7 @@ Widget::Widget(QWidget *parent):
     camera->addWidget(camera_at);
     camera->addWidget(camera_combo);
 
-    camera_combo->addItem("default");
+    camera_combo->addItem("Default");
     camera_combo->addItems(engine->chargeNames());
 
     connect(camera_combo, SIGNAL(currentIndexChanged(int)), this, SLOT(changeCamera(int)));
