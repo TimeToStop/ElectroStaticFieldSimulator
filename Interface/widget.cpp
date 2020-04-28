@@ -16,6 +16,7 @@
 #include <QGroupBox>
 #include <QComboBox>
 #include <QSlider>
+#include <QToolBar>
 #include <QDebug>
 
 Widget::Widget(QWidget *parent):
@@ -121,8 +122,8 @@ Widget::Widget(QWidget *parent):
     tension_box->setLayout(tension_res_layout);
 
     ValueWriter* tension_val = new ValueWriter("E", "Н/м");
-    ValueWriter* tension_x = new ValueWriter("Ex", "Н/м", 50);
-    ValueWriter* tension_y = new ValueWriter("Ey", "Н/м", 50);
+    ValueWriter* tension_x = new ValueWriter("Ex", "Н/м");
+    ValueWriter* tension_y = new ValueWriter("Ey", "Н/м");
     tension_res_layout->addWidget(tension_val);
     tension_res_layout->addWidget(tension_x);
     tension_res_layout->addWidget(tension_y);
@@ -159,9 +160,9 @@ Widget::Widget(QWidget *parent):
 
     QSpacerItem* spacer6 = new QSpacerItem(0, 10);
     potential_value->addSpacerItem(spacer6);
-    ValueWriter* potential_val = new ValueWriter("Y", "В");
+    ValueWriter* potential_val = new ValueWriter("φ", "В");
     potential_value->addWidget(potential_val);
-    QSpacerItem* spacer1 = new QSpacerItem(1, 100);
+    QSpacerItem* spacer1 = new QSpacerItem(1, 40);
     potential_value->addSpacerItem(spacer1);
     // End of potential
 
@@ -246,11 +247,11 @@ Widget::Widget(QWidget *parent):
 
     QSpacerItem* spacer2 = new QSpacerItem(0, 23);
     energy_val_layout->addSpacerItem(spacer2);
-    ValueWriter* energy_of_pos = new ValueWriter("W", "Дж");
+    ValueWriter* energy_of_pos = new ValueWriter("W     ", "Дж");
     energy_val_layout->addWidget(energy_of_pos);
     ValueWriter* energy_of_system = new ValueWriter("W sys", "Дж");
     energy_val_layout->addWidget(energy_of_system);
-    ValueWriter* kinetic_energy_of_system = new ValueWriter("Ek", "Дж");
+    ValueWriter* kinetic_energy_of_system = new ValueWriter("Wk    ", "Дж");
     energy_val_layout->addWidget(kinetic_energy_of_system);
     QSpacerItem* spacer3 = new QSpacerItem(0, 20);
     energy_val_layout->addSpacerItem(spacer3);
@@ -365,38 +366,48 @@ void Widget::edit()
 
 void Widget::addCharge()
 {
-    CreateCharge d(this);
+    CreateCharge d(m_engine->chargeNames(), this);
+    EngineState e = m_engine->engineState();
+    m_engine->setEngineState(EngineState::PAUSE);
 
     if(d.exec() == QDialog::Accepted)
     {
-        m_engine->addCharge(std::unique_ptr<Charge>(new Charge(d.name(), d.charge(), d.mass(), d.pos(), m_engine)));
+        m_engine->addCharge(std::unique_ptr<Charge>(new Charge(d.name(), d.charge(), d.mass(), d.pos(), d.is_ignored(), d.is_movable(), m_engine)));
         m_camera_change->addItem(d.name());
     }
+
+    m_engine->setEngineState(e);
 }
 
 void Widget::editCharge()
 {
     if(m_engine->hasCharges())
     {
+        EngineState e = m_engine->engineState();
         m_engine->setEngineState(EngineState::PAUSE);
         SelectCharge d(m_engine->chargeNames(), this);
 
         if(d.exec() == QDialog::Accepted)
         {
-            CreateCharge d1(this);
+            QStringList names = m_engine->chargeNames();
+            names.removeAt(d.getSelected());
+            CreateCharge d1(names, this);
 
             d1.setName(m_engine->getCharge(d.getSelected())->name());
             d1.setPos(m_engine->getCharge(d.getSelected())->pos());
             d1.setMass(m_engine->getCharge(d.getSelected())->mass());
             d1.setCharge(m_engine->getCharge(d.getSelected())->charge());
+            d1.setIgnored(m_engine->getCharge(d.getSelected())->is_ignored());
+            d1.setMovable(m_engine->getCharge(d.getSelected())->is_movable());
 
             if(d1.exec() == QDialog::Accepted)
             {
                 m_engine->rmCharge(d.getSelected());
-                m_engine->addCharge(std::unique_ptr<Charge>(new Charge(d1.name(), d1.charge(), d1.mass(), d1.pos(), m_engine)));
+                m_engine->addCharge(std::unique_ptr<Charge>(new Charge(d1.name(), d1.charge(), d1.mass(), d1.pos(), d1.is_ignored(), d1.is_movable(), m_engine)));
             }
         }
-        m_engine->setEngineState(EngineState::PLAY);
+
+        m_engine->setEngineState(e);
     }
 }
 
@@ -409,6 +420,8 @@ void Widget::rmCharge()
 {
     if(m_engine->hasCharges())
     {
+        EngineState e = m_engine->engineState();
+        m_engine->setEngineState(EngineState::PAUSE);
         SelectCharge d(m_engine->chargeNames(), this);
 
         if(d.exec() == QDialog::Accepted)
@@ -416,6 +429,8 @@ void Widget::rmCharge()
             m_engine->rmCharge(d.getSelected());
             m_camera_change->removeItem(d.getSelected() + 1);
         }
+
+        m_engine->setEngineState(e);
     }
 }
 

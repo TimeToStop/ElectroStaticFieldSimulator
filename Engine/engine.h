@@ -45,6 +45,7 @@ public:
     void tick(float);
 
     void setEngineState(EngineState);
+    EngineState engineState() const;
 
     void addCharge(std::unique_ptr<Charge>&&);
     void rmCharge(size_t);

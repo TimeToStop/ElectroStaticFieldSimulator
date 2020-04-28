@@ -5,13 +5,16 @@
 #include <QPushButton>
 #include <QLabel>
 
-CreateCharge::CreateCharge(QWidget *parent):
+CreateCharge::CreateCharge(const QStringList& list, QWidget *parent):
     QDialog(parent),
+    m_reserved_names(list),
     m_name(nullptr),
     m_pos_x(nullptr),
     m_pos_y(nullptr),
     m_mass(nullptr),
-    m_charge(nullptr)
+    m_charge(nullptr),
+    m_is_ignored(nullptr),
+    m_is_movable(nullptr)
 {
     QVBoxLayout* main = new QVBoxLayout(this);
 
@@ -19,12 +22,14 @@ CreateCharge::CreateCharge(QWidget *parent):
     QHBoxLayout* pos = new QHBoxLayout();
     ValueEdit* mass = new ValueEdit("m", "kg");
     ValueEdit* charge = new ValueEdit("q", "kl");
+    QHBoxLayout* checked = new QHBoxLayout();
     QHBoxLayout* buttons = new QHBoxLayout();
 
     main->addLayout(name);
     main->addLayout(pos);
     main->addWidget(mass);
     main->addWidget(charge);
+    main->addLayout(checked);
     main->addLayout(buttons);
 
     // Name
@@ -56,14 +61,25 @@ CreateCharge::CreateCharge(QWidget *parent):
     buttons->addWidget(accept);
     buttons->addWidget(exit);
 
-    connect(accept, SIGNAL(clicked()), this, SLOT(accept()));
+    connect(accept, SIGNAL(clicked()), this, SLOT(checkForCorrect()));
     connect(exit, SIGNAL(clicked()), this, SLOT(reject()));
+
+    QSpacerItem* spacer3 = new QSpacerItem(120, 0);
+    QCheckBox* ignore = new QCheckBox("is ignore");
+    QCheckBox* movable = new QCheckBox("is movable");
+    checked->addSpacerItem(spacer3);
+    checked->addWidget(ignore);
+    checked->addWidget(movable);
+    ignore->setChecked(false);
+    movable->setChecked(true);
 
     m_name = name_edit;
     m_pos_x = position_x;
     m_pos_y = position_y;
     m_mass = mass;
     m_charge = charge;
+    m_is_ignored = ignore;
+    m_is_movable = movable;
     setWindowTitle("Create charge");
 }
 
@@ -91,6 +107,16 @@ float CreateCharge::charge() const
     return m_charge->value();
 }
 
+bool CreateCharge::is_ignored() const
+{
+    return m_is_ignored->isChecked();
+}
+
+bool CreateCharge::is_movable() const
+{
+    return m_is_movable->isChecked();
+}
+
 void CreateCharge::setName(const QString& name)
 {
     m_name->setText(name);
@@ -110,4 +136,27 @@ void CreateCharge::setMass(float mass)
 void CreateCharge::setCharge(float charge)
 {
     m_charge->setValue(charge);
+}
+
+void CreateCharge::setIgnored(bool b)
+{
+    m_is_ignored->setChecked(b);
+}
+
+void CreateCharge::setMovable(bool b)
+{
+    m_is_movable->setChecked(b);
+}
+
+void CreateCharge::checkForCorrect()
+{
+    for(const QString& reserve_name : m_reserved_names)
+    {
+        if(reserve_name == name())
+        {
+            return;
+        }
+    }
+
+    accept();
 }
