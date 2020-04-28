@@ -8,15 +8,15 @@ Engine::Engine():
     m_lambda(0.1f),
     m_dielectric(1.f),
     m_charges(),
-    m_engine_state(EngineState::PLAY)
+    m_engine_state(EngineState::PAUSE)
 {
-//    m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(3, 3), this)));
-//    m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(2, -1), this)));
-//    m_charges.push_back(std::unique_ptr<Charge>(new Charge(1.f, Vector(-1, 0), this)));
+    m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(3, 3), this)));
+    m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(2, -1), this)));
+    m_charges.push_back(std::unique_ptr<Charge>(new Charge(1.f, Vector(-1, 0), this)));
 
-//    m_charges[0]->setCharge(0.00001);
-//    m_charges[1]->setCharge(0.00001);
-//    m_charges[2]->setCharge(0.00001);
+    m_charges[0]->setCharge(0.00001);
+    m_charges[1]->setCharge(0.00001);
+    m_charges[2]->setCharge(0.00001);
 }
 
 Engine::~Engine()

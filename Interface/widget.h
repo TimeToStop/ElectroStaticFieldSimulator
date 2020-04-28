@@ -8,11 +8,15 @@
 #include <QWidget>
 #include <QCheckBox>
 #include <QComboBox>
+#include <QToolBar>
+#include <QMenuBar>
+#include <QMenu>
 
 class Widget : public QWidget
 {
     Q_OBJECT
 
+    QMenuBar* m_tool_bar;
     EngineWidget* m_engine;
 
     QCheckBox* m_tension_use_cursor;
@@ -45,6 +49,11 @@ public slots:
     void stop();
     void speed_x_2();
     void edit();
+
+    void toolBarFile();
+    void toolBarOptions();
+    void toolBarHelp();
+    void toolBarCredits();
 
     void addCharge();
     void editCharge();

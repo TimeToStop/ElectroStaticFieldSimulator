@@ -170,7 +170,6 @@ void EngineWidget::drawGrid(QPainter& painter)
     painter.setFont(font);
 
     // ОТРИСОВКА ПОЛОСОК КАЖДЫЕ 5 ЕДИНИЦ ПО Х
-
     stepVector = fromXOY(Vector(5, 0));
     step = stepVector.x() - startVector.x();
     for (int i = startX % step; i < width(); i += step)

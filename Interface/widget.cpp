@@ -8,6 +8,7 @@
 #include <QVBoxLayout>
 
 #include <QMenuBar>
+#include <QMenu>
 #include <QTabWidget>
 
 #include <QPushButton>
@@ -16,11 +17,11 @@
 #include <QGroupBox>
 #include <QComboBox>
 #include <QSlider>
-#include <QToolBar>
 #include <QDebug>
 
 Widget::Widget(QWidget *parent):
     QWidget(parent),
+    m_tool_bar(nullptr),
     m_engine(nullptr),
     m_tension_use_cursor(nullptr),
     m_tension_pos_x(nullptr),
@@ -34,7 +35,43 @@ Widget::Widget(QWidget *parent):
     m_potential_val(nullptr),
     m_camera_change(nullptr)
 {
-    QHBoxLayout* main = new QHBoxLayout(this);
+    QVBoxLayout* main = new QVBoxLayout(this);
+    main->setMargin(5);
+
+    QWidget* size_controller = new QWidget();
+    size_controller->setFixedSize(300, 50);
+    main->addWidget(size_controller);
+    QHBoxLayout* size_controller_layout = new QHBoxLayout();
+    size_controller->setLayout(size_controller_layout);
+    QMenuBar* bar = new QMenuBar();
+    size_controller_layout->addWidget(bar);
+
+    QMenu* file_menu = bar->addMenu("File");
+
+    file_menu->addAction("Open");
+    file_menu->addAction("Save");
+    file_menu->addAction("Save as");
+    file_menu->addSeparator();
+    file_menu->addAction("Exit", this, &QWidget::close);
+
+    QMenu* options_menu = bar->addMenu("Options");
+
+    options_menu->addAction("Theme");
+    options_menu->addAction("Language");
+
+    QMenu* help_menu = bar->addMenu("Help");
+
+    help_menu->addAction("How to");
+
+    QMenu* credits_menu = bar->addMenu("Credits");
+
+    credits_menu->addAction("TimeToStop");
+    credits_menu->addAction("stxmrvge");
+    credits_menu->addAction("slayer404");
+
+    QHBoxLayout* widgets = new QHBoxLayout();
+    widgets->setMargin(0);
+    main->addLayout(widgets);
 
     // Engine
     EngineWidget* engine = new EngineWidget();
@@ -46,8 +83,8 @@ Widget::Widget(QWidget *parent):
 
     widget->setMaximumSize(500, 600);
 
-    main->addWidget(engine);
-    main->addWidget(widget);
+    widgets->addWidget(engine);
+    widgets->addWidget(widget);
 
     // Layout
     QVBoxLayout* settings = new QVBoxLayout();
@@ -324,6 +361,7 @@ Widget::Widget(QWidget *parent):
     connect(show_grid, SIGNAL(stateChanged(int)), this, SLOT(showGrid(int)));
     connect(show_tension, SIGNAL(stateChanged(int)), this, SLOT(showElectrostaticField(int)));
 
+    m_tool_bar = bar;
     m_engine = engine;
     m_tension_use_cursor = tension_check;
     m_tension_pos_x = tension_pos_x;
@@ -362,6 +400,26 @@ void Widget::speed_x_2()
 void Widget::edit()
 {
     m_engine->setEngineState(EngineState::EDIT);
+}
+
+void Widget::toolBarFile()
+{
+
+}
+
+void Widget::toolBarOptions()
+{
+
+}
+
+void Widget::toolBarHelp()
+{
+
+}
+
+void Widget::toolBarCredits()
+{
+
 }
 
 void Widget::addCharge()
@@ -413,7 +471,19 @@ void Widget::editCharge()
 
 void Widget::ignoreCharge()
 {
+    if(m_engine->hasCharges())
+    {
+        EngineState e = m_engine->engineState();
+        m_engine->setEngineState(EngineState::PAUSE);
+        IgnoreCharge d(m_engine->chargeNames(), this);
 
+        if(d.exec() == QDialog::Accepted)
+        {
+
+        }
+
+        m_engine->setEngineState(e);
+    }
 }
 
 void Widget::rmCharge()
