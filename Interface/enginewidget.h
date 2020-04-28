@@ -48,6 +48,7 @@ protected:
 
 signals:
     void cursorMoved(const QPoint&);
+    void blockCursor();
 
 public slots:
     void timeTick();

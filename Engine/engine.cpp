@@ -14,9 +14,9 @@ Engine::Engine():
     m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(2, -1), this)));
     m_charges.push_back(std::unique_ptr<Charge>(new Charge(1.f, Vector(-1, 0), this)));
 
-    m_charges[0]->setCharge(0.00001);
-    m_charges[1]->setCharge(0.00001);
-    m_charges[2]->setCharge(0.00001);
+    m_charges[0]->setCharge(0.95);
+    m_charges[1]->setCharge(0.95);
+    m_charges[2]->setCharge(0.1);
 }
 
 Engine::~Engine()
@@ -90,7 +90,7 @@ Vector Engine::calculateTension(float x, float y) {
         const float dx = x - m_charges[i]->pos().x();
         const float dy = m_charges[i]->pos().y() - y;
         const double distance = sqrt(dx * dx + dy * dy);
-        if (m_charges[i]->charge() < 0 && m_charges[i]->radius() >= distance)
+        if (m_charges[i]->radius() >= distance)
         {
             break;
         }

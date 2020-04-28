@@ -27,7 +27,8 @@ SOURCES += \
     Interface/ValueRepresener/valuewriter.cpp \
     Interface/enginewidget.cpp \
     Interface/widget.cpp \
-    main.cpp
+    main.cpp \
+    Interface/colortheme.cpp
 
 HEADERS += \
     Engine/charge.h \
@@ -40,7 +41,8 @@ HEADERS += \
     Interface/ValueRepresener/valuerepresenter.h \
     Interface/ValueRepresener/valuewriter.h \
     Interface/enginewidget.h \
-    Interface/widget.h
+    Interface/widget.h \
+    Interface/colortheme.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

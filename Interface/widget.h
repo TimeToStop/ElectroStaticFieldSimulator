@@ -61,6 +61,8 @@ public slots:
     void calculatePotential(float x, float y);
     void calculatePotentialByMouse(const QPoint&);
 
+    void stopUsingCursor();
+
     void scaleChanged(int);
 
     void changeCamera(int);

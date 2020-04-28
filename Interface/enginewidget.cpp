@@ -1,5 +1,6 @@
 #include "enginewidget.h"
 #include "Engine/charge.h"
+#include <QDebug>
 
 EngineWidget::EngineWidget(QWidget *parent):
     QWidget(parent),
@@ -18,6 +19,7 @@ EngineWidget::EngineWidget(QWidget *parent):
 {    
     m_main_timer.start(m_default_time);
     connect(&m_main_timer, SIGNAL(timeout()), this, SLOT(timeTick()));
+    this->setMouseTracking(true);
     setFocusPolicy(Qt::StrongFocus);
     setMinimumSize(400, 400);
 }
@@ -58,6 +60,7 @@ void EngineWidget::mousePressEvent(QMouseEvent* e)
     {
         m_is_left_mouse_pressed = true;
         m_pos_left_mouse_clicked = e->pos();
+        emit(blockCursor());
     }
     else if(e->button() == Qt::RightButton)
     {
@@ -234,7 +237,17 @@ void EngineWidget::drawElectrostaticField(QPainter& painter)
             const Vector tension(Engine::calculateTension(x, y));
             Vector pos(fromXOY(Vector(x, y)));
             Vector t = tension/ tension.module();
-            t *= 7.f;
+
+            if(tension.module() < 5)
+                t *= 0;
+            else
+                if(tension.module() < 0.5)
+                    t *= 3.f;
+            else
+                   if(tension.module() < 0.7)
+                       t *= 10.f;
+            else
+                       t *= 15.f;
             painter.drawLine(pos.x(), pos.y(), pos.x() + t.x(), pos.y() + t.y());
         }
     }

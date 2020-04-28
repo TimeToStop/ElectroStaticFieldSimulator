@@ -33,13 +33,14 @@ Widget::Widget(QWidget *parent):
     m_potential_val(nullptr),
     m_camera_change(nullptr)
 {
+
     QHBoxLayout* main = new QHBoxLayout(this);
 
     // Engine
     EngineWidget* engine = new EngineWidget();
     connect(engine, SIGNAL(cursorMoved(const QPoint&)), this, SLOT(calculateTensionByMouse(const QPoint&)));
     connect(engine, SIGNAL(cursorMoved(const QPoint&)), this, SLOT(calculatePotentialByMouse(const QPoint&)));
-
+    connect(engine, SIGNAL(blockCursor()), this, SLOT(stopUsingCursor()));
     // Main UI Buttons
     QWidget* widget = new QWidget();
 
@@ -475,6 +476,10 @@ void Widget::calculatePotentialByMouse(const QPoint& point)
         m_potential_pos_y->setValue(m_engine->toXOY(cursor_pos).y());
         m_potential_val->setValue(m_engine->calculatePotential(cursor_pos.x(), cursor_pos.y()));
     }
+}
+
+void Widget::stopUsingCursor() {
+    useCursorPosition(0);
 }
 
 void Widget::scaleChanged(int)
