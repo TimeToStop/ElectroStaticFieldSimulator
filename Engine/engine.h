@@ -56,8 +56,10 @@ public:
     QStringList chargeNames() const;
     float lambda() const;
 
-    Vector calculateTension(float x, float y);
-    float calculatePotential(float x, float y);
+    Vector calculateTension(const Vector&) const;
+    float calculatePotential(const Vector&) const;
+    float calculateKineticEnergyOfSystem() const;
+    float calculateEnergyOfSystem() const;
 
     Vector applyCharge(size_t);
     static int sign(float);

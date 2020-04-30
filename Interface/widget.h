@@ -16,6 +16,8 @@ class Widget : public QMainWindow
 {
     Q_OBJECT
 
+    bool m_use_cursor;
+
     QMenuBar* m_tool_bar;
     EngineWidget* m_engine;
 
@@ -43,9 +45,6 @@ class Widget : public QMainWindow
     ValueWriter* m_kinetic_energy;
 
     QComboBox* m_camera_change;
-
-    bool m_use_cursor;
-
 
 public:
     explicit Widget(QWidget *parent = nullptr);
@@ -85,6 +84,8 @@ public slots:
     void changeScene(int);
 
     void useCursorPosition(int);
+    void cursorMoved(const QPoint&);
+    void stopUsingCursor();
     void recountPhysics();
 };
 

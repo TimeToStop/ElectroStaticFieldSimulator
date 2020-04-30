@@ -88,45 +88,6 @@ QStringList Engine::chargeNames() const
     return names;
 }
 
-Vector Engine::calculateTension(float x, float y) {
-    const long long k = 9000000000.l;
-    float res_tension_x = 0;
-    float res_tension_y = 0;
-    for (size_t i = 0; i < m_charges.size(); ++i)
-    {
-        if(!m_charges[i]->is_ignored())
-        {
-            const float dx = x - m_charges[i]->pos().x();
-            const float dy = m_charges[i]->pos().y() - y;
-            const double distance = sqrt(dx * dx + dy * dy);
-            const double tension = (k * (double)m_charges[i]->charge()) / (distance * distance);
-            const float tension_x = tension * dx / distance;
-            const float tension_y = tension * dy / distance;
-            res_tension_x += tension_x;
-            res_tension_y += tension_y;
-        }
-    }
-    return Vector(res_tension_x, res_tension_y);
-}
-
-float Engine::calculatePotential(float x, float y)
-{
-    const long long k = 9000000000.l;
-    float res_potential = 0;
-    for (size_t i = 0; i < m_charges.size(); ++i)
-    {
-        if(!m_charges[i]->is_ignored())
-        {
-            const float dx = x - m_charges[i]->pos().x();
-            const float dy = m_charges[i]->pos().y() - y;
-            const double distance = sqrt(dx * dx + dy * dy);
-            const double potential = (k * (double)m_charges[i]->charge()) / distance;
-            res_potential += potential;
-        }
-    }
-    return res_potential;
-}
-
 Vector Engine::toXOY(float x, float y) const
 {
     return toXOY(Vector(x, y));
@@ -140,6 +101,85 @@ Vector Engine::fromXOY(float x, float y) const
 float Engine::lambda() const
 {
     return m_lambda;
+}
+
+Vector Engine::calculateTension(const Vector& v)  const
+{
+    const long long k = 9000000000.l;
+    float res_tension_x = 0;
+    float res_tension_y = 0;
+    for (size_t i = 0; i < m_charges.size(); ++i)
+    {
+        if(!m_charges[i]->is_ignored())
+        {
+            const float dx = v.x() - m_charges[i]->pos().x();
+            const float dy = m_charges[i]->pos().y() - v.y();
+            const double distance = sqrt(dx * dx + dy * dy);
+            const double tension = (k * (double)m_charges[i]->charge()) / (distance * distance);
+            const float tension_x = tension * dx / distance;
+            const float tension_y = tension * dy / distance;
+            res_tension_x += tension_x;
+            res_tension_y += tension_y;
+        }
+    }
+    return Vector(res_tension_x, res_tension_y);
+}
+
+float Engine::calculatePotential(const Vector& v) const
+{
+    const long long k = 9000000000.l;
+    float res_potential = 0;
+    for (size_t i = 0; i < m_charges.size(); ++i)
+    {
+        if(!m_charges[i]->is_ignored())
+        {
+            const float dx = v.x() - m_charges[i]->pos().x();
+            const float dy = m_charges[i]->pos().y() - v.y();
+            const double distance = sqrt(dx * dx + dy * dy);
+            const double potential = (k * (double)m_charges[i]->charge()) / distance;
+            res_potential += potential;
+        }
+    }
+    return res_potential;
+}
+
+float Engine::calculateKineticEnergyOfSystem() const
+{
+    float w = 0.f;
+
+    for(size_t i = 0; i < m_charges.size(); i++)
+    {
+        if(!m_charges[i]->is_ignored())
+        {
+            w += m_charges[i]->mass() * (m_charges[i]->velocity() * m_charges[i]->velocity())/2;
+        }
+    }
+
+    return w;
+}
+
+float Engine::calculateEnergyOfSystem() const
+{
+    const long long k = 9000000000.l;
+    float w = 0.f;
+    for (size_t i = 0; i < m_charges.size(); ++i)
+    {
+        if(!m_charges[i]->is_ignored())
+        {
+            for(size_t j = 0; j < m_charges.size(); ++j)
+            {
+                if(!m_charges[j]->is_ignored() && i != j)
+                {
+                    const float dx = m_charges[j]->pos().x() - m_charges[i]->pos().x();
+                    const float dy = m_charges[j]->pos().y() - m_charges[i]->pos().y();
+                    const float distanse = sqrt(dx*dx + dy*dy);
+                    w += k*m_charges[i]->charge() * m_charges[j]->charge()/distanse;
+                }
+            }
+        }
+    }
+
+    return w;
 }
 
 Vector Engine::applyCharge(size_t i)

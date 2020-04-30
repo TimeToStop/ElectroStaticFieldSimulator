@@ -47,6 +47,7 @@ protected:
     virtual void mouseReleaseEvent(QMouseEvent*) override;
 
 signals:
+    void leftButtonClicked();
     void recountPhysics();
     void cursorMoved(const QPoint&);
 

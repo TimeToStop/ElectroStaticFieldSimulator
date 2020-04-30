@@ -21,6 +21,7 @@
 
 Widget::Widget(QWidget *parent):
     QMainWindow(parent),
+    m_use_cursor(false),
     m_tool_bar(nullptr),
     m_engine(nullptr),
     m_tension_use_cursor(nullptr),
@@ -41,7 +42,7 @@ Widget::Widget(QWidget *parent):
     m_kinetic_energy(nullptr),
     m_camera_change(nullptr)
 {
-    int fixed_edit_pos_width = 70;
+    int fixed_edit_pos_width = 60;
     int fixed_pos_width = fixed_edit_pos_width + 135;
 
     QWidget* central_widget = new QWidget();
@@ -77,8 +78,8 @@ Widget::Widget(QWidget *parent):
 
     // Engine
     EngineWidget* engine = new EngineWidget();
-//    connect(engine, SIGNAL(cursorMoved(const QPoint&)), this, SLOT(calculateTensionByMouse(const QPoint&)));
-//    connect(engine, SIGNAL(cursorMoved(const QPoint&)), this, SLOT(calculatePotentialByMouse(const QPoint&)));
+    connect(engine, SIGNAL(cursorMoved(const QPoint&)), this, SLOT(cursorMoved(const QPoint&)));
+    connect(engine, SIGNAL(leftButtonClicked()), this, SLOT(stopUsingCursor()));
     connect(engine, SIGNAL(recountPhysics()), this, SLOT(recountPhysics()));
 
     // Main UI Buttons
@@ -154,8 +155,8 @@ Widget::Widget(QWidget *parent):
     tension_position->addWidget(tension_pos_y);
     tension_pos_x->setFixedEditWidth(fixed_edit_pos_width);
     tension_pos_y->setFixedEditWidth(fixed_edit_pos_width);
-    connect(tension_pos_x, SIGNAL(valueChanged()), this, SLOT(calculateTension()));
-    connect(tension_pos_y, SIGNAL(valueChanged()), this, SLOT(calculateTension()));
+    connect(tension_pos_x, SIGNAL(valueChanged()), this, SLOT(recountPhysics()));
+    connect(tension_pos_y, SIGNAL(valueChanged()), this, SLOT(recountPhysics()));
     // End of Working with position
 
     // Calculated Result of tension
@@ -197,12 +198,12 @@ Widget::Widget(QWidget *parent):
     ValueEdit* potential_pos_y = new ValueEdit("Y", "м");
     potential_position->addWidget(potential_pos_x);
     potential_position->addWidget(potential_pos_y);
-    potential_pos_x->setFixedEditWidth(fixed_edit_pos_width + 45);
-    potential_pos_y->setFixedEditWidth(fixed_edit_pos_width + 45);
-    potential_pos_x->setFixedWidth(fixed_pos_width + 25);
-    potential_pos_y->setFixedWidth(fixed_pos_width + 25);
-    connect(potential_pos_x, SIGNAL(valueChanged()), this, SLOT(calculatePotential()));
-    connect(potential_pos_y, SIGNAL(valueChanged()), this, SLOT(calculatePotential()));
+    potential_pos_x->setFixedEditWidth(fixed_edit_pos_width);
+    potential_pos_y->setFixedEditWidth(fixed_edit_pos_width);
+    potential_pos_x->setFixedWidth(fixed_pos_width);
+    potential_pos_y->setFixedWidth(fixed_pos_width);
+    connect(potential_pos_x, SIGNAL(valueChanged()), this, SLOT(recountPhysics()));
+    connect(potential_pos_y, SIGNAL(valueChanged()), this, SLOT(recountPhysics()));
     // End of Working with position
 
     QVBoxLayout* potential_value = new QVBoxLayout();
@@ -210,7 +211,7 @@ Widget::Widget(QWidget *parent):
 
     QSpacerItem* spacer6 = new QSpacerItem(0, 10);
     potential_value->addSpacerItem(spacer6);
-    ValueWriter* potential_val = new ValueWriter("φ", "В");
+    ValueWriter* potential_val = new ValueWriter("φ", "В", 130);
     potential_value->addWidget(potential_val);
     potential_val->setFixedEditWidth(fixed_edit_pos_width);
     QSpacerItem* spacer1 = new QSpacerItem(1, 40);
@@ -406,7 +407,7 @@ Widget::Widget(QWidget *parent):
     m_energy_of_system = energy_of_system;
     m_kinetic_energy = kinetic_energy_of_system;
 
-    m_use_cursor = false;
+    recountPhysics();
 }
 
 Widget::~Widget()
@@ -435,22 +436,18 @@ void Widget::edit()
 
 void Widget::toolBarFile()
 {
-
 }
 
 void Widget::toolBarOptions()
 {
-
 }
 
 void Widget::toolBarHelp()
 {
-
 }
 
 void Widget::toolBarCredits()
 {
-
 }
 
 void Widget::addCharge()
@@ -493,6 +490,7 @@ void Widget::editCharge()
             {
                 m_engine->rmCharge(d.getSelected());
                 m_engine->addCharge(std::unique_ptr<Charge>(new Charge(d1.name(), d1.charge(), d1.mass(), d1.pos(), d1.is_ignored(), d1.is_movable(), m_engine)));
+                recountPhysics();
             }
         }
 
@@ -510,7 +508,7 @@ void Widget::ignoreCharge()
 
         if(d.exec() == QDialog::Accepted)
         {
-
+            recountPhysics();
         }
 
         m_engine->setEngineState(e);
@@ -529,6 +527,7 @@ void Widget::rmCharge()
         {
             m_engine->rmCharge(d.getSelected());
             m_camera_change->removeItem(d.getSelected() + 1);
+            recountPhysics();
         }
 
         m_engine->setEngineState(e);
@@ -546,52 +545,6 @@ void Widget::showElectrostaticField(int val)
    m_engine->setDrawField(val == Qt::Checked);
    m_engine->repaint();
 }
-
-//void Widget::calculateTension()
-//{
-//    calculateTension(m_tension_pos_x->value(), m_tension_pos_y->value());
-//}
-
-//void Widget::calculateTension(float x, float y)
-//{
-//    Vector tension = m_engine->calculateTension(x, y);
-//    m_tension_val_x->setValue(tension.x());
-//    m_tension_val_y->setValue(tension.y());
-//}
-
-//void Widget::calculateTensionByMouse(const QPoint& point)
-//{
-//    if (m_use_cursor)
-//    {
-//        Vector cursor_pos(m_engine->toXOY(Vector(point.x(), point.y())));
-//        m_tension_pos_x->setValue(cursor_pos.x());
-//        m_tension_pos_y->setValue(cursor_pos.y());
-//        Vector tension(m_engine->calculateTension(cursor_pos.x(), cursor_pos.y()));
-//        m_tension_val_x->setValue(tension.x());
-//        m_tension_val_y->setValue(tension.y());
-//    }
-//}
-
-//void Widget::calculatePotential()
-//{
-//    calculatePotential(m_potential_pos_x->value(), m_potential_pos_y->value());
-//}
-
-//void Widget::calculatePotential(float x, float y)
-//{
-//    m_potential_val->setValue(m_engine->calculatePotential(x, y));
-//}
-
-//void Widget::calculatePotentialByMouse(const QPoint& point)
-//{
-//    if (m_use_cursor)
-//    {
-//        Vector cursor_pos = point;
-//        m_potential_pos_x->setValue(m_engine->toXOY(cursor_pos).x());
-//        m_potential_pos_y->setValue(m_engine->toXOY(cursor_pos).y());
-//        m_potential_val->setValue(m_engine->calculatePotential(cursor_pos.x(), cursor_pos.y()));
-//    }
-//}
 
 void Widget::scaleChanged(int)
 {
@@ -633,15 +586,43 @@ void Widget::useCursorPosition(int val)
     m_energy_pos_y->setDisabled(m_use_cursor);
 }
 
-void Widget::recountPhysics()
+void Widget::cursorMoved(const QPoint& point)
 {
     if(m_use_cursor)
     {
-        Vector v =
-    }
-    else
-    {
+        Vector v = m_engine->toXOY(point);
 
+        m_tension_pos_x->setValue(v.x());
+        m_tension_pos_y->setValue(v.y());
+
+        m_potential_pos_x->setValue(v.x());
+        m_potential_pos_y->setValue(v.y());
+
+        recountPhysics();
     }
+}
+
+void Widget::stopUsingCursor()
+{
+    useCursorPosition(Qt::Unchecked);
+}
+
+void Widget::recountPhysics()
+{
+    Vector tension_pos = m_engine->toXOY(Vector(m_tension_pos_x->value(), m_tension_pos_y->value()));
+    Vector potential_pos = m_engine->toXOY(Vector(m_potential_pos_x->value(), m_potential_pos_y->value()));
+    Vector tension = m_engine->calculateTension(tension_pos);
+    float potential = m_engine->calculatePotential(potential_pos);
+    float energy = m_engine->calculateEnergyOfSystem();
+    float kin_energy = m_engine->calculateKineticEnergyOfSystem();
+
+    m_tension_val->setValue(tension.module());
+    m_tension_val_x->setValue(tension.x());
+    m_tension_val_y->setValue(tension.y());
+
+    m_potential_val->setValue(potential);
+
+    m_energy_of_system->setValue(energy);
+    m_kinetic_energy->setValue(kin_energy);
 }
 

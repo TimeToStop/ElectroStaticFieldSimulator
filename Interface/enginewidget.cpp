@@ -19,6 +19,7 @@ EngineWidget::EngineWidget(QWidget *parent):
     m_main_timer.start(m_default_time);
     connect(&m_main_timer, SIGNAL(timeout()), this, SLOT(timeTick()));
     setFocusPolicy(Qt::StrongFocus);
+    setMouseTracking(true);
     setMinimumSize(400, 400);
 }
 
@@ -58,6 +59,7 @@ void EngineWidget::mousePressEvent(QMouseEvent* e)
     {
         m_is_left_mouse_pressed = true;
         m_pos_left_mouse_clicked = e->pos();
+        emit(leftButtonClicked());
     }
     else if(e->button() == Qt::RightButton)
     {
@@ -231,8 +233,8 @@ void EngineWidget::drawElectrostaticField(QPainter& painter)
     {
         for(int y = toXOY(Vector(0, 0)).y(); y >= window_size.y(); y -= stepY)
         {
-            const Vector tension(Engine::calculateTension(x, y));
-            Vector pos(fromXOY(Vector(x, y)));
+            const Vector tension = Engine::calculateTension(Vector(x, y));
+            Vector pos = fromXOY(Vector(x, y));
             Vector t = tension/ tension.module();
             t *= 7.f;
             painter.drawLine(pos.x(), pos.y(), pos.x() + t.x(), pos.y() + t.y());
