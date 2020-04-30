@@ -23,15 +23,18 @@ class EngineWidget:
 
     const float m_default_time;
     QTimer m_main_timer;
+    
+    mutable int m_camera;
 
 public:
     explicit EngineWidget(QWidget *parent = nullptr);
     virtual ~EngineWidget();
 
     void setDrawGrid(bool);
+    void setCamera(int);
     void setDrawField(bool);
 
-    QPoint current_cursos_pos();
+    QPoint current_cursos_pos() const;
 
     virtual Vector toXOY(const Vector&) const override;
     virtual Vector fromXOY(const Vector&) const override;
@@ -45,6 +48,7 @@ protected:
 
 signals:
     void cursorMoved(const QPoint&);
+    void blockCursor();
 
 public slots:
     void timeTick();

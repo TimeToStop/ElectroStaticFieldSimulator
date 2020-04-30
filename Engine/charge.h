@@ -16,6 +16,8 @@ class Charge
     Engine* const m_engine;
     QString m_name;
 
+    bool m_is_ignored;
+
     float m_charge;
     float m_mass;
 
@@ -32,6 +34,7 @@ public:
     void draw(QPainter&);
     void tick(float);
 
+    void setIgnore(bool);
     void setPos(const Vector&);
     void setVelocity(const Vector&);
     void setAcceleration(const Vector&);
@@ -42,6 +45,7 @@ public:
     void movePos(const Vector&);
     void addForce(const Vector&);
 
+    bool is_ignored() const;
     QString name() const;
     Vector pos() const;
     Vector velocity() const;
