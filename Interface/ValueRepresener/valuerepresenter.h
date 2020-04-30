@@ -22,6 +22,7 @@ public:
     virtual void setValue(float) = 0;
     virtual void setDisabled(bool) = 0;
     virtual float valueOnly() const = 0;
+    virtual void setFixedEditWidth(int) = 0;
 
     float value() const;
 

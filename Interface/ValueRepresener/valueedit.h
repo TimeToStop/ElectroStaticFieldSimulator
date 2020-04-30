@@ -19,6 +19,7 @@ public:
     virtual void setValue(float) override;
     virtual void setDisabled(bool) override;
     virtual float valueOnly() const override;
+    virtual void setFixedEditWidth(int);
 };
 
 #endif // VALUEEDIT_H

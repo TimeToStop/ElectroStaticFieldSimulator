@@ -5,14 +5,14 @@
 #include "Interface/ValueRepresener/valueedit.h"
 #include "Interface/ValueRepresener/valuewriter.h"
 
-#include <QWidget>
+#include <QMainWindow>
 #include <QCheckBox>
 #include <QComboBox>
 #include <QToolBar>
 #include <QMenuBar>
 #include <QMenu>
 
-class Widget : public QWidget
+class Widget : public QMainWindow
 {
     Q_OBJECT
 
@@ -32,6 +32,15 @@ class Widget : public QWidget
     ValueEdit* m_potential_pos_y;
 
     ValueWriter* m_potential_val;
+
+    QCheckBox* m_energy_use_cursor;
+
+    ValueEdit* m_energy_pos_x;
+    ValueEdit* m_energy_pos_y;
+
+    ValueWriter* m_enregy_of_pos;
+    ValueWriter* m_energy_of_system;
+    ValueWriter* m_kinetic_energy;
 
     QComboBox* m_camera_change;
 
@@ -63,12 +72,12 @@ public slots:
     void showGrid(int);
     void showElectrostaticField(int);
 
-    void calculateTension();
-    void calculateTension(float x, float y);
-    void calculateTensionByMouse(const QPoint&);
-    void calculatePotential();
-    void calculatePotential(float x, float y);
-    void calculatePotentialByMouse(const QPoint&);
+//    void calculateTension();
+//    void calculateTension(float x, float y);
+//    void calculateTensionByMouse(const QPoint&);
+//    void calculatePotential();
+//    void calculatePotential(float x, float y);
+//    void calculatePotentialByMouse(const QPoint&);
 
     void scaleChanged(int);
 
@@ -76,6 +85,7 @@ public slots:
     void changeScene(int);
 
     void useCursorPosition(int);
+    void recountPhysics();
 };
 
 #endif // WIDGET_H

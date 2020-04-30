@@ -115,6 +115,7 @@ void EngineWidget::timeTick()
     }
 
     Engine::tick(tick);
+    emit(recountPhysics());
     repaint();
 }
 

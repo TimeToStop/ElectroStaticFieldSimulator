@@ -14,17 +14,18 @@ IgnoreCharge::IgnoreCharge(const QStringList& names, QWidget *parent):
 
     QScrollArea* area = new QScrollArea();
     main->addWidget(area);
+
     QWidget* widget = new QWidget();
     area->setWidget(widget);
     QVBoxLayout* layout = new QVBoxLayout();
-    widget->setLayout(layout);
-    widget->show();
 
     for(const QString& name : names)
     {
-        QCheckBox* box = new QCheckBox(name);
-        layout->addWidget(box);
+        layout->addWidget(new QCheckBox(name));
     }
+
+    area->show();
+    area->setWidgetResizable(true);
 }
 
 IgnoreCharge::~IgnoreCharge()

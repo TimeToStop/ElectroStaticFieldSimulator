@@ -28,3 +28,8 @@ float ValueEdit::valueOnly() const
 {
     return m_edit->text().toDouble();
 }
+
+void ValueEdit::setFixedEditWidth(int w)
+{
+    m_edit->setFixedWidth(w);
+}
