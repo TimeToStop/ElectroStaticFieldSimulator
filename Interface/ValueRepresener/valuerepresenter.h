@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QHBoxLayout>
+#include <QComboBox>
 
 class ValueRepresenter : public QWidget
 {
@@ -12,6 +13,7 @@ class ValueRepresenter : public QWidget
 protected:
     int m_curr_index;
     QHBoxLayout* m_layout;
+    QComboBox* m_box;
     QString m_measure;
 
 
@@ -19,23 +21,24 @@ public:
     explicit ValueRepresenter(const QString&, const QString&, int= 0, QWidget *parent = nullptr);
     virtual ~ValueRepresenter();
 
-    virtual void setValue(float) = 0;
-    virtual void setDisabled(bool) = 0;
+    virtual void setValueOnly(float) = 0;
     virtual float valueOnly() const = 0;
     virtual void setFixedEditWidth(int) = 0;
+    virtual void setDisabled(bool) = 0;
 
+    void setValue(float);
     float value() const;
+
+protected:
+    static float power(int);
 
 signals:
     void valueChanged();
     void valueEdited(float);
 
 public slots:
-    void prefixChanged(int);
-    void newValueEdited();
-
-protected:
-    static float power(int);
+    virtual void newValueEdited();
+    virtual void prefixChanged(int);
 };
 
 #endif // VALUEREPRESENTER_H

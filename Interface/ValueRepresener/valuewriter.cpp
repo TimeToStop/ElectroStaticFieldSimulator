@@ -13,13 +13,9 @@ ValueWriter::~ValueWriter()
 {
 }
 
-void ValueWriter::setValue(float val)
+void ValueWriter::setValueOnly(float val)
 {
     m_label->setNum(val);
-}
-
-void ValueWriter::setDisabled(bool)
-{
 }
 
 float ValueWriter::valueOnly() const
@@ -30,4 +26,14 @@ float ValueWriter::valueOnly() const
 void ValueWriter::setFixedEditWidth(int w)
 {
     m_label->setFixedWidth(w);
+}
+
+void ValueWriter::setDisabled(bool)
+{
+}
+
+void ValueWriter::prefixChanged(int indx)
+{
+    setValueOnly(value()/power(indx));
+    m_curr_index = indx;
 }

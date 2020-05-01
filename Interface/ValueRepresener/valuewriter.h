@@ -14,10 +14,14 @@ public:
     explicit ValueWriter(const QString&, const QString&, int left_diff =0, QWidget* parent = nullptr);
     virtual ~ValueWriter();
 
-    virtual void setValue(float) override;
-    virtual void setDisabled(bool) override;
+    virtual void setValueOnly(float) override;
     virtual float valueOnly() const override;
     virtual void setFixedEditWidth(int) override;
+    virtual void setDisabled(bool) override;
+
+public slots:
+    virtual void prefixChanged(int) override;
+
 };
 
 #endif // VALUEWRITER_H

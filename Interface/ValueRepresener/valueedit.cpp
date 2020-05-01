@@ -7,14 +7,14 @@ ValueEdit::ValueEdit(const QString& name, const QString& measure, int left_diff,
     m_edit->setValidator(new QDoubleValidator());
     m_layout->insertWidget(2, m_edit);
     setValue(0.f);
-    connect(m_edit, SIGNAL(editingFinished()), this, SLOT(newValueEdited()));
+    connect(m_edit, SIGNAL(textChanged(const QString&)), this, SLOT(textChanged(const QString&)));
 }
 
 ValueEdit::~ValueEdit()
 {
 }
 
-void ValueEdit::setValue(float val)
+void ValueEdit::setValueOnly(float val)
 {
     m_edit->setText(QString::number(val));
 }
@@ -32,4 +32,14 @@ float ValueEdit::valueOnly() const
 void ValueEdit::setFixedEditWidth(int w)
 {
     m_edit->setFixedWidth(w);
+}
+
+void ValueEdit::textChanged(const QString&)
+{
+    newValueEdited();
+}
+
+void ValueEdit::prefixChanged(int indx)
+{
+    m_curr_index = indx;
 }

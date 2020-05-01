@@ -10,22 +10,7 @@
 IgnoreCharge::IgnoreCharge(const QStringList& names, QWidget *parent):
     QDialog(parent)
 {
-    QVBoxLayout* main = new QVBoxLayout(this);
 
-    QScrollArea* area = new QScrollArea();
-    main->addWidget(area);
-
-    QWidget* widget = new QWidget();
-    area->setWidget(widget);
-    QVBoxLayout* layout = new QVBoxLayout();
-
-    for(const QString& name : names)
-    {
-        layout->addWidget(new QCheckBox(name));
-    }
-
-    area->show();
-    area->setWidgetResizable(true);
 }
 
 IgnoreCharge::~IgnoreCharge()
