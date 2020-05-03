@@ -32,12 +32,13 @@ void EngineWidget::paintEvent(QPaintEvent*)
     QPainter painter(this);
 
     drawBorder(painter);
-    Engine::drawCharges(painter);
 
     if(m_draw_grid)
     {
         drawGrid(painter);
     }
+
+    Engine::drawCharges(painter);
 
     if(m_draw_field)
     {

@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QHBoxLayout>
 #include <QComboBox>
+#include <QLabel>
 
 class ValueRepresenter : public QWidget
 {
@@ -12,13 +13,13 @@ class ValueRepresenter : public QWidget
 
 protected:
     int m_curr_index;
-    QHBoxLayout* m_layout;
+    QLabel* m_header;
     QComboBox* m_box;
     QString m_measure;
 
 
 public:
-    explicit ValueRepresenter(const QString&, const QString&, int= 0, QWidget *parent = nullptr);
+    explicit ValueRepresenter(QLabel*, QComboBox*, const QString&, const QString&, QWidget *parent = nullptr);
     virtual ~ValueRepresenter();
 
     virtual void setValueOnly(float) = 0;

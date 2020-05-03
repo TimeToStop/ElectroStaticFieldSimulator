@@ -10,31 +10,20 @@ const QStringList ValueRepresenter::m_prefix = QStringList()
         << ""
         << "к" << "М" << "Г" << "Т";
 
-ValueRepresenter::ValueRepresenter(const QString& name, const QString& measure, int left_diff, QWidget *parent):
+ValueRepresenter::ValueRepresenter(QLabel* header, QComboBox* box, const QString& name, const QString& measure, QWidget *parent):
     QWidget(parent),
     m_curr_index(4),
-    m_layout(nullptr),
-    m_box(nullptr),
+    m_header(header),
+    m_box(box),
     m_measure(measure)
 {
-    QHBoxLayout* layout = new QHBoxLayout(this);
-
-    QSpacerItem* spacer = new QSpacerItem(left_diff, 0);
-    layout->addSpacerItem(spacer);
-    QLabel* name_label = new QLabel(name + " = ");
-    layout->addWidget(name_label);
-    QComboBox* box = new QComboBox();
-    layout->addWidget(box);
-
+    m_header->setText(name + " =");
     for(const QString& prefix : m_prefix)
     {
         box->addItem(prefix + m_measure);
     }
     box->setCurrentIndex(m_curr_index);
     connect(box, SIGNAL(currentIndexChanged(int)), this, SLOT(prefixChanged(int)));
-
-    m_layout = layout;
-    m_box = box;
 }
 
 ValueRepresenter::~ValueRepresenter()

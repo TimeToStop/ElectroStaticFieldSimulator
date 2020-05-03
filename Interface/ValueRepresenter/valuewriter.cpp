@@ -1,10 +1,9 @@
 #include "valuewriter.h"
 
-ValueWriter::ValueWriter(const QString& name, const QString& measure, int left_diff, QWidget *parent):
-    ValueRepresenter(name, measure,left_diff, parent),
-    m_label(new QLabel())
+ValueWriter::ValueWriter(QLabel* header, QLabel* val, QComboBox* box,const QString& name, const QString& measure,QWidget *parent):
+    ValueRepresenter(header, box, name, measure, parent),
+    m_label(val)
 {
-    m_layout->insertWidget(2, m_label);
     m_label->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     setValue(0.f);
 }

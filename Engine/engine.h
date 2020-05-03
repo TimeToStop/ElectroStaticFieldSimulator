@@ -58,6 +58,7 @@ public:
 
     Vector calculateTension(const Vector&) const;
     float calculatePotential(const Vector&) const;
+    float calculateEnergy(const Vector&) const;
     float calculateKineticEnergyOfSystem() const;
     float calculateEnergyOfSystem() const;
 

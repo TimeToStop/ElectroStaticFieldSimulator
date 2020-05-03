@@ -1,7 +1,7 @@
 #ifndef VALUEWRITER_H
 #define VALUEWRITER_H
 
-#include "Interface/ValueRepresener/valuerepresenter.h"
+#include "Interface/ValueRepresenter/valuerepresenter.h"
 #include <QLabel>
 
 class ValueWriter : public ValueRepresenter
@@ -11,7 +11,7 @@ class ValueWriter : public ValueRepresenter
     QLabel* m_label;
 
 public:
-    explicit ValueWriter(const QString&, const QString&, int left_diff =0, QWidget* parent = nullptr);
+    explicit ValueWriter(QLabel*, QLabel*, QComboBox*,const QString&, const QString&, QWidget* parent = nullptr);
     virtual ~ValueWriter();
 
     virtual void setValueOnly(float) override;

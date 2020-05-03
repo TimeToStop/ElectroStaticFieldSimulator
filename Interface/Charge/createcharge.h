@@ -2,7 +2,7 @@
 #define CREATECHARGE_H
 
 #include "Engine/charge.h"
-#include "Interface/ValueRepresener/valueedit.h"
+#include "Interface/ValueRepresenter/valueedit.h"
 
 #include <QDialog>
 #include <QCheckBox>

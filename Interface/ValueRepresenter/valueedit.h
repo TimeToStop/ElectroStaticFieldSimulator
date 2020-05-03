@@ -1,7 +1,7 @@
 #ifndef VALUEEDIT_H
 #define VALUEEDIT_H
 
-#include "Interface/ValueRepresener/valuerepresenter.h"
+#include "Interface/ValueRepresenter/valuerepresenter.h"
 
 #include <QLineEdit>
 #include <QValidator>
@@ -13,7 +13,7 @@ class ValueEdit: public ValueRepresenter
     QLineEdit* m_edit;
 
 public:
-    explicit ValueEdit(const QString&, const QString&, int left_diff =0,  QWidget* parent = nullptr);
+    explicit ValueEdit(QLabel*,QLineEdit*, QComboBox*,const QString&, const QString&, QWidget* parent = nullptr);
     virtual ~ValueEdit();
 
     virtual void setValueOnly(float) override;

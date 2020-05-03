@@ -2,8 +2,8 @@
 #define WIDGET_H
 
 #include "Interface/enginewidget.h"
-#include "Interface/ValueRepresener/valueedit.h"
-#include "Interface/ValueRepresener/valuewriter.h"
+#include "Interface/ValueRepresenter/valueedit.h"
+#include "Interface/ValueRepresenter/valuewriter.h"
 
 #include <QMainWindow>
 #include <QCheckBox>
@@ -21,26 +21,16 @@ class Widget : public QMainWindow
     QMenuBar* m_tool_bar;
     EngineWidget* m_engine;
 
-    QCheckBox* m_tension_use_cursor;
-    ValueEdit* m_tension_pos_x;
-    ValueEdit* m_tension_pos_y;
+    QCheckBox* m_check_use_cursor;
+    ValueEdit* m_pos_x;
+    ValueEdit* m_pos_y;
 
     ValueWriter* m_tension_val;
     ValueWriter* m_tension_val_x;
     ValueWriter* m_tension_val_y;
-
-    QCheckBox* m_potential_use_cursor;
-    ValueEdit* m_potential_pos_x;
-    ValueEdit* m_potential_pos_y;
-
     ValueWriter* m_potential_val;
+    ValueWriter* m_energy_of_pos;
 
-    QCheckBox* m_energy_use_cursor;
-
-    ValueEdit* m_energy_pos_x;
-    ValueEdit* m_energy_pos_y;
-
-    ValueWriter* m_enregy_of_pos;
     ValueWriter* m_energy_of_system;
     ValueWriter* m_kinetic_energy;
 

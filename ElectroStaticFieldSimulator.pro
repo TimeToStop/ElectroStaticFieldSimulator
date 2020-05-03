@@ -22,11 +22,11 @@ SOURCES += \
     Interface/Charge/createcharge.cpp \
     Interface/Charge/ignorecharge.cpp \
     Interface/Charge/selectcharge.cpp \
-    Interface/ValueRepresener/valueedit.cpp \
-    Interface/ValueRepresener/valuerepresenter.cpp \
-    Interface/ValueRepresener/valuewriter.cpp \
+    Interface/mainwindow.cpp \
+    Interface/ValueRepresenter/valueedit.cpp \
+    Interface/ValueRepresenter/valuerepresenter.cpp \
+    Interface/ValueRepresenter/valuewriter.cpp \
     Interface/enginewidget.cpp \
-    Interface/widget.cpp \
     main.cpp
 
 HEADERS += \
@@ -36,15 +36,16 @@ HEADERS += \
     Interface/Charge/createcharge.h \
     Interface/Charge/ignorecharge.h \
     Interface/Charge/selectcharge.h \
-    Interface/ValueRepresener/valueedit.h \
-    Interface/ValueRepresener/valuerepresenter.h \
-    Interface/ValueRepresener/valuewriter.h \
-    Interface/enginewidget.h \
-    Interface/widget.h
+    Interface/mainwindow.h \
+    Interface/ValueRepresenter/valueedit.h \
+    Interface/ValueRepresenter/valuerepresenter.h \
+    Interface/ValueRepresenter/valuewriter.h \
+    Interface/enginewidget.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-FORMS +=
+FORMS += \
+    Interface/mainwindow.ui

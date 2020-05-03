@@ -20,8 +20,8 @@ CreateCharge::CreateCharge(const QStringList& list, QWidget *parent):
 
     QHBoxLayout* name = new QHBoxLayout();
     QHBoxLayout* pos = new QHBoxLayout();
-    ValueEdit* mass = new ValueEdit("m", "kg");
-    ValueEdit* charge = new ValueEdit("q", "kl");
+    ValueEdit* mass = new ValueEdit(nullptr,nullptr,nullptr, "m", "kg");
+    ValueEdit* charge = new ValueEdit(nullptr,nullptr,nullptr,"q", "kl");
     QHBoxLayout* checked = new QHBoxLayout();
     QHBoxLayout* buttons = new QHBoxLayout();
 
@@ -48,8 +48,8 @@ CreateCharge::CreateCharge(const QStringList& list, QWidget *parent):
 
     QVBoxLayout* pos_layout = new QVBoxLayout();
     pos->addLayout(pos_layout);
-    ValueEdit* position_x = new ValueEdit("X", "м", 30);
-    ValueEdit* position_y = new ValueEdit("Y", "м", 30);
+    ValueEdit* position_x = new ValueEdit(nullptr,nullptr,nullptr,"X", "м");
+    ValueEdit* position_y = new ValueEdit(nullptr,nullptr,nullptr,"Y", "м");
     pos_layout->addWidget(position_x);
     pos_layout->addWidget(position_y);
 

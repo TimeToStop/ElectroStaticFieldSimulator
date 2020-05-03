@@ -11,12 +11,12 @@ Engine::Engine():
     m_engine_state(EngineState::PAUSE)
 {
     m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(3, 3), this)));
-    m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(2, -1), this)));
-    m_charges.push_back(std::unique_ptr<Charge>(new Charge(1.f, Vector(-1, 0), this)));
+//    m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(2, -1), this)));
+//    m_charges.push_back(std::unique_ptr<Charge>(new Charge(1.f, Vector(-1, 0), this)));
 
     m_charges[0]->setCharge(0.00001);
-    m_charges[1]->setCharge(0.00001);
-    m_charges[2]->setCharge(0.00001);
+//    m_charges[1]->setCharge(0.00001);
+//    m_charges[2]->setCharge(0.00001);
 }
 
 Engine::~Engine()
@@ -38,7 +38,6 @@ void Engine::tick(float deltatime)
         if(!m_charges[i]->is_ignored() && m_charges[i]->is_movable())
         {
             m_charges[i]->setForce(applyCharge(i));
-            qDebug() << applyCharge(i).toPointF();
         }
     }
 
@@ -105,7 +104,7 @@ float Engine::lambda() const
 
 Vector Engine::calculateTension(const Vector& v)  const
 {
-    const long long k = 9000000000.l;
+    static const long long k = 9000000000.l;
     float res_tension_x = 0;
     float res_tension_y = 0;
     for (size_t i = 0; i < m_charges.size(); ++i)
@@ -127,7 +126,7 @@ Vector Engine::calculateTension(const Vector& v)  const
 
 float Engine::calculatePotential(const Vector& v) const
 {
-    const long long k = 9000000000.l;
+    static const long long k = 9000000000.l;
     float res_potential = 0;
     for (size_t i = 0; i < m_charges.size(); ++i)
     {
@@ -141,6 +140,26 @@ float Engine::calculatePotential(const Vector& v) const
         }
     }
     return res_potential;
+}
+
+float Engine::calculateEnergy(const Vector& v) const
+{
+    static const long long k = 9000000000.l;
+    float w = 0.f;
+
+    for(size_t i = 0; i < m_charges.size(); i++)
+    {
+        if(!m_charges[i]->is_ignored())
+        {
+            const float dx = v.x() - m_charges[i]->pos().x();
+            const float dy = m_charges[i]->pos().y() - v.y();
+            const float distance = sqrt(dx * dx + dy * dy);
+            const float potential = (k * (double)m_charges[i]->charge()) / distance;
+            w += 0.5 * m_charges[i]->charge() * potential;
+        }
+    }
+
+    return w;
 }
 
 float Engine::calculateKineticEnergyOfSystem() const
@@ -160,7 +179,7 @@ float Engine::calculateKineticEnergyOfSystem() const
 
 float Engine::calculateEnergyOfSystem() const
 {
-    const long long k = 9000000000.l;
+    static const long long k = 9000000000.l;
     float w = 0.f;
     for (size_t i = 0; i < m_charges.size(); ++i)
     {
