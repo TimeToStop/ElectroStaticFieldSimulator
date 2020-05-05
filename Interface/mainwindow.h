@@ -13,6 +13,8 @@ class MainWindow: public QMainWindow
 {
     Q_OBJECT
 
+    bool m_use_cursor;
+
     ValueEdit m_pos_x;
     ValueEdit m_pos_y;
 
@@ -50,6 +52,13 @@ public slots:
     void pause();
     void speed_x_2();
     void edit();
+
+    void usePosCursor(int);
+    void useStartCursor(int);
+    void useDestCursor(int);
+
+    void cursorMoved(const QPoint&);
+    void leftButtonClicked();
 
 private:
     Ui::MainWindow *ui;

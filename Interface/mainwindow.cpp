@@ -2,12 +2,13 @@
 #include "ui_mainwindow.h"
 
 #include "Interface/Charge/createchargedialog.h"
-#include "Interface/Charge/ignorecharge.h"
+#include "Interface/Charge/ignorechargesdialog.h"
 #include "Interface/Charge/selectcharge.h"
 #include "Engine/charge.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
+    m_use_cursor(false),
     m_pos_x("X", "м"),
     m_pos_y("Y", "м"),
     m_tension_val("E", "В/м"),
@@ -42,6 +43,17 @@ MainWindow::MainWindow(QWidget *parent) :
     m_charge.setWidgets(ui->m_work_charge_label, ui->m_work_charge_edit, ui->m_work_charge_box);
 
     m_work.setWidgets(ui->m_work_label, ui->m_work_label_val, ui->m_work_box);
+
+    connect(ui->m_engine, SIGNAL(cursorMoved(const QPoint&)), this, SLOT(cursorMoved(const QPoint&)));
+    connect(ui->m_engine, SIGNAL(leftButtonClicked()), this, SLOT(leftButtonClicked()));
+
+    connect(ui->m_use_cursor_pos_info, SIGNAL(stateChanged(int)), this, SLOT(usePosCursor(int)));
+    connect(ui->m_use_cursor_start, SIGNAL(stateChanged(int)), this, SLOT(useStartCursor(int)));
+    connect(ui->m_use_cursor_dest, SIGNAL(stateChanged(int)), this, SLOT(useDestCursor(int)));
+
+    connect(ui->m_engine, SIGNAL(recountPhysics()), this, SLOT(recountPhysics()));
+
+    setMouseTracking(true);
 }
 
 MainWindow::~MainWindow()
@@ -63,7 +75,15 @@ void MainWindow::showElectroStaticField(int val)
 
 void MainWindow::recountPhysics()
 {
-
+    Vector v(m_pos_x.value(), m_pos_y.value());
+    Vector tension = ui->m_engine->calculateTension(v);
+    float potential = ui->m_engine->calculatePotential(v);
+    float energy = ui->m_engine->calculateEnergy(v);
+    m_tension_val.setValue(tension.module());
+    m_tension_x.setValue(tension.x());
+    m_tension_y.setValue(tension.y());
+    m_potential.setValue(potential);
+    m_energy.setValue(energy);
 }
 
 void MainWindow::addCharge()
@@ -121,7 +141,7 @@ void MainWindow::ignoreCharges()
     {
         EngineState e = ui->m_engine->engineState();
         ui->m_engine->setEngineState(EngineState::PAUSE);
-        IgnoreCharge d(ui->m_engine->chargeNames(), this);
+        IgnoreChargesDialog d(ui->m_engine->chargeNames(), this);
 
         if(d.exec() == QDialog::Accepted)
         {
@@ -169,4 +189,65 @@ void MainWindow::speed_x_2()
 void MainWindow::edit()
 {
     ui->m_engine->setEngineState(EngineState::EDIT);
+}
+
+void MainWindow::usePosCursor(int val)
+{
+    m_pos_x.setDisabled(val == Qt::Checked);
+    m_pos_y.setDisabled(val == Qt::Checked);
+}
+
+void MainWindow::useStartCursor(int val)
+{
+    m_start_pos_x.setDisabled(val == Qt::Checked);
+    m_start_pos_y.setDisabled(val == Qt::Checked);
+}
+
+void MainWindow::useDestCursor(int val)
+{
+    m_dest_pos_x.setDisabled(val == Qt::Checked);
+    m_dest_pos_y.setDisabled(val == Qt::Checked);
+}
+
+void MainWindow::cursorMoved(const QPoint& pos)
+{
+    Vector v = ui->m_engine->toXOY(pos);
+
+    if(ui->m_use_cursor_pos_info->isChecked())
+    {
+        m_pos_x.setValue(v.x());
+        m_pos_y.setValue(v.y());
+    }
+
+    if(ui->m_use_cursor_start->isChecked())
+    {
+        m_start_pos_x.setValue(v.x());
+        m_start_pos_y.setValue(v.y());
+    }
+
+    if(ui->m_use_cursor_dest->isChecked())
+    {
+        m_dest_pos_x.setValue(v.x());
+        m_dest_pos_y.setValue(v.y());
+    }
+
+    recountPhysics();
+}
+
+void MainWindow::leftButtonClicked()
+{
+    if(ui->m_use_cursor_pos_info->isChecked())
+    {
+        ui->m_use_cursor_pos_info->setChecked(false);
+    }
+
+    if(ui->m_use_cursor_start->isChecked())
+    {
+        ui->m_use_cursor_start->setChecked(false);
+    }
+
+    if(ui->m_use_cursor_dest->isChecked())
+    {
+        ui->m_use_cursor_dest->setChecked(false);
+    }
 }
