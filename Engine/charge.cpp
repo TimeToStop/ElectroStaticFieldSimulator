@@ -46,7 +46,7 @@ Charge::Charge(const QString& name, float q, float mass, Vector pos, Engine * co
     m_amount++;
 }
 
-Charge::Charge(const QString& name, float q, float mass, Vector pos, bool ignore, bool movable, Engine * const engine):
+Charge::Charge(const QString& name, float q, float mass, Vector pos, Vector vel, bool ignore, bool movable, Engine * const engine):
     m_engine(engine),
     m_name(name),
     m_is_ignored(ignore),
@@ -54,7 +54,7 @@ Charge::Charge(const QString& name, float q, float mass, Vector pos, bool ignore
     m_charge(q),
     m_mass(mass),
     m_pos(pos),
-    m_velocity(),
+    m_velocity(vel),
     m_acceleration()
 {
     m_amount++;

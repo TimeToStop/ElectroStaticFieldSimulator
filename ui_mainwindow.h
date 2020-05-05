@@ -56,15 +56,13 @@ public:
     QPushButton *pushButton_5;
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_3;
-    QVBoxLayout *verticalLayout_3;
-    QHBoxLayout *horizontalLayout_4;
+    QGridLayout *gridLayout_10;
     QLabel *label;
     QSlider *horizontalSlider;
     QCheckBox *m_show_grid;
     QCheckBox *checkBox_2;
-    QHBoxLayout *horizontalLayout_5;
     QLabel *label_2;
-    QComboBox *comboBox;
+    QComboBox *m_camera_change;
     QLabel *label_3;
     QComboBox *comboBox_2;
     QHBoxLayout *horizontalLayout_2;
@@ -230,14 +228,12 @@ public:
         groupBox_2->setMaximumSize(QSize(16777215, 100));
         gridLayout_3 = new QGridLayout(groupBox_2);
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
-        verticalLayout_3 = new QVBoxLayout();
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        gridLayout_10 = new QGridLayout();
+        gridLayout_10->setObjectName(QString::fromUtf8("gridLayout_10"));
         label = new QLabel(groupBox_2);
         label->setObjectName(QString::fromUtf8("label"));
 
-        horizontalLayout_4->addWidget(label);
+        gridLayout_10->addWidget(label, 0, 0, 1, 1);
 
         horizontalSlider = new QSlider(groupBox_2);
         horizontalSlider->setObjectName(QString::fromUtf8("horizontalSlider"));
@@ -248,48 +244,40 @@ public:
         horizontalSlider->setSizePolicy(sizePolicy3);
         horizontalSlider->setOrientation(Qt::Horizontal);
 
-        horizontalLayout_4->addWidget(horizontalSlider);
+        gridLayout_10->addWidget(horizontalSlider, 0, 1, 1, 1);
 
         m_show_grid = new QCheckBox(groupBox_2);
         m_show_grid->setObjectName(QString::fromUtf8("m_show_grid"));
 
-        horizontalLayout_4->addWidget(m_show_grid);
+        gridLayout_10->addWidget(m_show_grid, 0, 2, 1, 1);
 
         checkBox_2 = new QCheckBox(groupBox_2);
         checkBox_2->setObjectName(QString::fromUtf8("checkBox_2"));
 
-        horizontalLayout_4->addWidget(checkBox_2);
+        gridLayout_10->addWidget(checkBox_2, 0, 3, 1, 1);
 
-
-        verticalLayout_3->addLayout(horizontalLayout_4);
-
-        horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
         label_2 = new QLabel(groupBox_2);
         label_2->setObjectName(QString::fromUtf8("label_2"));
 
-        horizontalLayout_5->addWidget(label_2);
+        gridLayout_10->addWidget(label_2, 1, 0, 1, 1);
 
-        comboBox = new QComboBox(groupBox_2);
-        comboBox->setObjectName(QString::fromUtf8("comboBox"));
+        m_camera_change = new QComboBox(groupBox_2);
+        m_camera_change->setObjectName(QString::fromUtf8("m_camera_change"));
 
-        horizontalLayout_5->addWidget(comboBox);
+        gridLayout_10->addWidget(m_camera_change, 1, 1, 1, 1);
 
         label_3 = new QLabel(groupBox_2);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
-        horizontalLayout_5->addWidget(label_3);
+        gridLayout_10->addWidget(label_3, 1, 2, 1, 1);
 
         comboBox_2 = new QComboBox(groupBox_2);
         comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
 
-        horizontalLayout_5->addWidget(comboBox_2);
+        gridLayout_10->addWidget(comboBox_2, 1, 3, 1, 1);
 
 
-        verticalLayout_3->addLayout(horizontalLayout_5);
-
-
-        gridLayout_3->addLayout(verticalLayout_3, 0, 0, 1, 1);
+        gridLayout_3->addLayout(gridLayout_10, 0, 0, 1, 1);
 
 
         gridLayout_4->addWidget(groupBox_2, 3, 0, 1, 1);
@@ -352,6 +340,11 @@ public:
 
         groupBox_3 = new QGroupBox(tab);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
+        QSizePolicy sizePolicy4(QSizePolicy::Fixed, QSizePolicy::Preferred);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(groupBox_3->sizePolicy().hasHeightForWidth());
+        groupBox_3->setSizePolicy(sizePolicy4);
         gridLayout_6 = new QGridLayout(groupBox_3);
         gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
         gridLayout_7 = new QGridLayout();
@@ -692,6 +685,15 @@ public:
         retranslateUi(MainWindow);
         QObject::connect(m_show_grid, SIGNAL(stateChanged(int)), MainWindow, SLOT(showGrid(int)));
         QObject::connect(actionExit, SIGNAL(triggered()), MainWindow, SLOT(close()));
+        QObject::connect(checkBox_2, SIGNAL(stateChanged(int)), MainWindow, SLOT(showElectroStaticField(int)));
+        QObject::connect(pushButton, SIGNAL(clicked()), MainWindow, SLOT(addCharge()));
+        QObject::connect(pushButton_3, SIGNAL(clicked()), MainWindow, SLOT(ignoreCharges()));
+        QObject::connect(pushButton_4, SIGNAL(clicked()), MainWindow, SLOT(editCharge()));
+        QObject::connect(pushButton_2, SIGNAL(clicked()), MainWindow, SLOT(rmCharge()));
+        QObject::connect(pushButton_7, SIGNAL(clicked()), MainWindow, SLOT(play()));
+        QObject::connect(pushButton_8, SIGNAL(clicked()), MainWindow, SLOT(pause()));
+        QObject::connect(pushButton_6, SIGNAL(clicked()), MainWindow, SLOT(speed_x_2()));
+        QObject::connect(pushButton_5, SIGNAL(clicked()), MainWindow, SLOT(edit()));
 
         tabWidget->setCurrentIndex(0);
 

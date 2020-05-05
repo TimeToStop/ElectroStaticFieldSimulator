@@ -11,13 +11,15 @@ class ValueWriter : public ValueRepresenter
     QLabel* m_label;
 
 public:
-    explicit ValueWriter(QLabel*, QLabel*, QComboBox*,const QString&, const QString&, QWidget* parent = nullptr);
+    explicit ValueWriter(const QString&, const QString&, QWidget* parent = nullptr);
     virtual ~ValueWriter();
 
     virtual void setValueOnly(float) override;
     virtual float valueOnly() const override;
     virtual void setFixedEditWidth(int) override;
     virtual void setDisabled(bool) override;
+
+    void setWidgets(QLabel*, QLabel*, QComboBox*);
 
 public slots:
     virtual void prefixChanged(int) override;

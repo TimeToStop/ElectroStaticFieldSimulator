@@ -16,10 +16,11 @@ protected:
     QLabel* m_header;
     QComboBox* m_box;
     QString m_measure;
+    QString m_name;
 
 
 public:
-    explicit ValueRepresenter(QLabel*, QComboBox*, const QString&, const QString&, QWidget *parent = nullptr);
+    explicit ValueRepresenter(const QString&, const QString&, QWidget *parent = nullptr);
     virtual ~ValueRepresenter();
 
     virtual void setValueOnly(float) = 0;
@@ -31,6 +32,7 @@ public:
     float value() const;
 
 protected:
+    void setWidgets(QLabel*, QComboBox*);
     static float power(int);
 
 signals:

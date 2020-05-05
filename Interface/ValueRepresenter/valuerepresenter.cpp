@@ -10,20 +10,14 @@ const QStringList ValueRepresenter::m_prefix = QStringList()
         << ""
         << "к" << "М" << "Г" << "Т";
 
-ValueRepresenter::ValueRepresenter(QLabel* header, QComboBox* box, const QString& name, const QString& measure, QWidget *parent):
+ValueRepresenter::ValueRepresenter(const QString& name, const QString& measure, QWidget *parent):
     QWidget(parent),
     m_curr_index(4),
-    m_header(header),
-    m_box(box),
-    m_measure(measure)
+    m_header(nullptr),
+    m_box(nullptr),
+    m_measure(measure),
+    m_name(name)
 {
-    m_header->setText(name + " =");
-    for(const QString& prefix : m_prefix)
-    {
-        box->addItem(prefix + m_measure);
-    }
-    box->setCurrentIndex(m_curr_index);
-    connect(box, SIGNAL(currentIndexChanged(int)), this, SLOT(prefixChanged(int)));
 }
 
 ValueRepresenter::~ValueRepresenter()
@@ -61,6 +55,19 @@ void ValueRepresenter::setValue(float val)
 float ValueRepresenter::value() const
 {
     return valueOnly() * power(m_curr_index);
+}
+
+void ValueRepresenter::setWidgets(QLabel* label, QComboBox* box)
+{
+    m_header = label;
+    m_box = box;
+    m_header->setText(m_name + " =");
+    for(const QString& prefix : m_prefix)
+    {
+        m_box->addItem(prefix + m_measure);
+    }
+    m_box->setCurrentIndex(m_curr_index);
+    connect(m_box, SIGNAL(currentIndexChanged(int)), this, SLOT(prefixChanged(int)));
 }
 
 void ValueRepresenter::newValueEdited()

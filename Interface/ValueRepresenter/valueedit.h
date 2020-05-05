@@ -13,13 +13,15 @@ class ValueEdit: public ValueRepresenter
     QLineEdit* m_edit;
 
 public:
-    explicit ValueEdit(QLabel*,QLineEdit*, QComboBox*,const QString&, const QString&, QWidget* parent = nullptr);
+    explicit ValueEdit(const QString&, const QString&, QWidget* parent = nullptr);
     virtual ~ValueEdit();
 
     virtual void setValueOnly(float) override;
     virtual float valueOnly() const override;
     virtual void setFixedEditWidth(int) override;
     virtual void setDisabled(bool) override;
+
+    void setWidgets(QLabel*, QLineEdit*, QComboBox*);
 
 public slots:
     void textChanged(const QString&);

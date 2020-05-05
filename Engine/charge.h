@@ -30,7 +30,7 @@ public:
     Charge(Engine* const);
     Charge(float, Vector, Engine * const);
     Charge(const QString&, float, float, Vector, Engine* const);
-    Charge(const QString&, float, float, Vector, bool, bool, Engine* const);
+    Charge(const QString&, float, float, Vector, Vector, bool, bool, Engine* const);
     ~Charge();
 
     void draw(QPainter&);

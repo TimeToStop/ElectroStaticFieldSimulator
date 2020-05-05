@@ -19,7 +19,7 @@ SOURCES += \
     Engine/charge.cpp \
     Engine/engine.cpp \
     Engine/vector.cpp \
-    Interface/Charge/createcharge.cpp \
+    Interface/Charge/createchargedialog.cpp \
     Interface/Charge/ignorecharge.cpp \
     Interface/Charge/selectcharge.cpp \
     Interface/mainwindow.cpp \
@@ -33,7 +33,7 @@ HEADERS += \
     Engine/charge.h \
     Engine/engine.h \
     Engine/vector.h \
-    Interface/Charge/createcharge.h \
+    Interface/Charge/createchargedialog.h \
     Interface/Charge/ignorecharge.h \
     Interface/Charge/selectcharge.h \
     Interface/mainwindow.h \
@@ -48,4 +48,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 FORMS += \
+    Interface/Charge/createchargedialog.ui \
     Interface/mainwindow.ui

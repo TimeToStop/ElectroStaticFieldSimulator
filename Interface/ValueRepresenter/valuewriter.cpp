@@ -1,11 +1,9 @@
 #include "valuewriter.h"
 
-ValueWriter::ValueWriter(QLabel* header, QLabel* val, QComboBox* box,const QString& name, const QString& measure,QWidget *parent):
-    ValueRepresenter(header, box, name, measure, parent),
-    m_label(val)
+ValueWriter::ValueWriter(const QString& name, const QString& measure,QWidget *parent):
+    ValueRepresenter(name, measure, parent),
+    m_label(nullptr)
 {
-    m_label->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    setValue(0.f);
 }
 
 ValueWriter::~ValueWriter()
@@ -29,6 +27,14 @@ void ValueWriter::setFixedEditWidth(int w)
 
 void ValueWriter::setDisabled(bool)
 {
+}
+
+void ValueWriter::setWidgets(QLabel* label, QLabel* val, QComboBox* box)
+{
+    ValueRepresenter::setWidgets(label, box);
+    m_label = val;
+    m_label->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    setValue(0.f);
 }
 
 void ValueWriter::prefixChanged(int indx)

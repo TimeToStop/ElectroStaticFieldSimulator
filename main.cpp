@@ -1,4 +1,3 @@
-#include "Interface/widget.h"
 #include "Interface/mainwindow.h"
 
 #include <QApplication>
