@@ -48,6 +48,11 @@ Vector PlotGridWidget::fromXOY(float x, float y) const
     return fromXOY(Vector(x, y));
 }
 
+float PlotGridWidget::scale() const
+{
+    return m_scale;
+}
+
 void PlotGridWidget::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);

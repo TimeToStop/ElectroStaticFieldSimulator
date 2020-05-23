@@ -21,7 +21,6 @@ protected:
     bool m_is_left_mouse_pressed;
     bool m_is_right_mouse_pressed;
 
-private:
     QPoint m_current_cursor_pos;
     QPoint m_pos_left_mouse_clicked;
     QPoint m_previous_pos_right_mouse_clicked;
@@ -40,6 +39,8 @@ public:
     Vector toXOY(float, float) const;
     Vector fromXOY(const Vector&) const;
     Vector fromXOY(float, float) const;
+
+    float scale() const;
 
 protected:
     virtual void paintEvent(QPaintEvent*) override;

@@ -1,24 +1,34 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
-#include <QPoint>
+#include "Engine/vector.h"
+#include "Interface/plotgridwidget.h"
+
 #include <QPainter>
+
 
 class Object
 {
-    QPoint m_pos;
+protected:
+    PlotGridWidget* const m_widget;
+private:
+    bool m_is_selected;
+    Vector m_pos;
 
 public:
-    Object();
+    Object(PlotGridWidget* const);
     virtual ~Object();
 
     virtual void draw(QPainter&) const = 0;
+    virtual bool isClose(const QPoint&) = 0;
     virtual bool intersects(const QRect&) const = 0;
 
-    void setPos(const QPoint&);
-    void movePos(const QPoint&);
+    virtual void setPos(const Vector&);
+    virtual void movePos(const Vector&);
+    void setSelected(bool);
 
-    QPoint pos() const;
+    bool isSelected() const;
+    Vector pos() const;
 };
 
 #endif // OBJECT_H

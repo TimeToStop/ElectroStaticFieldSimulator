@@ -655,7 +655,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1172, 26));
+        menubar->setGeometry(QRect(0, 0, 1172, 21));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuOptions = new QMenu(menubar);
@@ -695,7 +695,7 @@ public:
         QObject::connect(m_speed_button, SIGNAL(clicked()), MainWindow, SLOT(speed_x_2()));
         QObject::connect(m_edit_button, SIGNAL(clicked()), MainWindow, SLOT(edit()));
 
-        m_tab_widget->setCurrentIndex(0);
+        m_tab_widget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);

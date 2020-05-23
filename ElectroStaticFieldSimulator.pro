@@ -20,6 +20,7 @@ SOURCES += \
     Editor/chargeedit.cpp \
     Editor/editor.cpp \
     Editor/editwindow.cpp \
+    Editor/mediator.cpp \
     Editor/object.cpp \
     Interface/plotgridwidget.cpp \
     Options/AbstractContainer.cpp \
@@ -44,6 +45,7 @@ HEADERS += \
     Editor/chargeedit.h \
     Editor/editor.h \
     Editor/editwindow.h \
+    Editor/mediator.h \
     Editor/object.h \
     Interface/plotgridwidget.h \
     Options/AbstractContainer.h \
