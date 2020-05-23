@@ -10,11 +10,11 @@ Engine::Engine():
     m_charges(),
     m_engine_state(EngineState::PAUSE)
 {
-    m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(3, 3), this)));
+    //m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(3, 3), this)));
 //    m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(2, -1), this)));
 //    m_charges.push_back(std::unique_ptr<Charge>(new Charge(1.f, Vector(-1, 0), this)));
 
-    m_charges[0]->setCharge(0.00001);
+  //  m_charges[0]->setCharge(0.00001);
 //    m_charges[1]->setCharge(0.00001);
 //    m_charges[2]->setCharge(0.00001);
 }
@@ -85,16 +85,6 @@ QStringList Engine::chargeNames() const
     }
 
     return names;
-}
-
-Vector Engine::toXOY(float x, float y) const
-{
-    return toXOY(Vector(x, y));
-}
-
-Vector Engine::fromXOY(float x, float y) const
-{
-    return fromXOY(Vector(x, y));
 }
 
 float Engine::lambda() const

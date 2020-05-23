@@ -1,12 +1,12 @@
 #include "charge.h"
 
-#include "engine.h"
+#include "Interface/enginewidget.h"
 #include <QDebug>
 
 const int Charge::m_radius = 5;
 long long Charge::m_amount = 0;
 
-Charge::Charge(Engine* const engine):
+Charge::Charge(EngineWidget* const engine):
     m_engine(engine),
     m_name("Charge " + QString::number(m_amount++)),
     m_is_ignored(false),
@@ -19,7 +19,7 @@ Charge::Charge(Engine* const engine):
 {
 }
 
-Charge::Charge(float mass, Vector pos, Engine * const engine):
+Charge::Charge(float mass, Vector pos, EngineWidget * const engine):
     m_engine(engine),
     m_name("Charge " + QString::number(m_amount++)),
     m_is_ignored(false),
@@ -32,7 +32,7 @@ Charge::Charge(float mass, Vector pos, Engine * const engine):
 {
 }
 
-Charge::Charge(const QString& name, float q, float mass, Vector pos, Engine * const engine):
+Charge::Charge(const QString& name, float q, float mass, Vector pos, EngineWidget * const engine):
     m_engine(engine),
     m_name(name),
     m_is_ignored(false),
@@ -46,7 +46,7 @@ Charge::Charge(const QString& name, float q, float mass, Vector pos, Engine * co
     m_amount++;
 }
 
-Charge::Charge(const QString& name, float q, float mass, Vector pos, Vector vel, bool ignore, bool movable, Engine * const engine):
+Charge::Charge(const QString& name, float q, float mass, Vector pos, Vector vel, bool ignore, bool movable, EngineWidget * const engine):
     m_engine(engine),
     m_name(name),
     m_is_ignored(ignore),
@@ -123,7 +123,7 @@ void Charge::setCharge(float c)
 
 void Charge::movePos(const Vector& pos)
 {
-    m_pos = pos;
+    m_pos += pos;
 }
 
 void Charge::addForce(const Vector& force)

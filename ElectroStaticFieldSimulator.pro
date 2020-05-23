@@ -2,7 +2,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++11
+CONFIG += c++17
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -16,6 +16,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Editor/arrow.cpp \
+    Editor/chargeedit.cpp \
+    Editor/editor.cpp \
+    Editor/editwindow.cpp \
+    Editor/object.cpp \
+    Interface/plotgridwidget.cpp \
+    Options/AbstractContainer.cpp \
+    Options/Dictionary.cpp \
+    Options/Theme.cpp \
+    Options/Translater.cpp \
     Engine/charge.cpp \
     Engine/engine.cpp \
     Engine/vector.cpp \
@@ -30,6 +40,18 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
+    Editor/arrow.h \
+    Editor/chargeedit.h \
+    Editor/editor.h \
+    Editor/editwindow.h \
+    Editor/object.h \
+    Interface/plotgridwidget.h \
+    Options/AbstractContainer.h \
+    Options/Container.h \
+    Options/Dictionary.h \
+    Options/Enums.h \
+    Options/Theme.h \
+    Options/Translater.h \
     Engine/charge.h \
     Engine/engine.h \
     Engine/vector.h \
@@ -48,6 +70,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 FORMS += \
+    Editor/editwindow.ui \
     Interface/Charge/createchargedialog.ui \
     Interface/Charge/ignorechargesdialog.ui \
     Interface/mainwindow.ui

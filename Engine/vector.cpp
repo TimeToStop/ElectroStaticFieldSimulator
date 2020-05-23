@@ -72,6 +72,19 @@ float Vector::y() const
     return m_y;
 }
 
+Vector& Vector::normalize()
+{
+    return (*this /= module());
+}
+
+Vector& Vector::rotate(float alpha)
+{
+    Vector res(m_x * cos(alpha) - m_y * sin(alpha), m_x * sin(alpha) + m_y * cos(alpha));
+    m_x = res.x();
+    m_y = res.y();
+    return *this;
+}
+
 float Vector::module() const
 {
     return sqrt(m_x*m_x+m_y*m_y);

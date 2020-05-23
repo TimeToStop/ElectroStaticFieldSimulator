@@ -32,6 +32,8 @@ class MainWindow: public QMainWindow
 
     ValueWriter m_work;
 
+    int m_id;
+
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);

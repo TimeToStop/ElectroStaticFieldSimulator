@@ -156,7 +156,7 @@
          <item row="0" column="0">
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
-            <widget class="QGroupBox" name="groupBox">
+            <widget class="QGroupBox" name="m_charges_group_box">
              <property name="maximumSize">
               <size>
                <width>16777215</width>
@@ -170,28 +170,28 @@
               <item row="0" column="0">
                <layout class="QVBoxLayout" name="verticalLayout_2">
                 <item>
-                 <widget class="QPushButton" name="pushButton">
+                 <widget class="QPushButton" name="m_add_charge_button">
                   <property name="text">
                    <string>Add Charge</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="pushButton_3">
+                 <widget class="QPushButton" name="m_ignore_charges">
                   <property name="text">
                    <string>Ignore Charges</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="pushButton_4">
+                 <widget class="QPushButton" name="m_edit_charges">
                   <property name="text">
                    <string>Edit Charge</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="pushButton_2">
+                 <widget class="QPushButton" name="m_rm_charge">
                   <property name="text">
                    <string>Remove Charge</string>
                   </property>
@@ -219,7 +219,7 @@
             </size>
            </property>
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="tab">
             <attribute name="title">
@@ -238,7 +238,7 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QGroupBox" name="m_postion_group_box">
+                  <widget class="QGroupBox" name="m_position_group_box">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                      <horstretch>0</horstretch>
@@ -285,7 +285,7 @@
                 </layout>
                </item>
                <item>
-                <widget class="QGroupBox" name="m_info_group_bx">
+                <widget class="QGroupBox" name="m_info_group_box">
                  <property name="title">
                   <string>Info</string>
                  </property>
@@ -411,7 +411,7 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QGroupBox" name="groupBox_4">
+                    <widget class="QGroupBox" name="m_start_group_box">
                      <property name="title">
                       <string>Start</string>
                      </property>
@@ -461,7 +461,7 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QGroupBox" name="groupBox_6">
+                    <widget class="QGroupBox" name="m_dest_group_box">
                      <property name="title">
                       <string>Destination</string>
                      </property>
@@ -723,7 +723,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton</sender>
+   <sender>m_add_charge_button</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>addCharge()</slot>
@@ -739,7 +739,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_3</sender>
+   <sender>m_ignore_charges</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>ignoreCharges()</slot>
@@ -755,7 +755,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_4</sender>
+   <sender>m_edit_charges</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>editCharge()</slot>
@@ -771,7 +771,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_2</sender>
+   <sender>m_rm_charge</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>rmCharge()</slot>

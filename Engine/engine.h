@@ -36,11 +36,6 @@ public:
     Engine();
     virtual ~Engine();
 
-    virtual Vector fromXOY(const Vector&) const = 0;
-    virtual Vector toXOY(const Vector&) const = 0;
-    Vector toXOY(float, float) const;
-    Vector fromXOY(float, float) const;
-
     void drawCharges(QPainter&);
     void tick(float);
 

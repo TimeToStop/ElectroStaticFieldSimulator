@@ -66,20 +66,20 @@ public:
     QLabel *m_schange_scene_label;
     QComboBox *m_change_scene;
     QHBoxLayout *horizontalLayout_2;
-    QGroupBox *groupBox;
+    QGroupBox *m_charges_group_box;
     QGridLayout *gridLayout_2;
     QVBoxLayout *verticalLayout_2;
-    QPushButton *pushButton;
-    QPushButton *pushButton_3;
-    QPushButton *pushButton_4;
-    QPushButton *pushButton_2;
+    QPushButton *m_add_charge_button;
+    QPushButton *m_ignore_charges;
+    QPushButton *m_edit_charges;
+    QPushButton *m_rm_charge;
     QTabWidget *m_tab_widget;
     QWidget *tab;
     QGridLayout *gridLayout_5;
     QHBoxLayout *horizontalLayout_6;
     QVBoxLayout *verticalLayout_5;
     QCheckBox *m_use_cursor_pos_info;
-    QGroupBox *m_postion_group_box;
+    QGroupBox *m_position_group_box;
     QGridLayout *gridLayout_6;
     QGridLayout *gridLayout_7;
     QLabel *m_pos_x_info_label;
@@ -88,7 +88,7 @@ public:
     QLineEdit *m_pos_x_info_edit;
     QComboBox *m_pos_x_info_box;
     QComboBox *m_pos_y_info_box;
-    QGroupBox *m_info_group_bx;
+    QGroupBox *m_info_group_box;
     QGridLayout *gridLayout_9;
     QGridLayout *gridLayout_8;
     QComboBox *m_tension_y_label_box;
@@ -112,7 +112,7 @@ public:
     QHBoxLayout *horizontalLayout_7;
     QVBoxLayout *verticalLayout_6;
     QCheckBox *m_use_cursor_start;
-    QGroupBox *groupBox_4;
+    QGroupBox *m_start_group_box;
     QGridLayout *gridLayout_11;
     QGridLayout *gridLayout_12;
     QLabel *m_pos_x_start_label;
@@ -123,7 +123,7 @@ public:
     QComboBox *m_pos_y_start_box;
     QVBoxLayout *verticalLayout_7;
     QCheckBox *m_use_cursor_dest;
-    QGroupBox *groupBox_6;
+    QGroupBox *m_dest_group_box;
     QGridLayout *gridLayout_13;
     QGridLayout *gridLayout_14;
     QLabel *m_pos_x_dest_label;
@@ -284,38 +284,38 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        groupBox = new QGroupBox(widget_2);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setMaximumSize(QSize(16777215, 175));
-        gridLayout_2 = new QGridLayout(groupBox);
+        m_charges_group_box = new QGroupBox(widget_2);
+        m_charges_group_box->setObjectName(QString::fromUtf8("m_charges_group_box"));
+        m_charges_group_box->setMaximumSize(QSize(16777215, 175));
+        gridLayout_2 = new QGridLayout(m_charges_group_box);
         gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        pushButton = new QPushButton(groupBox);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        m_add_charge_button = new QPushButton(m_charges_group_box);
+        m_add_charge_button->setObjectName(QString::fromUtf8("m_add_charge_button"));
 
-        verticalLayout_2->addWidget(pushButton);
+        verticalLayout_2->addWidget(m_add_charge_button);
 
-        pushButton_3 = new QPushButton(groupBox);
-        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
+        m_ignore_charges = new QPushButton(m_charges_group_box);
+        m_ignore_charges->setObjectName(QString::fromUtf8("m_ignore_charges"));
 
-        verticalLayout_2->addWidget(pushButton_3);
+        verticalLayout_2->addWidget(m_ignore_charges);
 
-        pushButton_4 = new QPushButton(groupBox);
-        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
+        m_edit_charges = new QPushButton(m_charges_group_box);
+        m_edit_charges->setObjectName(QString::fromUtf8("m_edit_charges"));
 
-        verticalLayout_2->addWidget(pushButton_4);
+        verticalLayout_2->addWidget(m_edit_charges);
 
-        pushButton_2 = new QPushButton(groupBox);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        m_rm_charge = new QPushButton(m_charges_group_box);
+        m_rm_charge->setObjectName(QString::fromUtf8("m_rm_charge"));
 
-        verticalLayout_2->addWidget(pushButton_2);
+        verticalLayout_2->addWidget(m_rm_charge);
 
 
         gridLayout_2->addLayout(verticalLayout_2, 0, 0, 1, 1);
 
 
-        horizontalLayout_2->addWidget(groupBox);
+        horizontalLayout_2->addWidget(m_charges_group_box);
 
 
         gridLayout_4->addLayout(horizontalLayout_2, 0, 0, 1, 1);
@@ -338,43 +338,43 @@ public:
 
         verticalLayout_5->addWidget(m_use_cursor_pos_info);
 
-        m_postion_group_box = new QGroupBox(tab);
-        m_postion_group_box->setObjectName(QString::fromUtf8("m_postion_group_box"));
+        m_position_group_box = new QGroupBox(tab);
+        m_position_group_box->setObjectName(QString::fromUtf8("m_position_group_box"));
         QSizePolicy sizePolicy4(QSizePolicy::Fixed, QSizePolicy::Preferred);
         sizePolicy4.setHorizontalStretch(0);
         sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(m_postion_group_box->sizePolicy().hasHeightForWidth());
-        m_postion_group_box->setSizePolicy(sizePolicy4);
-        gridLayout_6 = new QGridLayout(m_postion_group_box);
+        sizePolicy4.setHeightForWidth(m_position_group_box->sizePolicy().hasHeightForWidth());
+        m_position_group_box->setSizePolicy(sizePolicy4);
+        gridLayout_6 = new QGridLayout(m_position_group_box);
         gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
         gridLayout_7 = new QGridLayout();
         gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
-        m_pos_x_info_label = new QLabel(m_postion_group_box);
+        m_pos_x_info_label = new QLabel(m_position_group_box);
         m_pos_x_info_label->setObjectName(QString::fromUtf8("m_pos_x_info_label"));
 
         gridLayout_7->addWidget(m_pos_x_info_label, 0, 0, 1, 1);
 
-        m_pos_y_info_label = new QLabel(m_postion_group_box);
+        m_pos_y_info_label = new QLabel(m_position_group_box);
         m_pos_y_info_label->setObjectName(QString::fromUtf8("m_pos_y_info_label"));
 
         gridLayout_7->addWidget(m_pos_y_info_label, 1, 0, 1, 1);
 
-        m_pos_y_info_edit = new QLineEdit(m_postion_group_box);
+        m_pos_y_info_edit = new QLineEdit(m_position_group_box);
         m_pos_y_info_edit->setObjectName(QString::fromUtf8("m_pos_y_info_edit"));
 
         gridLayout_7->addWidget(m_pos_y_info_edit, 1, 1, 1, 1);
 
-        m_pos_x_info_edit = new QLineEdit(m_postion_group_box);
+        m_pos_x_info_edit = new QLineEdit(m_position_group_box);
         m_pos_x_info_edit->setObjectName(QString::fromUtf8("m_pos_x_info_edit"));
 
         gridLayout_7->addWidget(m_pos_x_info_edit, 0, 1, 1, 1);
 
-        m_pos_x_info_box = new QComboBox(m_postion_group_box);
+        m_pos_x_info_box = new QComboBox(m_position_group_box);
         m_pos_x_info_box->setObjectName(QString::fromUtf8("m_pos_x_info_box"));
 
         gridLayout_7->addWidget(m_pos_x_info_box, 0, 2, 1, 1);
 
-        m_pos_y_info_box = new QComboBox(m_postion_group_box);
+        m_pos_y_info_box = new QComboBox(m_position_group_box);
         m_pos_y_info_box->setObjectName(QString::fromUtf8("m_pos_y_info_box"));
 
         gridLayout_7->addWidget(m_pos_y_info_box, 1, 2, 1, 1);
@@ -383,90 +383,90 @@ public:
         gridLayout_6->addLayout(gridLayout_7, 0, 0, 1, 1);
 
 
-        verticalLayout_5->addWidget(m_postion_group_box);
+        verticalLayout_5->addWidget(m_position_group_box);
 
 
         horizontalLayout_6->addLayout(verticalLayout_5);
 
-        m_info_group_bx = new QGroupBox(tab);
-        m_info_group_bx->setObjectName(QString::fromUtf8("m_info_group_bx"));
-        m_info_group_bx->setCheckable(false);
-        m_info_group_bx->setChecked(false);
-        gridLayout_9 = new QGridLayout(m_info_group_bx);
+        m_info_group_box = new QGroupBox(tab);
+        m_info_group_box->setObjectName(QString::fromUtf8("m_info_group_box"));
+        m_info_group_box->setCheckable(false);
+        m_info_group_box->setChecked(false);
+        gridLayout_9 = new QGridLayout(m_info_group_box);
         gridLayout_9->setObjectName(QString::fromUtf8("gridLayout_9"));
         gridLayout_8 = new QGridLayout();
         gridLayout_8->setObjectName(QString::fromUtf8("gridLayout_8"));
-        m_tension_y_label_box = new QComboBox(m_info_group_bx);
+        m_tension_y_label_box = new QComboBox(m_info_group_box);
         m_tension_y_label_box->setObjectName(QString::fromUtf8("m_tension_y_label_box"));
 
         gridLayout_8->addWidget(m_tension_y_label_box, 2, 2, 1, 1);
 
-        m_tension_y_label = new QLabel(m_info_group_bx);
+        m_tension_y_label = new QLabel(m_info_group_box);
         m_tension_y_label->setObjectName(QString::fromUtf8("m_tension_y_label"));
 
         gridLayout_8->addWidget(m_tension_y_label, 2, 0, 1, 1);
 
-        m_potential_label_val = new QLabel(m_info_group_bx);
+        m_potential_label_val = new QLabel(m_info_group_box);
         m_potential_label_val->setObjectName(QString::fromUtf8("m_potential_label_val"));
 
         gridLayout_8->addWidget(m_potential_label_val, 3, 1, 1, 1);
 
-        m_tension_x_label = new QLabel(m_info_group_bx);
+        m_tension_x_label = new QLabel(m_info_group_box);
         m_tension_x_label->setObjectName(QString::fromUtf8("m_tension_x_label"));
 
         gridLayout_8->addWidget(m_tension_x_label, 1, 0, 1, 1);
 
-        m_tension_y_label_val = new QLabel(m_info_group_bx);
+        m_tension_y_label_val = new QLabel(m_info_group_box);
         m_tension_y_label_val->setObjectName(QString::fromUtf8("m_tension_y_label_val"));
 
         gridLayout_8->addWidget(m_tension_y_label_val, 2, 1, 1, 1);
 
-        m_tension_x_label_val = new QLabel(m_info_group_bx);
+        m_tension_x_label_val = new QLabel(m_info_group_box);
         m_tension_x_label_val->setObjectName(QString::fromUtf8("m_tension_x_label_val"));
 
         gridLayout_8->addWidget(m_tension_x_label_val, 1, 1, 1, 1);
 
-        m_potential_label_box = new QComboBox(m_info_group_bx);
+        m_potential_label_box = new QComboBox(m_info_group_box);
         m_potential_label_box->setObjectName(QString::fromUtf8("m_potential_label_box"));
 
         gridLayout_8->addWidget(m_potential_label_box, 3, 2, 1, 1);
 
-        m_tension_val_label_val = new QLabel(m_info_group_bx);
+        m_tension_val_label_val = new QLabel(m_info_group_box);
         m_tension_val_label_val->setObjectName(QString::fromUtf8("m_tension_val_label_val"));
 
         gridLayout_8->addWidget(m_tension_val_label_val, 0, 1, 1, 1);
 
-        m_tension_val_label_box = new QComboBox(m_info_group_bx);
+        m_tension_val_label_box = new QComboBox(m_info_group_box);
         m_tension_val_label_box->setObjectName(QString::fromUtf8("m_tension_val_label_box"));
 
         gridLayout_8->addWidget(m_tension_val_label_box, 0, 2, 1, 1);
 
-        m_tension_x_label_box = new QComboBox(m_info_group_bx);
+        m_tension_x_label_box = new QComboBox(m_info_group_box);
         m_tension_x_label_box->setObjectName(QString::fromUtf8("m_tension_x_label_box"));
 
         gridLayout_8->addWidget(m_tension_x_label_box, 1, 2, 1, 1);
 
-        m_potential_label = new QLabel(m_info_group_bx);
+        m_potential_label = new QLabel(m_info_group_box);
         m_potential_label->setObjectName(QString::fromUtf8("m_potential_label"));
 
         gridLayout_8->addWidget(m_potential_label, 3, 0, 1, 1);
 
-        m_tension_val_label = new QLabel(m_info_group_bx);
+        m_tension_val_label = new QLabel(m_info_group_box);
         m_tension_val_label->setObjectName(QString::fromUtf8("m_tension_val_label"));
 
         gridLayout_8->addWidget(m_tension_val_label, 0, 0, 1, 1);
 
-        m_energy_val_label = new QLabel(m_info_group_bx);
+        m_energy_val_label = new QLabel(m_info_group_box);
         m_energy_val_label->setObjectName(QString::fromUtf8("m_energy_val_label"));
 
         gridLayout_8->addWidget(m_energy_val_label, 4, 0, 1, 1);
 
-        m_energy_val_label_val = new QLabel(m_info_group_bx);
+        m_energy_val_label_val = new QLabel(m_info_group_box);
         m_energy_val_label_val->setObjectName(QString::fromUtf8("m_energy_val_label_val"));
 
         gridLayout_8->addWidget(m_energy_val_label_val, 4, 1, 1, 1);
 
-        m_energy_val_label_box = new QComboBox(m_info_group_bx);
+        m_energy_val_label_box = new QComboBox(m_info_group_box);
         m_energy_val_label_box->setObjectName(QString::fromUtf8("m_energy_val_label_box"));
 
         gridLayout_8->addWidget(m_energy_val_label_box, 4, 2, 1, 1);
@@ -475,7 +475,7 @@ public:
         gridLayout_9->addLayout(gridLayout_8, 0, 0, 1, 1);
 
 
-        horizontalLayout_6->addWidget(m_info_group_bx);
+        horizontalLayout_6->addWidget(m_info_group_box);
 
 
         gridLayout_5->addLayout(horizontalLayout_6, 1, 0, 1, 1);
@@ -496,38 +496,38 @@ public:
 
         verticalLayout_6->addWidget(m_use_cursor_start);
 
-        groupBox_4 = new QGroupBox(tab_2);
-        groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
-        gridLayout_11 = new QGridLayout(groupBox_4);
+        m_start_group_box = new QGroupBox(tab_2);
+        m_start_group_box->setObjectName(QString::fromUtf8("m_start_group_box"));
+        gridLayout_11 = new QGridLayout(m_start_group_box);
         gridLayout_11->setObjectName(QString::fromUtf8("gridLayout_11"));
         gridLayout_12 = new QGridLayout();
         gridLayout_12->setObjectName(QString::fromUtf8("gridLayout_12"));
-        m_pos_x_start_label = new QLabel(groupBox_4);
+        m_pos_x_start_label = new QLabel(m_start_group_box);
         m_pos_x_start_label->setObjectName(QString::fromUtf8("m_pos_x_start_label"));
 
         gridLayout_12->addWidget(m_pos_x_start_label, 0, 0, 1, 1);
 
-        m_pos_y_start_label = new QLabel(groupBox_4);
+        m_pos_y_start_label = new QLabel(m_start_group_box);
         m_pos_y_start_label->setObjectName(QString::fromUtf8("m_pos_y_start_label"));
 
         gridLayout_12->addWidget(m_pos_y_start_label, 1, 0, 1, 1);
 
-        m_pos_y_start_edit = new QLineEdit(groupBox_4);
+        m_pos_y_start_edit = new QLineEdit(m_start_group_box);
         m_pos_y_start_edit->setObjectName(QString::fromUtf8("m_pos_y_start_edit"));
 
         gridLayout_12->addWidget(m_pos_y_start_edit, 1, 1, 1, 1);
 
-        m_pos_x_start_edit = new QLineEdit(groupBox_4);
+        m_pos_x_start_edit = new QLineEdit(m_start_group_box);
         m_pos_x_start_edit->setObjectName(QString::fromUtf8("m_pos_x_start_edit"));
 
         gridLayout_12->addWidget(m_pos_x_start_edit, 0, 1, 1, 1);
 
-        m_pos_x_start_box = new QComboBox(groupBox_4);
+        m_pos_x_start_box = new QComboBox(m_start_group_box);
         m_pos_x_start_box->setObjectName(QString::fromUtf8("m_pos_x_start_box"));
 
         gridLayout_12->addWidget(m_pos_x_start_box, 0, 2, 1, 1);
 
-        m_pos_y_start_box = new QComboBox(groupBox_4);
+        m_pos_y_start_box = new QComboBox(m_start_group_box);
         m_pos_y_start_box->setObjectName(QString::fromUtf8("m_pos_y_start_box"));
 
         gridLayout_12->addWidget(m_pos_y_start_box, 1, 2, 1, 1);
@@ -536,7 +536,7 @@ public:
         gridLayout_11->addLayout(gridLayout_12, 0, 0, 1, 1);
 
 
-        verticalLayout_6->addWidget(groupBox_4);
+        verticalLayout_6->addWidget(m_start_group_box);
 
 
         horizontalLayout_7->addLayout(verticalLayout_6);
@@ -548,38 +548,38 @@ public:
 
         verticalLayout_7->addWidget(m_use_cursor_dest);
 
-        groupBox_6 = new QGroupBox(tab_2);
-        groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
-        gridLayout_13 = new QGridLayout(groupBox_6);
+        m_dest_group_box = new QGroupBox(tab_2);
+        m_dest_group_box->setObjectName(QString::fromUtf8("m_dest_group_box"));
+        gridLayout_13 = new QGridLayout(m_dest_group_box);
         gridLayout_13->setObjectName(QString::fromUtf8("gridLayout_13"));
         gridLayout_14 = new QGridLayout();
         gridLayout_14->setObjectName(QString::fromUtf8("gridLayout_14"));
-        m_pos_x_dest_label = new QLabel(groupBox_6);
+        m_pos_x_dest_label = new QLabel(m_dest_group_box);
         m_pos_x_dest_label->setObjectName(QString::fromUtf8("m_pos_x_dest_label"));
 
         gridLayout_14->addWidget(m_pos_x_dest_label, 0, 0, 1, 1);
 
-        m_pos_y_dest_label = new QLabel(groupBox_6);
+        m_pos_y_dest_label = new QLabel(m_dest_group_box);
         m_pos_y_dest_label->setObjectName(QString::fromUtf8("m_pos_y_dest_label"));
 
         gridLayout_14->addWidget(m_pos_y_dest_label, 1, 0, 1, 1);
 
-        m_pos_y_dest_edit = new QLineEdit(groupBox_6);
+        m_pos_y_dest_edit = new QLineEdit(m_dest_group_box);
         m_pos_y_dest_edit->setObjectName(QString::fromUtf8("m_pos_y_dest_edit"));
 
         gridLayout_14->addWidget(m_pos_y_dest_edit, 1, 1, 1, 1);
 
-        m_pos_x_dest_edit = new QLineEdit(groupBox_6);
+        m_pos_x_dest_edit = new QLineEdit(m_dest_group_box);
         m_pos_x_dest_edit->setObjectName(QString::fromUtf8("m_pos_x_dest_edit"));
 
         gridLayout_14->addWidget(m_pos_x_dest_edit, 0, 1, 1, 1);
 
-        m_pos_x_dest_box = new QComboBox(groupBox_6);
+        m_pos_x_dest_box = new QComboBox(m_dest_group_box);
         m_pos_x_dest_box->setObjectName(QString::fromUtf8("m_pos_x_dest_box"));
 
         gridLayout_14->addWidget(m_pos_x_dest_box, 0, 2, 1, 1);
 
-        m_pos_y_dest_box = new QComboBox(groupBox_6);
+        m_pos_y_dest_box = new QComboBox(m_dest_group_box);
         m_pos_y_dest_box->setObjectName(QString::fromUtf8("m_pos_y_dest_box"));
 
         gridLayout_14->addWidget(m_pos_y_dest_box, 1, 2, 1, 1);
@@ -588,7 +588,7 @@ public:
         gridLayout_13->addLayout(gridLayout_14, 0, 0, 1, 1);
 
 
-        verticalLayout_7->addWidget(groupBox_6);
+        verticalLayout_7->addWidget(m_dest_group_box);
 
 
         horizontalLayout_7->addLayout(verticalLayout_7);
@@ -686,16 +686,16 @@ public:
         QObject::connect(m_show_grid, SIGNAL(stateChanged(int)), MainWindow, SLOT(showGrid(int)));
         QObject::connect(actionExit, SIGNAL(triggered()), MainWindow, SLOT(close()));
         QObject::connect(m_show_electro_static_field, SIGNAL(stateChanged(int)), MainWindow, SLOT(showElectroStaticField(int)));
-        QObject::connect(pushButton, SIGNAL(clicked()), MainWindow, SLOT(addCharge()));
-        QObject::connect(pushButton_3, SIGNAL(clicked()), MainWindow, SLOT(ignoreCharges()));
-        QObject::connect(pushButton_4, SIGNAL(clicked()), MainWindow, SLOT(editCharge()));
-        QObject::connect(pushButton_2, SIGNAL(clicked()), MainWindow, SLOT(rmCharge()));
+        QObject::connect(m_add_charge_button, SIGNAL(clicked()), MainWindow, SLOT(addCharge()));
+        QObject::connect(m_ignore_charges, SIGNAL(clicked()), MainWindow, SLOT(ignoreCharges()));
+        QObject::connect(m_edit_charges, SIGNAL(clicked()), MainWindow, SLOT(editCharge()));
+        QObject::connect(m_rm_charge, SIGNAL(clicked()), MainWindow, SLOT(rmCharge()));
         QObject::connect(m_play_button, SIGNAL(clicked()), MainWindow, SLOT(play()));
         QObject::connect(m_pause_button, SIGNAL(clicked()), MainWindow, SLOT(pause()));
         QObject::connect(m_speed_button, SIGNAL(clicked()), MainWindow, SLOT(speed_x_2()));
         QObject::connect(m_edit_button, SIGNAL(clicked()), MainWindow, SLOT(edit()));
 
-        m_tab_widget->setCurrentIndex(1);
+        m_tab_widget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -724,16 +724,16 @@ public:
         m_show_electro_static_field->setText(QCoreApplication::translate("MainWindow", "Show Electro Static Field ", nullptr));
         m_camera_change_label->setText(QCoreApplication::translate("MainWindow", "Camera at:", nullptr));
         m_schange_scene_label->setText(QCoreApplication::translate("MainWindow", "Change scene:", nullptr));
-        groupBox->setTitle(QCoreApplication::translate("MainWindow", "Charges", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "Add Charge", nullptr));
-        pushButton_3->setText(QCoreApplication::translate("MainWindow", "Ignore Charges", nullptr));
-        pushButton_4->setText(QCoreApplication::translate("MainWindow", "Edit Charge", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("MainWindow", "Remove Charge", nullptr));
+        m_charges_group_box->setTitle(QCoreApplication::translate("MainWindow", "Charges", nullptr));
+        m_add_charge_button->setText(QCoreApplication::translate("MainWindow", "Add Charge", nullptr));
+        m_ignore_charges->setText(QCoreApplication::translate("MainWindow", "Ignore Charges", nullptr));
+        m_edit_charges->setText(QCoreApplication::translate("MainWindow", "Edit Charge", nullptr));
+        m_rm_charge->setText(QCoreApplication::translate("MainWindow", "Remove Charge", nullptr));
         m_use_cursor_pos_info->setText(QCoreApplication::translate("MainWindow", "Use Cursor Position", nullptr));
-        m_postion_group_box->setTitle(QCoreApplication::translate("MainWindow", "Position", nullptr));
+        m_position_group_box->setTitle(QCoreApplication::translate("MainWindow", "Position", nullptr));
         m_pos_x_info_label->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         m_pos_y_info_label->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
-        m_info_group_bx->setTitle(QCoreApplication::translate("MainWindow", "Info", nullptr));
+        m_info_group_box->setTitle(QCoreApplication::translate("MainWindow", "Info", nullptr));
         m_tension_y_label->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         m_potential_label_val->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         m_tension_x_label->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
@@ -746,11 +746,11 @@ public:
         m_energy_val_label_val->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         m_tab_widget->setTabText(m_tab_widget->indexOf(tab), QCoreApplication::translate("MainWindow", "Position Info", nullptr));
         m_use_cursor_start->setText(QCoreApplication::translate("MainWindow", "Use Cursor Position", nullptr));
-        groupBox_4->setTitle(QCoreApplication::translate("MainWindow", "Start", nullptr));
+        m_start_group_box->setTitle(QCoreApplication::translate("MainWindow", "Start", nullptr));
         m_pos_x_start_label->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         m_pos_y_start_label->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         m_use_cursor_dest->setText(QCoreApplication::translate("MainWindow", "Use Cursor Position", nullptr));
-        groupBox_6->setTitle(QCoreApplication::translate("MainWindow", "Destination", nullptr));
+        m_dest_group_box->setTitle(QCoreApplication::translate("MainWindow", "Destination", nullptr));
         m_pos_x_dest_label->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         m_pos_y_dest_label->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         m_work_label->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));

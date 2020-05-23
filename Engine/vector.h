@@ -27,6 +27,9 @@ public:
     float x() const;
     float y() const;
 
+    Vector& normalize();
+    Vector& rotate(float);
+
     float module() const;
     QPointF toPointF() const;
 

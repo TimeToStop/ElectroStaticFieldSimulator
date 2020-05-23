@@ -4,16 +4,17 @@
 #include <QPainter>
 #include <QPointF>
 
-#include "vector.h"
+#include "Engine/vector.h"
 
-class Engine;
+class EngineWidget;
 
 class Charge
 {
     static const int m_radius;
     static long long m_amount;
 
-    Engine* const m_engine;
+    EngineWidget* const m_engine;
+
     QString m_name;
 
     bool m_is_ignored;
@@ -27,10 +28,10 @@ class Charge
     Vector m_acceleration;
 
 public:
-    Charge(Engine* const);
-    Charge(float, Vector, Engine * const);
-    Charge(const QString&, float, float, Vector, Engine* const);
-    Charge(const QString&, float, float, Vector, Vector, bool, bool, Engine* const);
+    Charge(EngineWidget* const);
+    Charge(float, Vector, EngineWidget * const);
+    Charge(const QString&, float, float, Vector, EngineWidget* const);
+    Charge(const QString&, float, float, Vector, Vector, bool, bool, EngineWidget* const);
     ~Charge();
 
     void draw(QPainter&);

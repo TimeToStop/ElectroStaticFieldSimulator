@@ -6,6 +6,8 @@
 #include "Interface/Charge/selectcharge.h"
 #include "Engine/charge.h"
 
+#include "Options/Translater.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     m_use_cursor(false),
@@ -22,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_dest_pos_y("Y", "м"),
     m_charge("q", "Кл"),
     m_work("A", "Дж"),
+    m_id(Translater::addContainer()),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
