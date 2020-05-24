@@ -35,3 +35,8 @@ bool Object::isSelected() const
 {
     return m_is_selected;
 }
+
+bool Object::isLeftGreater(const std::shared_ptr<Object>& obj1, const std::shared_ptr<Object>& obj2)
+{
+    return obj1->index() < obj2->index();
+}

@@ -12,6 +12,7 @@ Mediator::~Mediator()
 void Mediator::bindPair(Arrow* arrow, ChargeEdit* charge)
 {
     m_bounded_objects.push_back(std::make_pair(arrow, charge));
+    arrow->recount();
 }
 
 void Mediator::rm(Arrow* arrow)

@@ -21,14 +21,20 @@ public:
 
     virtual void draw(QPainter&) const = 0;
     virtual bool intersects(const QRect&) const = 0;
+    virtual bool isClose(const QPoint&) const = 0;
 
-    void setSelected(bool);
+    virtual void setSelected(bool);
 
     virtual void setPos(const Vector&);
     virtual void movePos(const Vector&);
 
     Vector pos() const;
     bool isSelected() const;
+
+    static bool isLeftGreater(const std::shared_ptr<Object>&, const std::shared_ptr<Object>&);
+
+protected:
+    virtual int index() const = 0;
 };
 
 #endif // OBJECT_H

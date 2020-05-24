@@ -31,6 +31,8 @@ public:
     virtual void mouseMoveEvent(QMouseEvent*) override;
     virtual void mouseReleaseEvent(QMouseEvent*) override;
 
+    void addObject(const std::shared_ptr<Object>&);
+
     Arrow* get(ChargeEdit*);
     ChargeEdit* get(Arrow*);
 

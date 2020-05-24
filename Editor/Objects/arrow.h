@@ -13,9 +13,13 @@ public:
 
     virtual void draw(QPainter &) const override;
     virtual bool intersects(const QRect &) const override;
+    virtual bool isClose(const QPoint&) const override;
 
     void recount();
     void setDest(const Vector&);
+
+protected:
+    virtual int index() const override;
 };
 
 #endif // ARROW_H

@@ -13,9 +13,15 @@ public:
 
     virtual void draw(QPainter &) const override;
     virtual bool intersects(const QRect &) const override;
+    virtual bool isClose(const QPoint &) const override;
 
     virtual void setPos(const Vector &) override;
     virtual void movePos(const Vector&) override;
+
+    virtual void setSelected(bool) override;
+
+protected:
+    virtual int index() const override;
 };
 
 #endif // CHARGEEDIT_H

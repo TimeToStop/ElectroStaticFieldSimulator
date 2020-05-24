@@ -80,9 +80,7 @@ Vector& Vector::normalize()
 Vector& Vector::rotate(float alpha)
 {
     Vector res(m_x * cos(alpha) - m_y * sin(alpha), m_x * sin(alpha) + m_y * cos(alpha));
-    m_x = res.x();
-    m_y = res.y();
-    return *this;
+    return (*this = res);
 }
 
 float Vector::module() const

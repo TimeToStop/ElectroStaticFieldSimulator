@@ -35,6 +35,11 @@ bool ChargeEdit::intersects(const QRect& rect) const
     return rect.contains(m_editor->fromXOY(pos()).toPointF().toPoint());
 }
 
+bool ChargeEdit::isClose(const QPoint& _pos) const
+{
+    return QLineF(_pos, m_editor->fromXOY(pos()).toPointF().toPoint()).length() < m_r;
+}
+
 void ChargeEdit::setPos(const Vector& _pos)
 {
     Object::setPos(_pos);
@@ -53,4 +58,19 @@ void ChargeEdit::movePos(const Vector& _pos)
     {
         arrow->setDest(pos());
     }
+}
+
+void ChargeEdit::setSelected(bool b)
+{
+    Object::setSelected(b);
+    Arrow* arrow = m_editor->get(this);
+    if(arrow != nullptr)
+    {
+        arrow->setSelected(b);
+    }
+}
+
+int ChargeEdit::index() const
+{
+    return 1;
 }

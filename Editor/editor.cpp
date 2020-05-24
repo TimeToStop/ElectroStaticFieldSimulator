@@ -9,7 +9,12 @@ Editor::Editor(QWidget* parent):
     m_prev_pos(),
     m_objects()
 {
-    m_objects.push_back(std::make_shared<ChargeEdit>(this));
+    auto charge = std::make_shared<ChargeEdit>(this);
+    auto arrow = std::make_shared<Arrow>(this);
+    m_mediator.bindPair(arrow.get(), charge.get());
+
+    addObject(charge);
+    addObject(arrow);
 }
 
 Editor::~Editor()
@@ -44,6 +49,16 @@ void Editor::mousePressEvent(QMouseEvent * e)
             obj->setSelected(false);
         }
     }
+    else if(e->button() == Qt::RightButton)
+    {
+        for(std::shared_ptr<Object>& obj : m_objects)
+        {
+            if(obj->isClose(e->pos()))
+            {
+                break;
+            }
+        }
+    }
 
     m_prev_pos = e->pos();
     repaint();
@@ -64,7 +79,12 @@ void Editor::mouseMoveEvent(QMouseEvent * e)
     if(m_is_left_mouse_pressed)
     {
         QRect rect(m_pos_left_mouse_clicked, m_current_cursor_pos);
+
         m_has_object_selected = false;
+        for(std::shared_ptr<Object>& obj : m_objects)
+        {
+            obj->setSelected(false);
+        }
 
         for(std::shared_ptr<Object>& obj : m_objects)
         {
@@ -72,10 +92,6 @@ void Editor::mouseMoveEvent(QMouseEvent * e)
             {
                 obj->setSelected(true);
                 m_has_object_selected = true;
-            }
-            else
-            {
-                obj->setSelected(false);
             }
         }
     }
@@ -87,7 +103,10 @@ void Editor::mouseMoveEvent(QMouseEvent * e)
 
         for(std::shared_ptr<Object>& obj : m_objects)
         {
-            obj->movePos(v);
+            if(obj->isSelected())
+            {
+                obj->movePos(v);
+            }
         }
     }
 
@@ -98,6 +117,20 @@ void Editor::mouseMoveEvent(QMouseEvent * e)
 void Editor::mouseReleaseEvent(QMouseEvent * e)
 {
     PlotGridWidget::mouseReleaseEvent(e);
+}
+
+void Editor::addObject(const std::shared_ptr<Object>& object)
+{
+    for(size_t i = 0; i < m_objects.size(); i++)
+    {
+        if(Object::isLeftGreater(object, m_objects[i]))
+        {
+            m_objects.insert(m_objects.begin() + i, object);
+            return;
+        }
+    }
+
+    m_objects.push_back(object);
 }
 
 Arrow *Editor::get(ChargeEdit* charge)
