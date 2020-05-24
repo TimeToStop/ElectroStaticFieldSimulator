@@ -1,6 +1,8 @@
 #include "object.h"
 
-Object::Object(PlotGridWidget* const widget):
+#include "Editor/editor.h"
+
+Object::Object(Editor* const widget):
     m_widget(widget),
     m_is_selected(false),
     m_pos()

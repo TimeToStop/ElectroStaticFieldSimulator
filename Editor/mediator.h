@@ -6,7 +6,7 @@
 
 class Mediator
 {
-    typedef std::pair<std::shared_ptr<Arrow>, std::shared_ptr<ChargeEdit>> Bound;
+    typedef std::pair<Arrow*, ChargeEdit*> Bound;
     typedef std::vector<Bound> Bounds;
     Bounds m_bounded_objects;
 
@@ -14,12 +14,12 @@ public:
     Mediator();
     ~Mediator();
 
-    void bindPair(std::shared_ptr<Arrow>, std::shared_ptr<ChargeEdit>);
-    void rmBind(std::shared_ptr<Arrow>);
-    void rmBind(std::shared_ptr<ChargeEdit>);
+    void bindPair(Arrow*, ChargeEdit*);
+    void rmBind(Arrow*);
+    void rmBind(ChargeEdit*);
 
-    std::shared_ptr<Arrow> get(std::shared_ptr<ChargeEdit>);
-    std::shared_ptr<ChargeEdit> get(std::shared_ptr<Arrow>);
+    Arrow* get(ChargeEdit*);
+    ChargeEdit* get(Arrow*);
 };
 
 #endif // MEDIATOR_H

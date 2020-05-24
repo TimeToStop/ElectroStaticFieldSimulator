@@ -9,12 +9,12 @@ Mediator::~Mediator()
 {
 }
 
-void Mediator::bindPair(std::shared_ptr<Arrow> arrow, std::shared_ptr<ChargeEdit> charge)
+void Mediator::bindPair(Arrow* arrow, ChargeEdit* charge)
 {
     m_bounded_objects.push_back(std::make_pair(arrow, charge));
 }
 
-void Mediator::rmBind(std::shared_ptr<Arrow> arrow)
+void Mediator::rmBind(Arrow* arrow)
 {
     for(Bounds::iterator it = m_bounded_objects.begin(); it != m_bounded_objects.end(); ++it)
     {
@@ -26,7 +26,7 @@ void Mediator::rmBind(std::shared_ptr<Arrow> arrow)
     }
 }
 
-void Mediator::rmBind(std::shared_ptr<ChargeEdit> charge)
+void Mediator::rmBind(ChargeEdit* charge)
 {
     for(Bounds::iterator it = m_bounded_objects.begin(); it != m_bounded_objects.end(); ++it)
     {
@@ -38,7 +38,7 @@ void Mediator::rmBind(std::shared_ptr<ChargeEdit> charge)
     }
 }
 
-std::shared_ptr<Arrow> Mediator::get(std::shared_ptr<ChargeEdit> charge)
+Arrow* Mediator::get(ChargeEdit* charge)
 {
     for(Bound const& pair : m_bounded_objects)
     {
@@ -51,7 +51,7 @@ std::shared_ptr<Arrow> Mediator::get(std::shared_ptr<ChargeEdit> charge)
     return nullptr;
 }
 
-std::shared_ptr<ChargeEdit> Mediator::get(std::shared_ptr<Arrow> arrow)
+ChargeEdit* Mediator::get(Arrow* arrow)
 {
     for(Bound const& pair : m_bounded_objects)
     {

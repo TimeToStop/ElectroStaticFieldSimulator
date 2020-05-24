@@ -1,8 +1,9 @@
 #include "chargeedit.h"
+#include "Editor/editor.h"
 
 int ChargeEdit::m_radius = 5;
 
-ChargeEdit::ChargeEdit(PlotGridWidget * const widget):
+ChargeEdit::ChargeEdit(Editor * const widget):
     Object(widget)
 {
 }
@@ -44,13 +45,22 @@ bool ChargeEdit::isClose(const QPoint& _pos)
     return (pow(_pos.x() - position.x(), 2) + pow(_pos.y() -  position.y(), 2) < m_radius*m_radius);
 }
 
-void ChargeEdit::setPos(const Vector& pos)
+void ChargeEdit::setPos(const Vector& _pos)
 {
-    Object::setPos(pos);
-    m_widget->
+    Object::setPos(_pos);
+    Arrow* arrow = m_widget->get(this);
+    if(arrow != nullptr)
+    {
+        arrow->reset();
+    }
 }
 
-void ChargeEdit::movePos(const Vector& pos)
+void ChargeEdit::movePos(const Vector& _pos)
 {
-    Object::movePos(pos);
+    Object::movePos(_pos);
+    Arrow* arrow = m_widget->get(this);
+    if(arrow != nullptr)
+    {
+        arrow->reset();
+    }
 }

@@ -1,5 +1,9 @@
 #include "editor.h"
 
+#include "Editor/object.h"
+#include "Editor/chargeedit.h"
+#include "Editor/arrow.h"
+
 Editor::Editor(QWidget* parent):
     PlotGridWidget(parent),
     m_has_object_selected(false),
@@ -9,9 +13,10 @@ Editor::Editor(QWidget* parent):
 {
     std::shared_ptr<ChargeEdit> charge = std::make_shared<ChargeEdit>(this);
     std::shared_ptr<Arrow> arrow = std::make_shared<Arrow>(ArrowColor::RED, this);
-    m_mediator.bindPair(arrow, charge);
+    m_mediator.bindPair(arrow.get(), charge.get());
     addCharge(charge);
     addArrow(arrow);
+    arrow->reset();
 }
 
 Editor::~Editor()
@@ -112,9 +117,14 @@ void Editor::addArrow(const std::shared_ptr<Arrow>& arrow)
     m_objects.push_back(std::move(arrow));
 }
 
-std::shared_ptr<Arrow> Editor::get(std::shared_ptr<ChargeEdit> charge)
+Arrow *Editor::get(ChargeEdit* charge)
 {
     return m_mediator.get(charge);
+}
+
+ChargeEdit *Editor::get(Arrow* arrow)
+{
+    return m_mediator.get(arrow);
 }
 
 void Editor::drawSelectingRect(QPainter& painter)

@@ -1,10 +1,6 @@
 #ifndef EDITOR_H
 #define EDITOR_H
 
-#include "Editor/object.h"
-#include "Editor/chargeedit.h"
-#include "Editor/arrow.h"
-
 #include "Editor/mediator.h"
 #include "Interface/plotgridwidget.h"
 
@@ -13,6 +9,10 @@
 #include <QMouseEvent>
 
 #include <QWidget>
+
+class Object;
+class ChargeEdit;
+class Arrow;
 
 class Editor : public PlotGridWidget
 {
@@ -36,7 +36,8 @@ public:
     void addCharge(const std::shared_ptr<ChargeEdit>&);
     void addArrow(const std::shared_ptr<Arrow>&);
 
-    std::shared_ptr<Arrow> get(std::shared_ptr<ChargeEdit>);
+    Arrow* get(ChargeEdit*);
+    ChargeEdit* get(Arrow*);
 
 private:
     void drawSelectingRect(QPainter&);

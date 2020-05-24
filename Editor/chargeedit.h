@@ -8,7 +8,7 @@ class ChargeEdit : public Object
     static int m_radius;
 
 public:
-    ChargeEdit(PlotGridWidget* const);
+    ChargeEdit(Editor* const);
     virtual ~ChargeEdit();
 
     virtual void draw(QPainter&) const override;

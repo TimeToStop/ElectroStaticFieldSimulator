@@ -15,14 +15,12 @@ class Arrow : public Object
     QPoint m_to;
 
 public:
-    Arrow(ArrowColor, PlotGridWidget* const);
+    Arrow(ArrowColor, Editor* const);
     virtual ~Arrow();
 
     virtual void draw(QPainter&) const override;
     virtual bool isClose(const QPoint&) override;
     virtual bool intersects(const QRect&) const override;
-
-    void setDest(const QPoint&);
 };
 
 #endif // ARROW_H

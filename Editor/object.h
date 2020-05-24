@@ -2,21 +2,21 @@
 #define OBJECT_H
 
 #include "Engine/vector.h"
-#include "Interface/plotgridwidget.h"
 
 #include <QPainter>
 
+class Editor;
 
 class Object
 {
 protected:
-    PlotGridWidget* const m_widget;
+    Editor* const m_widget;
 private:
     bool m_is_selected;
     Vector m_pos;
 
 public:
-    Object(PlotGridWidget* const);
+    Object(Editor* const);
     virtual ~Object();
 
     virtual void draw(QPainter&) const = 0;
