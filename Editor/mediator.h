@@ -1,22 +1,23 @@
 #ifndef MEDIATOR_H
 #define MEDIATOR_H
 
-#include "Editor/chargeedit.h"
-#include "Editor/arrow.h"
+#include "Editor/Objects/arrow.h"
+#include "Editor/Objects/chargeedit.h"
+
+#include <vector>
+#include <utility>
 
 class Mediator
 {
-    typedef std::pair<Arrow*, ChargeEdit*> Bound;
-    typedef std::vector<Bound> Bounds;
-    Bounds m_bounded_objects;
+   std::vector<std::pair<Arrow*, ChargeEdit*>> m_bounded_objects;
 
 public:
     Mediator();
     ~Mediator();
 
     void bindPair(Arrow*, ChargeEdit*);
-    void rmBind(Arrow*);
-    void rmBind(ChargeEdit*);
+    void rm(Arrow*);
+    void rm(ChargeEdit*);
 
     Arrow* get(ChargeEdit*);
     ChargeEdit* get(Arrow*);

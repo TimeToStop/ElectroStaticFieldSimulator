@@ -1,12 +1,12 @@
 #include "mediator.h"
 
-Mediator::Mediator():
-    m_bounded_objects()
+Mediator::Mediator()
 {
 }
 
 Mediator::~Mediator()
 {
+    m_bounded_objects.clear();
 }
 
 void Mediator::bindPair(Arrow* arrow, ChargeEdit* charge)
@@ -14,9 +14,9 @@ void Mediator::bindPair(Arrow* arrow, ChargeEdit* charge)
     m_bounded_objects.push_back(std::make_pair(arrow, charge));
 }
 
-void Mediator::rmBind(Arrow* arrow)
+void Mediator::rm(Arrow* arrow)
 {
-    for(Bounds::iterator it = m_bounded_objects.begin(); it != m_bounded_objects.end(); ++it)
+    for(std::vector<std::pair<Arrow*, ChargeEdit*>>::iterator it = m_bounded_objects.begin(); it != m_bounded_objects.end(); ++it)
     {
         if(it->first == arrow)
         {
@@ -26,9 +26,9 @@ void Mediator::rmBind(Arrow* arrow)
     }
 }
 
-void Mediator::rmBind(ChargeEdit* charge)
+void Mediator::rm(ChargeEdit* charge)
 {
-    for(Bounds::iterator it = m_bounded_objects.begin(); it != m_bounded_objects.end(); ++it)
+    for(std::vector<std::pair<Arrow*, ChargeEdit*>>::iterator it = m_bounded_objects.begin(); it != m_bounded_objects.end(); ++it)
     {
         if(it->second == charge)
         {
@@ -38,26 +38,26 @@ void Mediator::rmBind(ChargeEdit* charge)
     }
 }
 
-Arrow* Mediator::get(ChargeEdit* charge)
+Arrow *Mediator::get(ChargeEdit* charge)
 {
-    for(Bound const& pair : m_bounded_objects)
+    for(std::pair<Arrow*, ChargeEdit*> bound : m_bounded_objects)
     {
-        if(pair.second == charge)
+        if(bound.second == charge)
         {
-            return pair.first;
+            return bound.first;
         }
     }
 
     return nullptr;
 }
 
-ChargeEdit* Mediator::get(Arrow* arrow)
+ChargeEdit *Mediator::get(Arrow * arrow)
 {
-    for(Bound const& pair : m_bounded_objects)
+    for(std::pair<Arrow*, ChargeEdit*> bound : m_bounded_objects)
     {
-        if(pair.first == arrow)
+        if(bound.first == arrow)
         {
-            return pair.second;
+            return bound.second;
         }
     }
 

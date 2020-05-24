@@ -16,12 +16,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Editor/arrow.cpp \
-    Editor/chargeedit.cpp \
+    Editor/Objects/arrow.cpp \
+    Editor/Objects/chargeedit.cpp \
+    Editor/Objects/object.cpp \
     Editor/editor.cpp \
     Editor/editwindow.cpp \
     Editor/mediator.cpp \
-    Editor/object.cpp \
     Interface/plotgridwidget.cpp \
     Options/AbstractContainer.cpp \
     Options/Dictionary.cpp \
@@ -41,12 +41,12 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
-    Editor/arrow.h \
-    Editor/chargeedit.h \
+    Editor/Objects/arrow.h \
+    Editor/Objects/chargeedit.h \
+    Editor/Objects/object.h \
     Editor/editor.h \
     Editor/editwindow.h \
     Editor/mediator.h \
-    Editor/object.h \
     Interface/plotgridwidget.h \
     Options/AbstractContainer.h \
     Options/Container.h \

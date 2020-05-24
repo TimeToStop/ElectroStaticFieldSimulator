@@ -1,8 +1,8 @@
 #ifndef EDITOR_H
 #define EDITOR_H
 
-#include "Editor/mediator.h"
 #include "Interface/plotgridwidget.h"
+#include "Editor/mediator.h"
 
 #include <QPainter>
 #include <QKeyEvent>
@@ -11,8 +11,6 @@
 #include <QWidget>
 
 class Object;
-class ChargeEdit;
-class Arrow;
 
 class Editor : public PlotGridWidget
 {
@@ -32,9 +30,6 @@ public:
     virtual void mousePressEvent(QMouseEvent*) override;
     virtual void mouseMoveEvent(QMouseEvent*) override;
     virtual void mouseReleaseEvent(QMouseEvent*) override;
-
-    void addCharge(const std::shared_ptr<ChargeEdit>&);
-    void addArrow(const std::shared_ptr<Arrow>&);
 
     Arrow* get(ChargeEdit*);
     ChargeEdit* get(Arrow*);

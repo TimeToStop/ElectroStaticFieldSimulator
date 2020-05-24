@@ -1,22 +1,15 @@
 #include "editor.h"
 
-#include "Editor/object.h"
-#include "Editor/chargeedit.h"
-#include "Editor/arrow.h"
+#include "Editor/Objects/object.h"
+#include "Editor/Objects/chargeedit.h"
 
 Editor::Editor(QWidget* parent):
     PlotGridWidget(parent),
     m_has_object_selected(false),
     m_prev_pos(),
-    m_mediator(),
     m_objects()
 {
-    std::shared_ptr<ChargeEdit> charge = std::make_shared<ChargeEdit>(this);
-    std::shared_ptr<Arrow> arrow = std::make_shared<Arrow>(ArrowColor::RED, this);
-    m_mediator.bindPair(arrow.get(), charge.get());
-    addCharge(charge);
-    addArrow(arrow);
-    arrow->reset();
+    m_objects.push_back(std::make_shared<ChargeEdit>(this));
 }
 
 Editor::~Editor()
@@ -105,16 +98,6 @@ void Editor::mouseMoveEvent(QMouseEvent * e)
 void Editor::mouseReleaseEvent(QMouseEvent * e)
 {
     PlotGridWidget::mouseReleaseEvent(e);
-}
-
-void Editor::addCharge(const std::shared_ptr<ChargeEdit> & charge)
-{
-    m_objects.push_back(std::move(charge));
-}
-
-void Editor::addArrow(const std::shared_ptr<Arrow>& arrow)
-{
-    m_objects.push_back(std::move(arrow));
 }
 
 Arrow *Editor::get(ChargeEdit* charge)

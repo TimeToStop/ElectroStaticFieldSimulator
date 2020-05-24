@@ -1,9 +1,7 @@
-#include "object.h"
+#include "Editor/Objects/object.h"
 
-#include "Editor/editor.h"
-
-Object::Object(Editor* const widget):
-    m_widget(widget),
+Object::Object(Editor* const editor):
+    m_editor(editor),
     m_is_selected(false),
     m_pos()
 {
@@ -11,6 +9,11 @@ Object::Object(Editor* const widget):
 
 Object::~Object()
 {
+}
+
+void Object::setSelected(bool b)
+{
+    m_is_selected = b;
 }
 
 void Object::setPos(const Vector& pos)
@@ -23,17 +26,12 @@ void Object::movePos(const Vector& pos)
     m_pos += pos;
 }
 
-void Object::setSelected(bool b)
+Vector Object::pos() const
 {
-    m_is_selected = b;
+    return m_pos;
 }
 
 bool Object::isSelected() const
 {
     return m_is_selected;
-}
-
-Vector Object::pos() const
-{
-    return m_pos;
 }
