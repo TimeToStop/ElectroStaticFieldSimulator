@@ -2,7 +2,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++11
+CONFIG += c++14
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -27,7 +27,13 @@ SOURCES += \
     Interface/ValueRepresenter/valuerepresenter.cpp \
     Interface/ValueRepresenter/valuewriter.cpp \
     Interface/enginewidget.cpp \
-    main.cpp
+    main.cpp \
+    Options/abstractcontainer.cpp \
+    Options/dictionary.cpp \
+    Options/translator.cpp \
+    Options/colortheme.cpp \
+    about.cpp \
+    Interface/help.cpp
 
 HEADERS += \
     Engine/charge.h \
@@ -40,7 +46,16 @@ HEADERS += \
     Interface/ValueRepresenter/valueedit.h \
     Interface/ValueRepresenter/valuerepresenter.h \
     Interface/ValueRepresenter/valuewriter.h \
-    Interface/enginewidget.h
+    Interface/enginewidget.h \
+    Options/abstractcontainer.h \
+    Options/container.h \
+    Options/dictionary.h \
+    Options/enums.h \
+    Options/theme.h \
+    Options/translator.h \
+    Options/colortheme.h \
+    about.h \
+    Interface/help.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -50,4 +65,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 FORMS += \
     Interface/Charge/createchargedialog.ui \
     Interface/Charge/ignorechargesdialog.ui \
-    Interface/mainwindow.ui
+    Interface/mainwindow.ui \
+    about.ui \
+    Interface/help.ui
+
+

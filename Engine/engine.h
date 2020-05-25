@@ -59,8 +59,10 @@ public:
     Vector calculateTension(const Vector&) const;
     float calculatePotential(const Vector&) const;
     float calculateEnergy(const Vector&) const;
+    float calculateKineticEnergy(const int index) const;
     float calculateKineticEnergyOfSystem() const;
     float calculateEnergyOfSystem() const;
+    float calculateWork(const Vector& start, const Vector& dest, float charge) const;
 
     Vector applyCharge(size_t);
     static int sign(float);

@@ -26,6 +26,8 @@ public:
     explicit CreateChargeDialog(const QStringList&, QWidget *parent = nullptr);
     ~CreateChargeDialog();
 
+    int m_id;
+
     QString name() const;
     Vector pos() const;
     Vector vel() const;
