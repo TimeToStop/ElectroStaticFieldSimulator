@@ -23,6 +23,7 @@ SOURCES += \
     Editor/editwindow.cpp \
     Editor/mediator.cpp \
     Interface/plotgridwidget.cpp \
+    Interface/simulator.cpp \
     Options/AbstractContainer.cpp \
     Options/Dictionary.cpp \
     Options/Theme.cpp \
@@ -33,7 +34,6 @@ SOURCES += \
     Interface/Charge/createchargedialog.cpp \
     Interface/Charge/ignorechargesdialog.cpp \
     Interface/Charge/selectcharge.cpp \
-    Interface/mainwindow.cpp \
     Interface/ValueRepresenter/valueedit.cpp \
     Interface/ValueRepresenter/valuerepresenter.cpp \
     Interface/ValueRepresenter/valuewriter.cpp \
@@ -48,6 +48,7 @@ HEADERS += \
     Editor/editwindow.h \
     Editor/mediator.h \
     Interface/plotgridwidget.h \
+    Interface/simulator.h \
     Options/AbstractContainer.h \
     Options/Container.h \
     Options/Dictionary.h \
@@ -60,7 +61,6 @@ HEADERS += \
     Interface/Charge/createchargedialog.h \
     Interface/Charge/ignorechargesdialog.h \
     Interface/Charge/selectcharge.h \
-    Interface/mainwindow.h \
     Interface/ValueRepresenter/valueedit.h \
     Interface/ValueRepresenter/valuerepresenter.h \
     Interface/ValueRepresenter/valuewriter.h \
@@ -75,4 +75,4 @@ FORMS += \
     Editor/editwindow.ui \
     Interface/Charge/createchargedialog.ui \
     Interface/Charge/ignorechargesdialog.ui \
-    Interface/mainwindow.ui
+    Interface/simulator.ui

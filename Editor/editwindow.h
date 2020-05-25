@@ -15,6 +15,9 @@ public:
     explicit EditWindow(QWidget *parent = nullptr);
     virtual ~EditWindow();
 
+public slots:
+    void simulate();
+
 private:
     Ui::EditWindow *ui;
 };

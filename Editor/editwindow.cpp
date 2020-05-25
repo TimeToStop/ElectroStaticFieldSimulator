@@ -1,6 +1,8 @@
 #include "editwindow.h"
 #include "ui_editwindow.h"
 
+#include "Interface/simulator.h"
+
 EditWindow::EditWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::EditWindow)
@@ -11,4 +13,10 @@ EditWindow::EditWindow(QWidget *parent) :
 EditWindow::~EditWindow()
 {
     delete ui;
+}
+
+void EditWindow::simulate()
+{
+    Simulator s(this);
+    s.exec();
 }
