@@ -43,38 +43,6 @@
         </property>
         <layout class="QGridLayout" name="gridLayout_4">
          <item row="2" column="0">
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <item>
-            <widget class="QPushButton" name="m_play_button">
-             <property name="text">
-              <string>Play</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="m_pause_button">
-             <property name="text">
-              <string>Pause</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="m_speed_button">
-             <property name="text">
-              <string>Speed x 2</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="m_edit_button">
-             <property name="text">
-              <string>Edit</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item row="3" column="0">
           <widget class="QGroupBox" name="m_additional_group_box">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -154,57 +122,6 @@
           </widget>
          </item>
          <item row="0" column="0">
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <item>
-            <widget class="QGroupBox" name="m_charges_group_box">
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>175</height>
-              </size>
-             </property>
-             <property name="title">
-              <string>Charges</string>
-             </property>
-             <layout class="QGridLayout" name="gridLayout_2">
-              <item row="0" column="0">
-               <layout class="QVBoxLayout" name="verticalLayout_2">
-                <item>
-                 <widget class="QPushButton" name="m_add_charge_button">
-                  <property name="text">
-                   <string>Add Charge</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="m_ignore_charges">
-                  <property name="text">
-                   <string>Ignore Charges</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="m_edit_charges">
-                  <property name="text">
-                   <string>Edit Charge</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="m_rm_charge">
-                  <property name="text">
-                   <string>Remove Charge</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-             </layout>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item row="1" column="0">
           <widget class="QTabWidget" name="m_tab_widget">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -575,6 +492,38 @@
            </widget>
           </widget>
          </item>
+         <item row="1" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QPushButton" name="m_play_button">
+             <property name="text">
+              <string>Play</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="m_pause_button">
+             <property name="text">
+              <string>Pause</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="m_speed_button">
+             <property name="text">
+              <string>Speed x 2</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="m_edit_button">
+             <property name="text">
+              <string>Edit</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
         </layout>
        </widget>
       </item>
@@ -588,7 +537,7 @@
      <x>0</x>
      <y>0</y>
      <width>1172</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -719,70 +668,6 @@
     <hint type="destinationlabel">
      <x>1102</x>
      <y>609</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>m_add_charge_button</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>addCharge()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>789</x>
-     <y>96</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>610</x>
-     <y>31</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>m_ignore_charges</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>ignoreCharges()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>930</x>
-     <y>123</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>953</x>
-     <y>34</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>m_edit_charges</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>editCharge()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>959</x>
-     <y>161</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>1065</x>
-     <y>32</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>m_rm_charge</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>rmCharge()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1068</x>
-     <y>198</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>878</x>
-     <y>30</y>
     </hint>
    </hints>
   </connection>

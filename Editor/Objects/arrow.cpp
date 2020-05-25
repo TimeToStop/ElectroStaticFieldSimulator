@@ -9,6 +9,7 @@ Arrow::Arrow(Editor* const editor):
 
 Arrow::~Arrow()
 {
+    m_editor->rm(this);
 }
 
 void Arrow::draw(QPainter& painter) const
