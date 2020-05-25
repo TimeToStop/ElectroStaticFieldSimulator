@@ -162,6 +162,11 @@ float Engine::calculateEnergy(const Vector& v) const
     return w;
 }
 
+float Engine::calculateKineticEnergy(const int index) const {
+    return m_charges[index]->mass() * m_charges[index]->velocity().module() * m_charges[index]->velocity().module() / 2;
+
+}
+
 float Engine::calculateKineticEnergyOfSystem() const
 {
     float w = 0.f;
@@ -199,6 +204,13 @@ float Engine::calculateEnergyOfSystem() const
     }
 
     return w;
+}
+
+float Engine::calculateWork(const Vector& start, const Vector& dest, float charge) const {
+  float p1 = calculatePotential(start);
+  float p2 = calculatePotential(dest);
+  return charge*p1 - charge*p2;
+
 }
 
 Vector Engine::applyCharge(size_t i)

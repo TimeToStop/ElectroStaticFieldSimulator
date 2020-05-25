@@ -1,5 +1,6 @@
 #include "createchargedialog.h"
 #include "ui_createchargedialog.h"
+#include "Options/translator.h"
 
 CreateChargeDialog::CreateChargeDialog(const QStringList&, QWidget *parent) :
     QDialog(parent),
@@ -19,18 +20,29 @@ CreateChargeDialog::CreateChargeDialog(const QStringList&, QWidget *parent) :
     m_mass.setWidgets(ui->m_mass_label, ui->m_mass_edit, ui->m_mass_box);
     m_charge.setWidgets(ui->m_charge_label, ui->m_charge_edit, ui->m_charge_box);
 
+    m_id = Translator::addContainer();
+
+    //Labels
+    Translator::registerWidget<QLabel, Words::NAME>(m_id, ui->m_name_label, &QLabel::setText);
+    Translator::registerWidget<QLabel, Words::VELOCITY>(m_id, ui->m_vel_label, &QLabel::setText);
+    Translator::registerWidget<QLabel, Words::POSITION>(m_id, ui->m_pos_label, &QLabel::setText);
+
+    //CheckBoxes
+    Translator::registerWidget<QCheckBox, Words::IS_IGNORE>(m_id, ui->m_is_ignored, &QCheckBox::setText);
+    Translator::registerWidget<QCheckBox, Words::IS_MOVABLE>(m_id, ui->m_is_movable, &QCheckBox::setText);
+
+    //Translator::registerWidget<QCheckBox, Words::IS_IGNORE>(m_id, ui->m_, &QCheckBox::setText);
+
+    Translator::setLanguage();
+
     ui->m_err->setText("");
-    ui->m_name_label->setText("Name:");
-    ui->m_pos_label->setText("Position:");
-    ui->m_vel_label->setText("Velocity:");
-    ui->m_is_ignored->setText("Is Ignored");
-    ui->m_is_movable->setText("Is Movable");
 
     ui->m_is_movable->setChecked(true);
 }
 
 CreateChargeDialog::~CreateChargeDialog()
 {
+    Translator::rmContainer(m_id);
     delete ui;
 }
 

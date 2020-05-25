@@ -3,6 +3,7 @@
 
 #include "Interface/ValueRepresenter/valueedit.h"
 #include "Interface/ValueRepresenter/valuewriter.h"
+
 #include <QMainWindow>
 
 namespace Ui {
@@ -14,6 +15,8 @@ class MainWindow: public QMainWindow
     Q_OBJECT
 
     bool m_use_cursor;
+
+    int m_id;
 
     ValueEdit m_pos_x;
     ValueEdit m_pos_y;
@@ -32,7 +35,15 @@ class MainWindow: public QMainWindow
 
     ValueWriter m_work;
 
+    ValueWriter m_info_charge_q;
+    ValueWriter m_info_charge_mass;
+    ValueWriter m_info_charge_speed;
+    ValueWriter m_info_charge_energy;
+    ValueWriter m_info_charge_acceleration;
 
+    ValueWriter m_info_system_sum_kenergy;
+    ValueWriter m_info_system_sum_energy;
+    ValueWriter m_info_system_whole_energy;
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -47,6 +58,14 @@ public slots:
     void ignoreCharges();
     void editCharge();
     void rmCharge();
+    void resetCameraChange();
+    void resetChargeInfoList();
+    void help();
+    void about();
+
+    void setRussian();
+    void setEnglish();
+    void changeLanguage();
 
     void play();
     void pause();

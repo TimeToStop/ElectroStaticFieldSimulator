@@ -1,5 +1,6 @@
 #include "ignorechargesdialog.h"
 #include "ui_ignorechargesdialog.h"
+#include "Options/translator.h"
 
 #include <QLabel>
 #include <QCheckBox>
@@ -21,6 +22,17 @@ IgnoreChargesDialog::IgnoreChargesDialog(const QStringList& names, QWidget *pare
         layout->addWidget(is_movable);
         ui->main_layout->addLayout(layout);
     }
+
+    //m_id = Translator::addContainer();
+
+    //CheckBoxes
+   // Translator::registerWidget<QCheckBox, Words::IS_IGNORE>(m_id, , &QCheckBox::setText);
+    //Translator::registerWidget<QCheckBox, Words::IS_MOVABLE>(m_id, ui->m_is_movable, &QCheckBox::setText);
+
+    //Translator::registerWidget<QCheckBox, Words::IS_IGNORE>(m_id, ui->m_, &QCheckBox::setText);
+
+   // Translator::setLanguage();
+
 }
 
 IgnoreChargesDialog::~IgnoreChargesDialog()
