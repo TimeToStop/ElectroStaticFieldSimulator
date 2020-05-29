@@ -237,7 +237,7 @@ void EngineWidget::drawElectrostaticField(QPainter& painter)
             const Vector tension = Engine::calculateTension(Vector(x, y));
             Vector pos = fromXOY(Vector(x, y));
             Vector t = tension/ tension.module();
-            t *= 7.f;
+            t *= 5.f;
             painter.drawLine(pos.x(), pos.y(), pos.x() + t.x(), pos.y() + t.y());
         }
     }

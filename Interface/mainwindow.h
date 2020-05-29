@@ -37,9 +37,14 @@ class MainWindow: public QMainWindow
 
     ValueWriter m_info_charge_q;
     ValueWriter m_info_charge_mass;
-    ValueWriter m_info_charge_speed;
+    ValueWriter m_info_charge_velocity;
+    ValueWriter m_info_charge_velocity_x;
+    ValueWriter m_info_charge_velocity_y;
     ValueWriter m_info_charge_energy;
     ValueWriter m_info_charge_acceleration;
+    ValueWriter m_info_charge_acceleration_x;
+    ValueWriter m_info_charge_acceleration_y;
+
 
     ValueWriter m_info_system_sum_kenergy;
     ValueWriter m_info_system_sum_energy;
