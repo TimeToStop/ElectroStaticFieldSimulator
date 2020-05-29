@@ -54,11 +54,6 @@ public:
     EngineWidget *m_engine;
     QWidget *widget_2;
     QGridLayout *gridLayout_4;
-    QHBoxLayout *horizontalLayout_3;
-    QPushButton *m_play_button;
-    QPushButton *m_pause_button;
-    QPushButton *m_speed_button;
-    QPushButton *m_edit_button;
     QGroupBox *m_additional_group_box;
     QGridLayout *gridLayout_3;
     QGridLayout *gridLayout_10;
@@ -70,6 +65,11 @@ public:
     QComboBox *m_camera_change;
     QLabel *m_schange_scene_label;
     QComboBox *m_change_scene;
+    QHBoxLayout *horizontalLayout_3;
+    QPushButton *m_play_button;
+    QPushButton *m_pause_button;
+    QPushButton *m_speed_button;
+    QPushButton *m_edit_button;
     QHBoxLayout *horizontalLayout_2;
     QGroupBox *m_charges_group_box;
     QGridLayout *gridLayout_2;
@@ -147,49 +147,76 @@ public:
     QSpacerItem *verticalSpacer;
     QSpacerItem *verticalSpacer_2;
     QWidget *tab;
-    QHBoxLayout *horizontalLayout_5;
-    QHBoxLayout *horizontalLayout_4;
-    QSpacerItem *horizontalSpacer;
+    QVBoxLayout *verticalLayout_16;
+    QSpacerItem *verticalSpacer_5;
+    QVBoxLayout *verticalLayout_15;
+    QHBoxLayout *horizontalLayout_12;
+    QLabel *m_info_charges_label;
     QComboBox *m_charges_list;
-    QSpacerItem *horizontalSpacer_2;
-    QGridLayout *gridLayout_16;
+    QSpacerItem *horizontalSpacer;
+    QSpacerItem *verticalSpacer_3;
+    QHBoxLayout *horizontalLayout_11;
+    QHBoxLayout *horizontalLayout_4;
+    QVBoxLayout *verticalLayout;
     QLabel *m_info_charge_q_label;
-    QLabel *m_info_charge_q_val;
-    QComboBox *m_info_charge_q_box;
     QLabel *m_info_charge_mass_label;
-    QLabel *m_info_charge_mass_val;
-    QComboBox *m_info_charge_mass_box;
-    QLabel *m_info_charge_speed_label;
-    QLabel *m_info_charge_speed_val;
-    QComboBox *m_info_charge_speed_box;
-    QLabel *m_info_acceleration_label;
-    QLabel *m_info_charge_acceleration_val;
-    QComboBox *m_info_charge_acceleration_box;
     QLabel *m_info_charge_energy_label;
+    QVBoxLayout *verticalLayout_3;
+    QLabel *m_info_charge_q_val;
+    QLabel *m_info_charge_mass_val;
     QLabel *m_info_charge_energy_val;
+    QVBoxLayout *verticalLayout_8;
+    QComboBox *m_info_charge_q_box;
+    QComboBox *m_info_charge_mass_box;
     QComboBox *m_info_charge_energy_box;
+    QHBoxLayout *horizontalLayout_5;
+    QVBoxLayout *verticalLayout_11;
+    QLabel *m_info_charge_velocity_label;
+    QLabel *m_info_charge_velocity_x_label;
+    QLabel *m_info_charge_velocity_y_label;
+    QVBoxLayout *verticalLayout_10;
+    QLabel *m_info_charge_velocity_val;
+    QLabel *m_info_charge_velocity_x_val;
+    QLabel *m_info_charge_velocity_y_val;
+    QVBoxLayout *verticalLayout_9;
+    QComboBox *m_info_charge_velocity_box;
+    QComboBox *m_info_charge_velocity_x_box;
+    QComboBox *m_info_charge_velocity_y_box;
+    QHBoxLayout *horizontalLayout_10;
+    QVBoxLayout *verticalLayout_12;
+    QLabel *m_info_charge_acceleration_label;
+    QLabel *m_info_charge_acceleration_x_label;
+    QLabel *m_info_charge_acceleration_y_label;
+    QVBoxLayout *verticalLayout_13;
+    QLabel *m_info_charge_acceleration_val;
+    QLabel *m_info_charge_acceleration_x_val;
+    QLabel *m_info_charge_acceleration_y_val;
+    QVBoxLayout *verticalLayout_14;
+    QComboBox *m_info_charge_acceleration_box;
+    QComboBox *m_info_charge_acceleration_x_box;
+    QComboBox *m_info_charge_acceleration_y_box;
+    QSpacerItem *verticalSpacer_4;
     QWidget *tab_2;
-    QGridLayout *gridLayout;
-    QComboBox *m_info_system_sum_energy_box;
-    QLabel *m_info_system_sum_energy_val;
-    QLabel *m_info_system_sum_energy_label;
+    QVBoxLayout *verticalLayout_20;
+    QHBoxLayout *horizontalLayout_13;
+    QSpacerItem *horizontalSpacer_2;
+    QVBoxLayout *verticalLayout_17;
     QLabel *m_info_system_kenergy_label;
-    QLabel *m_info_system_kenergy_val;
-    QComboBox *m_info_system_kenergy_box;
-    QComboBox *m_info_system_whole_energy_box;
-    QLabel *m_info_system_whole_energy_val;
+    QLabel *m_info_system_sum_energy_label;
     QLabel *m_info_system_whole_energy_label;
+    QVBoxLayout *verticalLayout_18;
+    QLabel *m_info_system_kenergy_val;
+    QLabel *m_info_system_sum_energy_val;
+    QLabel *m_info_system_whole_energy_val;
+    QVBoxLayout *verticalLayout_19;
+    QComboBox *m_info_system_kenergy_box;
+    QComboBox *m_info_system_sum_energy_box;
+    QComboBox *m_info_system_whole_energy_box;
     QSpacerItem *horizontalSpacer_3;
-    QSpacerItem *horizontalSpacer_4;
-    QSpacerItem *horizontalSpacer_5;
-    QSpacerItem *horizontalSpacer_6;
-    QSpacerItem *horizontalSpacer_7;
-    QSpacerItem *horizontalSpacer_8;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuOptions;
     QMenu *menuLanguage;
-    QMenu *menuTheme;
     QMenu *menuHelp;
     QMenu *menuCredits;
     QStatusBar *statusbar;
@@ -257,31 +284,6 @@ public:
         widget_2->setMaximumSize(QSize(600, 600));
         gridLayout_4 = new QGridLayout(widget_2);
         gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        m_play_button = new QPushButton(widget_2);
-        m_play_button->setObjectName(QStringLiteral("m_play_button"));
-
-        horizontalLayout_3->addWidget(m_play_button);
-
-        m_pause_button = new QPushButton(widget_2);
-        m_pause_button->setObjectName(QStringLiteral("m_pause_button"));
-
-        horizontalLayout_3->addWidget(m_pause_button);
-
-        m_speed_button = new QPushButton(widget_2);
-        m_speed_button->setObjectName(QStringLiteral("m_speed_button"));
-
-        horizontalLayout_3->addWidget(m_speed_button);
-
-        m_edit_button = new QPushButton(widget_2);
-        m_edit_button->setObjectName(QStringLiteral("m_edit_button"));
-
-        horizontalLayout_3->addWidget(m_edit_button);
-
-
-        gridLayout_4->addLayout(horizontalLayout_3, 2, 0, 1, 1);
-
         m_additional_group_box = new QGroupBox(widget_2);
         m_additional_group_box->setObjectName(QStringLiteral("m_additional_group_box"));
         QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Preferred);
@@ -344,7 +346,32 @@ public:
         gridLayout_3->addLayout(gridLayout_10, 0, 0, 1, 1);
 
 
-        gridLayout_4->addWidget(m_additional_group_box, 3, 0, 1, 1);
+        gridLayout_4->addWidget(m_additional_group_box, 4, 0, 1, 1);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        m_play_button = new QPushButton(widget_2);
+        m_play_button->setObjectName(QStringLiteral("m_play_button"));
+
+        horizontalLayout_3->addWidget(m_play_button);
+
+        m_pause_button = new QPushButton(widget_2);
+        m_pause_button->setObjectName(QStringLiteral("m_pause_button"));
+
+        horizontalLayout_3->addWidget(m_pause_button);
+
+        m_speed_button = new QPushButton(widget_2);
+        m_speed_button->setObjectName(QStringLiteral("m_speed_button"));
+
+        horizontalLayout_3->addWidget(m_speed_button);
+
+        m_edit_button = new QPushButton(widget_2);
+        m_edit_button->setObjectName(QStringLiteral("m_edit_button"));
+
+        horizontalLayout_3->addWidget(m_edit_button);
+
+
+        gridLayout_4->addLayout(horizontalLayout_3, 3, 0, 1, 1);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
@@ -709,206 +736,361 @@ public:
         m_tab_widget->addTab(m_work_tab, QString());
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
-        horizontalLayout_5 = new QHBoxLayout(tab);
-        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+        verticalLayout_16 = new QVBoxLayout(tab);
+        verticalLayout_16->setObjectName(QStringLiteral("verticalLayout_16"));
+        verticalSpacer_5 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        horizontalLayout_4->addItem(horizontalSpacer);
+        verticalLayout_16->addItem(verticalSpacer_5);
+
+        verticalLayout_15 = new QVBoxLayout();
+        verticalLayout_15->setObjectName(QStringLiteral("verticalLayout_15"));
+        horizontalLayout_12 = new QHBoxLayout();
+        horizontalLayout_12->setObjectName(QStringLiteral("horizontalLayout_12"));
+        m_info_charges_label = new QLabel(tab);
+        m_info_charges_label->setObjectName(QStringLiteral("m_info_charges_label"));
+        QSizePolicy sizePolicy5(QSizePolicy::Maximum, QSizePolicy::Preferred);
+        sizePolicy5.setHorizontalStretch(0);
+        sizePolicy5.setVerticalStretch(0);
+        sizePolicy5.setHeightForWidth(m_info_charges_label->sizePolicy().hasHeightForWidth());
+        m_info_charges_label->setSizePolicy(sizePolicy5);
+
+        horizontalLayout_12->addWidget(m_info_charges_label);
 
         m_charges_list = new QComboBox(tab);
         m_charges_list->setObjectName(QStringLiteral("m_charges_list"));
 
-        horizontalLayout_4->addWidget(m_charges_list);
+        horizontalLayout_12->addWidget(m_charges_list);
 
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
 
-        horizontalLayout_4->addItem(horizontalSpacer_2);
+        horizontalLayout_12->addItem(horizontalSpacer);
 
-        gridLayout_16 = new QGridLayout();
-        gridLayout_16->setObjectName(QStringLiteral("gridLayout_16"));
+
+        verticalLayout_15->addLayout(horizontalLayout_12);
+
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Maximum);
+
+        verticalLayout_15->addItem(verticalSpacer_3);
+
+        horizontalLayout_11 = new QHBoxLayout();
+        horizontalLayout_11->setObjectName(QStringLiteral("horizontalLayout_11"));
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         m_info_charge_q_label = new QLabel(tab);
         m_info_charge_q_label->setObjectName(QStringLiteral("m_info_charge_q_label"));
         m_info_charge_q_label->setAlignment(Qt::AlignCenter);
 
-        gridLayout_16->addWidget(m_info_charge_q_label, 0, 0, 1, 1);
+        verticalLayout->addWidget(m_info_charge_q_label);
 
+        m_info_charge_mass_label = new QLabel(tab);
+        m_info_charge_mass_label->setObjectName(QStringLiteral("m_info_charge_mass_label"));
+        m_info_charge_mass_label->setAlignment(Qt::AlignCenter);
+
+        verticalLayout->addWidget(m_info_charge_mass_label);
+
+        m_info_charge_energy_label = new QLabel(tab);
+        m_info_charge_energy_label->setObjectName(QStringLiteral("m_info_charge_energy_label"));
+        m_info_charge_energy_label->setAlignment(Qt::AlignCenter);
+
+        verticalLayout->addWidget(m_info_charge_energy_label);
+
+
+        horizontalLayout_4->addLayout(verticalLayout);
+
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         m_info_charge_q_val = new QLabel(tab);
         m_info_charge_q_val->setObjectName(QStringLiteral("m_info_charge_q_val"));
         m_info_charge_q_val->setFrameShadow(QFrame::Plain);
         m_info_charge_q_val->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         m_info_charge_q_val->setWordWrap(false);
 
-        gridLayout_16->addWidget(m_info_charge_q_val, 0, 1, 1, 1);
-
-        m_info_charge_q_box = new QComboBox(tab);
-        m_info_charge_q_box->setObjectName(QStringLiteral("m_info_charge_q_box"));
-
-        gridLayout_16->addWidget(m_info_charge_q_box, 0, 2, 1, 1);
-
-        m_info_charge_mass_label = new QLabel(tab);
-        m_info_charge_mass_label->setObjectName(QStringLiteral("m_info_charge_mass_label"));
-        m_info_charge_mass_label->setAlignment(Qt::AlignCenter);
-
-        gridLayout_16->addWidget(m_info_charge_mass_label, 1, 0, 1, 1);
+        verticalLayout_3->addWidget(m_info_charge_q_val);
 
         m_info_charge_mass_val = new QLabel(tab);
         m_info_charge_mass_val->setObjectName(QStringLiteral("m_info_charge_mass_val"));
         m_info_charge_mass_val->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
-        gridLayout_16->addWidget(m_info_charge_mass_val, 1, 1, 1, 1);
-
-        m_info_charge_mass_box = new QComboBox(tab);
-        m_info_charge_mass_box->setObjectName(QStringLiteral("m_info_charge_mass_box"));
-
-        gridLayout_16->addWidget(m_info_charge_mass_box, 1, 2, 1, 1);
-
-        m_info_charge_speed_label = new QLabel(tab);
-        m_info_charge_speed_label->setObjectName(QStringLiteral("m_info_charge_speed_label"));
-        m_info_charge_speed_label->setAlignment(Qt::AlignCenter);
-
-        gridLayout_16->addWidget(m_info_charge_speed_label, 2, 0, 1, 1);
-
-        m_info_charge_speed_val = new QLabel(tab);
-        m_info_charge_speed_val->setObjectName(QStringLiteral("m_info_charge_speed_val"));
-        m_info_charge_speed_val->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_16->addWidget(m_info_charge_speed_val, 2, 1, 1, 1);
-
-        m_info_charge_speed_box = new QComboBox(tab);
-        m_info_charge_speed_box->setObjectName(QStringLiteral("m_info_charge_speed_box"));
-
-        gridLayout_16->addWidget(m_info_charge_speed_box, 2, 2, 1, 1);
-
-        m_info_acceleration_label = new QLabel(tab);
-        m_info_acceleration_label->setObjectName(QStringLiteral("m_info_acceleration_label"));
-        m_info_acceleration_label->setAlignment(Qt::AlignCenter);
-
-        gridLayout_16->addWidget(m_info_acceleration_label, 3, 0, 1, 1);
-
-        m_info_charge_acceleration_val = new QLabel(tab);
-        m_info_charge_acceleration_val->setObjectName(QStringLiteral("m_info_charge_acceleration_val"));
-        m_info_charge_acceleration_val->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        gridLayout_16->addWidget(m_info_charge_acceleration_val, 3, 1, 1, 1);
-
-        m_info_charge_acceleration_box = new QComboBox(tab);
-        m_info_charge_acceleration_box->setObjectName(QStringLiteral("m_info_charge_acceleration_box"));
-
-        gridLayout_16->addWidget(m_info_charge_acceleration_box, 3, 2, 1, 1);
-
-        m_info_charge_energy_label = new QLabel(tab);
-        m_info_charge_energy_label->setObjectName(QStringLiteral("m_info_charge_energy_label"));
-        m_info_charge_energy_label->setAlignment(Qt::AlignCenter);
-
-        gridLayout_16->addWidget(m_info_charge_energy_label, 4, 0, 1, 1);
+        verticalLayout_3->addWidget(m_info_charge_mass_val);
 
         m_info_charge_energy_val = new QLabel(tab);
         m_info_charge_energy_val->setObjectName(QStringLiteral("m_info_charge_energy_val"));
         m_info_charge_energy_val->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
-        gridLayout_16->addWidget(m_info_charge_energy_val, 4, 1, 1, 1);
+        verticalLayout_3->addWidget(m_info_charge_energy_val);
+
+
+        horizontalLayout_4->addLayout(verticalLayout_3);
+
+        verticalLayout_8 = new QVBoxLayout();
+        verticalLayout_8->setObjectName(QStringLiteral("verticalLayout_8"));
+        m_info_charge_q_box = new QComboBox(tab);
+        m_info_charge_q_box->setObjectName(QStringLiteral("m_info_charge_q_box"));
+
+        verticalLayout_8->addWidget(m_info_charge_q_box);
+
+        m_info_charge_mass_box = new QComboBox(tab);
+        m_info_charge_mass_box->setObjectName(QStringLiteral("m_info_charge_mass_box"));
+
+        verticalLayout_8->addWidget(m_info_charge_mass_box);
 
         m_info_charge_energy_box = new QComboBox(tab);
         m_info_charge_energy_box->setObjectName(QStringLiteral("m_info_charge_energy_box"));
 
-        gridLayout_16->addWidget(m_info_charge_energy_box, 4, 2, 1, 1);
+        verticalLayout_8->addWidget(m_info_charge_energy_box);
 
 
-        horizontalLayout_4->addLayout(gridLayout_16);
+        horizontalLayout_4->addLayout(verticalLayout_8);
 
 
-        horizontalLayout_5->addLayout(horizontalLayout_4);
+        horizontalLayout_11->addLayout(horizontalLayout_4);
+
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        verticalLayout_11 = new QVBoxLayout();
+        verticalLayout_11->setObjectName(QStringLiteral("verticalLayout_11"));
+        m_info_charge_velocity_label = new QLabel(tab);
+        m_info_charge_velocity_label->setObjectName(QStringLiteral("m_info_charge_velocity_label"));
+        m_info_charge_velocity_label->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_11->addWidget(m_info_charge_velocity_label);
+
+        m_info_charge_velocity_x_label = new QLabel(tab);
+        m_info_charge_velocity_x_label->setObjectName(QStringLiteral("m_info_charge_velocity_x_label"));
+        m_info_charge_velocity_x_label->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_11->addWidget(m_info_charge_velocity_x_label);
+
+        m_info_charge_velocity_y_label = new QLabel(tab);
+        m_info_charge_velocity_y_label->setObjectName(QStringLiteral("m_info_charge_velocity_y_label"));
+        m_info_charge_velocity_y_label->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_11->addWidget(m_info_charge_velocity_y_label);
+
+
+        horizontalLayout_5->addLayout(verticalLayout_11);
+
+        verticalLayout_10 = new QVBoxLayout();
+        verticalLayout_10->setObjectName(QStringLiteral("verticalLayout_10"));
+        m_info_charge_velocity_val = new QLabel(tab);
+        m_info_charge_velocity_val->setObjectName(QStringLiteral("m_info_charge_velocity_val"));
+        m_info_charge_velocity_val->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        verticalLayout_10->addWidget(m_info_charge_velocity_val);
+
+        m_info_charge_velocity_x_val = new QLabel(tab);
+        m_info_charge_velocity_x_val->setObjectName(QStringLiteral("m_info_charge_velocity_x_val"));
+        m_info_charge_velocity_x_val->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        verticalLayout_10->addWidget(m_info_charge_velocity_x_val);
+
+        m_info_charge_velocity_y_val = new QLabel(tab);
+        m_info_charge_velocity_y_val->setObjectName(QStringLiteral("m_info_charge_velocity_y_val"));
+        m_info_charge_velocity_y_val->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        verticalLayout_10->addWidget(m_info_charge_velocity_y_val);
+
+
+        horizontalLayout_5->addLayout(verticalLayout_10);
+
+        verticalLayout_9 = new QVBoxLayout();
+        verticalLayout_9->setObjectName(QStringLiteral("verticalLayout_9"));
+        m_info_charge_velocity_box = new QComboBox(tab);
+        m_info_charge_velocity_box->setObjectName(QStringLiteral("m_info_charge_velocity_box"));
+
+        verticalLayout_9->addWidget(m_info_charge_velocity_box);
+
+        m_info_charge_velocity_x_box = new QComboBox(tab);
+        m_info_charge_velocity_x_box->setObjectName(QStringLiteral("m_info_charge_velocity_x_box"));
+
+        verticalLayout_9->addWidget(m_info_charge_velocity_x_box);
+
+        m_info_charge_velocity_y_box = new QComboBox(tab);
+        m_info_charge_velocity_y_box->setObjectName(QStringLiteral("m_info_charge_velocity_y_box"));
+
+        verticalLayout_9->addWidget(m_info_charge_velocity_y_box);
+
+
+        horizontalLayout_5->addLayout(verticalLayout_9);
+
+
+        horizontalLayout_11->addLayout(horizontalLayout_5);
+
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
+        verticalLayout_12 = new QVBoxLayout();
+        verticalLayout_12->setObjectName(QStringLiteral("verticalLayout_12"));
+        m_info_charge_acceleration_label = new QLabel(tab);
+        m_info_charge_acceleration_label->setObjectName(QStringLiteral("m_info_charge_acceleration_label"));
+        m_info_charge_acceleration_label->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_12->addWidget(m_info_charge_acceleration_label);
+
+        m_info_charge_acceleration_x_label = new QLabel(tab);
+        m_info_charge_acceleration_x_label->setObjectName(QStringLiteral("m_info_charge_acceleration_x_label"));
+        m_info_charge_acceleration_x_label->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_12->addWidget(m_info_charge_acceleration_x_label);
+
+        m_info_charge_acceleration_y_label = new QLabel(tab);
+        m_info_charge_acceleration_y_label->setObjectName(QStringLiteral("m_info_charge_acceleration_y_label"));
+        m_info_charge_acceleration_y_label->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_12->addWidget(m_info_charge_acceleration_y_label);
+
+
+        horizontalLayout_10->addLayout(verticalLayout_12);
+
+        verticalLayout_13 = new QVBoxLayout();
+        verticalLayout_13->setObjectName(QStringLiteral("verticalLayout_13"));
+        m_info_charge_acceleration_val = new QLabel(tab);
+        m_info_charge_acceleration_val->setObjectName(QStringLiteral("m_info_charge_acceleration_val"));
+        m_info_charge_acceleration_val->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        verticalLayout_13->addWidget(m_info_charge_acceleration_val);
+
+        m_info_charge_acceleration_x_val = new QLabel(tab);
+        m_info_charge_acceleration_x_val->setObjectName(QStringLiteral("m_info_charge_acceleration_x_val"));
+        m_info_charge_acceleration_x_val->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        verticalLayout_13->addWidget(m_info_charge_acceleration_x_val);
+
+        m_info_charge_acceleration_y_val = new QLabel(tab);
+        m_info_charge_acceleration_y_val->setObjectName(QStringLiteral("m_info_charge_acceleration_y_val"));
+        m_info_charge_acceleration_y_val->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        verticalLayout_13->addWidget(m_info_charge_acceleration_y_val);
+
+
+        horizontalLayout_10->addLayout(verticalLayout_13);
+
+        verticalLayout_14 = new QVBoxLayout();
+        verticalLayout_14->setObjectName(QStringLiteral("verticalLayout_14"));
+        m_info_charge_acceleration_box = new QComboBox(tab);
+        m_info_charge_acceleration_box->setObjectName(QStringLiteral("m_info_charge_acceleration_box"));
+
+        verticalLayout_14->addWidget(m_info_charge_acceleration_box);
+
+        m_info_charge_acceleration_x_box = new QComboBox(tab);
+        m_info_charge_acceleration_x_box->setObjectName(QStringLiteral("m_info_charge_acceleration_x_box"));
+
+        verticalLayout_14->addWidget(m_info_charge_acceleration_x_box);
+
+        m_info_charge_acceleration_y_box = new QComboBox(tab);
+        m_info_charge_acceleration_y_box->setObjectName(QStringLiteral("m_info_charge_acceleration_y_box"));
+
+        verticalLayout_14->addWidget(m_info_charge_acceleration_y_box);
+
+
+        horizontalLayout_10->addLayout(verticalLayout_14);
+
+
+        horizontalLayout_11->addLayout(horizontalLayout_10);
+
+
+        verticalLayout_15->addLayout(horizontalLayout_11);
+
+
+        verticalLayout_16->addLayout(verticalLayout_15);
+
+        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_16->addItem(verticalSpacer_4);
 
         m_tab_widget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
-        gridLayout = new QGridLayout(tab_2);
-        gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        m_info_system_sum_energy_box = new QComboBox(tab_2);
-        m_info_system_sum_energy_box->setObjectName(QStringLiteral("m_info_system_sum_energy_box"));
+        verticalLayout_20 = new QVBoxLayout(tab_2);
+        verticalLayout_20->setObjectName(QStringLiteral("verticalLayout_20"));
+        horizontalLayout_13 = new QHBoxLayout();
+        horizontalLayout_13->setObjectName(QStringLiteral("horizontalLayout_13"));
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
 
-        gridLayout->addWidget(m_info_system_sum_energy_box, 1, 4, 1, 1);
+        horizontalLayout_13->addItem(horizontalSpacer_2);
 
-        m_info_system_sum_energy_val = new QLabel(tab_2);
-        m_info_system_sum_energy_val->setObjectName(QStringLiteral("m_info_system_sum_energy_val"));
-        m_info_system_sum_energy_val->setAlignment(Qt::AlignCenter);
+        verticalLayout_17 = new QVBoxLayout();
+        verticalLayout_17->setObjectName(QStringLiteral("verticalLayout_17"));
+        m_info_system_kenergy_label = new QLabel(tab_2);
+        m_info_system_kenergy_label->setObjectName(QStringLiteral("m_info_system_kenergy_label"));
+        m_info_system_kenergy_label->setAlignment(Qt::AlignCenter);
 
-        gridLayout->addWidget(m_info_system_sum_energy_val, 1, 2, 1, 1);
+        verticalLayout_17->addWidget(m_info_system_kenergy_label);
 
         m_info_system_sum_energy_label = new QLabel(tab_2);
         m_info_system_sum_energy_label->setObjectName(QStringLiteral("m_info_system_sum_energy_label"));
         m_info_system_sum_energy_label->setAlignment(Qt::AlignCenter);
 
-        gridLayout->addWidget(m_info_system_sum_energy_label, 1, 0, 1, 1);
-
-        m_info_system_kenergy_label = new QLabel(tab_2);
-        m_info_system_kenergy_label->setObjectName(QStringLiteral("m_info_system_kenergy_label"));
-        m_info_system_kenergy_label->setAlignment(Qt::AlignCenter);
-
-        gridLayout->addWidget(m_info_system_kenergy_label, 0, 0, 1, 1);
-
-        m_info_system_kenergy_val = new QLabel(tab_2);
-        m_info_system_kenergy_val->setObjectName(QStringLiteral("m_info_system_kenergy_val"));
-        m_info_system_kenergy_val->setAlignment(Qt::AlignCenter);
-
-        gridLayout->addWidget(m_info_system_kenergy_val, 0, 2, 1, 1);
-
-        m_info_system_kenergy_box = new QComboBox(tab_2);
-        m_info_system_kenergy_box->setObjectName(QStringLiteral("m_info_system_kenergy_box"));
-        QSizePolicy sizePolicy5(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy5.setHorizontalStretch(0);
-        sizePolicy5.setVerticalStretch(0);
-        sizePolicy5.setHeightForWidth(m_info_system_kenergy_box->sizePolicy().hasHeightForWidth());
-        m_info_system_kenergy_box->setSizePolicy(sizePolicy5);
-
-        gridLayout->addWidget(m_info_system_kenergy_box, 0, 4, 1, 1);
-
-        m_info_system_whole_energy_box = new QComboBox(tab_2);
-        m_info_system_whole_energy_box->setObjectName(QStringLiteral("m_info_system_whole_energy_box"));
-
-        gridLayout->addWidget(m_info_system_whole_energy_box, 2, 4, 1, 1);
-
-        m_info_system_whole_energy_val = new QLabel(tab_2);
-        m_info_system_whole_energy_val->setObjectName(QStringLiteral("m_info_system_whole_energy_val"));
-        m_info_system_whole_energy_val->setAlignment(Qt::AlignCenter);
-
-        gridLayout->addWidget(m_info_system_whole_energy_val, 2, 2, 1, 1);
+        verticalLayout_17->addWidget(m_info_system_sum_energy_label);
 
         m_info_system_whole_energy_label = new QLabel(tab_2);
         m_info_system_whole_energy_label->setObjectName(QStringLiteral("m_info_system_whole_energy_label"));
         m_info_system_whole_energy_label->setAlignment(Qt::AlignCenter);
 
-        gridLayout->addWidget(m_info_system_whole_energy_label, 2, 0, 1, 1);
+        verticalLayout_17->addWidget(m_info_system_whole_energy_label);
+
+
+        horizontalLayout_13->addLayout(verticalLayout_17);
+
+        verticalLayout_18 = new QVBoxLayout();
+        verticalLayout_18->setObjectName(QStringLiteral("verticalLayout_18"));
+        m_info_system_kenergy_val = new QLabel(tab_2);
+        m_info_system_kenergy_val->setObjectName(QStringLiteral("m_info_system_kenergy_val"));
+        m_info_system_kenergy_val->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_18->addWidget(m_info_system_kenergy_val);
+
+        m_info_system_sum_energy_val = new QLabel(tab_2);
+        m_info_system_sum_energy_val->setObjectName(QStringLiteral("m_info_system_sum_energy_val"));
+        m_info_system_sum_energy_val->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_18->addWidget(m_info_system_sum_energy_val);
+
+        m_info_system_whole_energy_val = new QLabel(tab_2);
+        m_info_system_whole_energy_val->setObjectName(QStringLiteral("m_info_system_whole_energy_val"));
+        m_info_system_whole_energy_val->setAlignment(Qt::AlignCenter);
+
+        verticalLayout_18->addWidget(m_info_system_whole_energy_val);
+
+
+        horizontalLayout_13->addLayout(verticalLayout_18);
+
+        verticalLayout_19 = new QVBoxLayout();
+        verticalLayout_19->setObjectName(QStringLiteral("verticalLayout_19"));
+        m_info_system_kenergy_box = new QComboBox(tab_2);
+        m_info_system_kenergy_box->setObjectName(QStringLiteral("m_info_system_kenergy_box"));
+        QSizePolicy sizePolicy6(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy6.setHorizontalStretch(0);
+        sizePolicy6.setVerticalStretch(0);
+        sizePolicy6.setHeightForWidth(m_info_system_kenergy_box->sizePolicy().hasHeightForWidth());
+        m_info_system_kenergy_box->setSizePolicy(sizePolicy6);
+
+        verticalLayout_19->addWidget(m_info_system_kenergy_box);
+
+        m_info_system_sum_energy_box = new QComboBox(tab_2);
+        m_info_system_sum_energy_box->setObjectName(QStringLiteral("m_info_system_sum_energy_box"));
+
+        verticalLayout_19->addWidget(m_info_system_sum_energy_box);
+
+        m_info_system_whole_energy_box = new QComboBox(tab_2);
+        m_info_system_whole_energy_box->setObjectName(QStringLiteral("m_info_system_whole_energy_box"));
+
+        verticalLayout_19->addWidget(m_info_system_whole_energy_box);
+
+
+        horizontalLayout_13->addLayout(verticalLayout_19);
 
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
 
-        gridLayout->addItem(horizontalSpacer_3, 0, 3, 1, 1);
+        horizontalLayout_13->addItem(horizontalSpacer_3);
 
-        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
 
-        gridLayout->addItem(horizontalSpacer_4, 0, 1, 1, 1);
-
-        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
-
-        gridLayout->addItem(horizontalSpacer_5, 1, 1, 1, 1);
-
-        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
-
-        gridLayout->addItem(horizontalSpacer_6, 1, 3, 1, 1);
-
-        horizontalSpacer_7 = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
-
-        gridLayout->addItem(horizontalSpacer_7, 2, 1, 1, 1);
-
-        horizontalSpacer_8 = new QSpacerItem(40, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
-
-        gridLayout->addItem(horizontalSpacer_8, 2, 3, 1, 1);
+        verticalLayout_20->addLayout(horizontalLayout_13);
 
         m_tab_widget->addTab(tab_2, QString());
 
-        gridLayout_4->addWidget(m_tab_widget, 1, 0, 1, 1);
+        gridLayout_4->addWidget(m_tab_widget, 2, 0, 1, 1);
 
 
         horizontalLayout->addWidget(widget_2);
@@ -926,8 +1108,6 @@ public:
         menuOptions->setObjectName(QStringLiteral("menuOptions"));
         menuLanguage = new QMenu(menuOptions);
         menuLanguage->setObjectName(QStringLiteral("menuLanguage"));
-        menuTheme = new QMenu(menuOptions);
-        menuTheme->setObjectName(QStringLiteral("menuTheme"));
         menuHelp = new QMenu(menubar);
         menuHelp->setObjectName(QStringLiteral("menuHelp"));
         menuCredits = new QMenu(menubar);
@@ -946,12 +1126,9 @@ public:
         menuFile->addAction(actionSave_as);
         menuFile->addSeparator();
         menuFile->addAction(actionExit);
-        menuOptions->addAction(menuTheme->menuAction());
         menuOptions->addAction(menuLanguage->menuAction());
         menuLanguage->addAction(actionEnglish);
         menuLanguage->addAction(actionRussian);
-        menuTheme->addAction(actionDark);
-        menuTheme->addAction(actionLight);
         menuHelp->addAction(actionHow_To);
         menuCredits->addAction(actionAbout_Programm);
 
@@ -990,16 +1167,16 @@ public:
         actionEnglish->setText(QApplication::translate("MainWindow", "English", nullptr));
         actionRussian->setText(QApplication::translate("MainWindow", "Russian", nullptr));
         actionAbout_Programm->setText(QApplication::translate("MainWindow", "About Programm", nullptr));
-        m_play_button->setText(QApplication::translate("MainWindow", "Play", nullptr));
-        m_pause_button->setText(QApplication::translate("MainWindow", "Pause", nullptr));
-        m_speed_button->setText(QApplication::translate("MainWindow", "Speed x 2", nullptr));
-        m_edit_button->setText(QApplication::translate("MainWindow", "Edit", nullptr));
         m_additional_group_box->setTitle(QApplication::translate("MainWindow", "Additional", nullptr));
         m_scale_label->setText(QApplication::translate("MainWindow", "Scale:", nullptr));
         m_show_grid->setText(QApplication::translate("MainWindow", "Show Grid", nullptr));
         m_show_electro_static_field->setText(QApplication::translate("MainWindow", "Show Electro Static Field ", nullptr));
         m_camera_change_label->setText(QApplication::translate("MainWindow", "Camera at:", nullptr));
         m_schange_scene_label->setText(QApplication::translate("MainWindow", "Change scene:", nullptr));
+        m_play_button->setText(QApplication::translate("MainWindow", "Play", nullptr));
+        m_pause_button->setText(QApplication::translate("MainWindow", "Pause", nullptr));
+        m_speed_button->setText(QApplication::translate("MainWindow", "Speed x 2", nullptr));
+        m_edit_button->setText(QApplication::translate("MainWindow", "Edit", nullptr));
         m_charges_group_box->setTitle(QApplication::translate("MainWindow", "Charges", nullptr));
         m_add_charge_button->setText(QApplication::translate("MainWindow", "Add Charge", nullptr));
         m_ignore_charge_button->setText(QApplication::translate("MainWindow", "Ignore Charges", nullptr));
@@ -1033,28 +1210,36 @@ public:
         m_work_charge_label->setText(QApplication::translate("MainWindow", "TextLabel", nullptr));
         m_work_label_val->setText(QApplication::translate("MainWindow", "TextLabel", nullptr));
         m_tab_widget->setTabText(m_tab_widget->indexOf(m_work_tab), QApplication::translate("MainWindow", "Work", nullptr));
+        m_info_charges_label->setText(QApplication::translate("MainWindow", "Charge", nullptr));
         m_info_charge_q_label->setText(QApplication::translate("MainWindow", "q", nullptr));
-        m_info_charge_q_val->setText(QApplication::translate("MainWindow", "0", nullptr));
-        m_info_charge_mass_label->setText(QApplication::translate("MainWindow", "Mass", nullptr));
-        m_info_charge_mass_val->setText(QApplication::translate("MainWindow", "0", nullptr));
-        m_info_charge_speed_label->setText(QApplication::translate("MainWindow", "Speed", nullptr));
-        m_info_charge_speed_val->setText(QApplication::translate("MainWindow", "0", nullptr));
-        m_info_acceleration_label->setText(QApplication::translate("MainWindow", "Acceleration", nullptr));
-        m_info_charge_acceleration_val->setText(QApplication::translate("MainWindow", "0", nullptr));
+        m_info_charge_mass_label->setText(QApplication::translate("MainWindow", "m", nullptr));
         m_info_charge_energy_label->setText(QApplication::translate("MainWindow", "Ek", nullptr));
+        m_info_charge_q_val->setText(QApplication::translate("MainWindow", "0", nullptr));
+        m_info_charge_mass_val->setText(QApplication::translate("MainWindow", "0", nullptr));
         m_info_charge_energy_val->setText(QApplication::translate("MainWindow", "0", nullptr));
+        m_info_charge_velocity_label->setText(QApplication::translate("MainWindow", "V", nullptr));
+        m_info_charge_velocity_x_label->setText(QApplication::translate("MainWindow", "Vx", nullptr));
+        m_info_charge_velocity_y_label->setText(QApplication::translate("MainWindow", "Vy", nullptr));
+        m_info_charge_velocity_val->setText(QApplication::translate("MainWindow", "0", nullptr));
+        m_info_charge_velocity_x_val->setText(QApplication::translate("MainWindow", "0", nullptr));
+        m_info_charge_velocity_y_val->setText(QApplication::translate("MainWindow", "0", nullptr));
+        m_info_charge_acceleration_label->setText(QApplication::translate("MainWindow", "a", nullptr));
+        m_info_charge_acceleration_x_label->setText(QApplication::translate("MainWindow", "a_x", nullptr));
+        m_info_charge_acceleration_y_label->setText(QApplication::translate("MainWindow", "a_y", nullptr));
+        m_info_charge_acceleration_val->setText(QApplication::translate("MainWindow", "0", nullptr));
+        m_info_charge_acceleration_x_val->setText(QApplication::translate("MainWindow", "0", nullptr));
+        m_info_charge_acceleration_y_val->setText(QApplication::translate("MainWindow", "0", nullptr));
         m_tab_widget->setTabText(m_tab_widget->indexOf(tab), QApplication::translate("MainWindow", "Charge Info", nullptr));
-        m_info_system_sum_energy_val->setText(QApplication::translate("MainWindow", "0", nullptr));
-        m_info_system_sum_energy_label->setText(QApplication::translate("MainWindow", "S W", nullptr));
         m_info_system_kenergy_label->setText(QApplication::translate("MainWindow", "S Ek", nullptr));
-        m_info_system_kenergy_val->setText(QApplication::translate("MainWindow", "0", nullptr));
-        m_info_system_whole_energy_val->setText(QApplication::translate("MainWindow", "0", nullptr));
+        m_info_system_sum_energy_label->setText(QApplication::translate("MainWindow", "S W", nullptr));
         m_info_system_whole_energy_label->setText(QApplication::translate("MainWindow", "W", nullptr));
+        m_info_system_kenergy_val->setText(QApplication::translate("MainWindow", "0", nullptr));
+        m_info_system_sum_energy_val->setText(QApplication::translate("MainWindow", "0", nullptr));
+        m_info_system_whole_energy_val->setText(QApplication::translate("MainWindow", "0", nullptr));
         m_tab_widget->setTabText(m_tab_widget->indexOf(tab_2), QApplication::translate("MainWindow", "System Info", nullptr));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
         menuOptions->setTitle(QApplication::translate("MainWindow", "Options", nullptr));
         menuLanguage->setTitle(QApplication::translate("MainWindow", "Language", nullptr));
-        menuTheme->setTitle(QApplication::translate("MainWindow", "Theme", nullptr));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help", nullptr));
         menuCredits->setTitle(QApplication::translate("MainWindow", "About", nullptr));
     } // retranslateUi

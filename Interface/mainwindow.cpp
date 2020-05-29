@@ -28,10 +28,14 @@ MainWindow::MainWindow(QWidget *parent) :
     m_charge("q", "Кл"),
     m_work("A", "Дж"),
     m_info_charge_q("q", "Кл"),
-    m_info_charge_mass("Mass", "кг"),
-    m_info_charge_speed("Speed", "м/c"),
-    m_info_charge_acceleration("Acceleration", "м/с^2"),
-    m_info_charge_energy("Energy", "Дж"),
+    m_info_charge_mass("m", "кг"),
+    m_info_charge_velocity("V", "м/c"),
+    m_info_charge_velocity_x("Vx", "м/c"),
+    m_info_charge_velocity_y("Vy", "м/c"),
+    m_info_charge_acceleration("a", "м/с^2"),
+    m_info_charge_acceleration_x("a_x", "м/с^2"),
+    m_info_charge_acceleration_y("a_y", "м/c^2"),
+    m_info_charge_energy("Ek", "Дж"),
     m_info_system_sum_kenergy("Sum Ek", "Дж"),
     m_info_system_sum_energy("Sum W", "Дж"),
     m_info_system_whole_energy("W system", "Дж"),
@@ -59,8 +63,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_info_charge_q.setWidgets(ui->m_info_charge_q_label, ui->m_info_charge_q_val, ui->m_info_charge_q_box);
     m_info_charge_mass.setWidgets(ui->m_info_charge_mass_label, ui->m_info_charge_mass_val, ui->m_info_charge_mass_box);
-    m_info_charge_speed.setWidgets(ui->m_info_charge_speed_label, ui->m_info_charge_speed_val, ui->m_info_charge_speed_box);
-    m_info_charge_acceleration.setWidgets(ui->m_info_acceleration_label, ui->m_info_charge_acceleration_val, ui->m_info_charge_acceleration_box);
+    m_info_charge_velocity.setWidgets(ui->m_info_charge_velocity_label, ui->m_info_charge_velocity_val, ui->m_info_charge_velocity_box);
+    m_info_charge_velocity_x.setWidgets(ui->m_info_charge_velocity_x_label, ui->m_info_charge_velocity_x_val, ui->m_info_charge_velocity_x_box);
+    m_info_charge_velocity_y.setWidgets(ui->m_info_charge_velocity_y_label, ui->m_info_charge_velocity_y_val, ui->m_info_charge_velocity_y_box);
+    m_info_charge_acceleration.setWidgets(ui->m_info_charge_acceleration_label, ui->m_info_charge_acceleration_val, ui->m_info_charge_acceleration_box);
+    m_info_charge_acceleration_x.setWidgets(ui->m_info_charge_acceleration_x_label, ui->m_info_charge_acceleration_x_val, ui->m_info_charge_acceleration_x_box);
+    m_info_charge_acceleration_y.setWidgets(ui->m_info_charge_acceleration_y_label, ui->m_info_charge_acceleration_y_val, ui->m_info_charge_acceleration_y_box);
     m_info_charge_energy.setWidgets(ui->m_info_charge_energy_label, ui->m_info_charge_energy_val, ui->m_info_charge_energy_box);
 
     m_info_system_sum_kenergy.setWidgets(ui->m_info_system_kenergy_label, ui->m_info_system_kenergy_val, ui->m_info_system_kenergy_box);
@@ -191,8 +199,12 @@ void MainWindow::recountPhysics()
     {
       m_info_charge_q.setValue(ui->m_engine->getCharge(ui->m_charges_list->currentIndex())->charge());
       m_info_charge_mass.setValue(ui->m_engine->getCharge(ui->m_charges_list->currentIndex())->mass());
-      m_info_charge_speed.setValue(ui->m_engine->getCharge(ui->m_charges_list->currentIndex())->velocity().module());
+      m_info_charge_velocity.setValue(ui->m_engine->getCharge(ui->m_charges_list->currentIndex())->velocity().module());
+      m_info_charge_velocity_x.setValue(ui->m_engine->getCharge(ui->m_charges_list->currentIndex())->velocity().x());
+      m_info_charge_velocity_y.setValue(ui->m_engine->getCharge(ui->m_charges_list->currentIndex())->velocity().y());
       m_info_charge_acceleration.setValue(ui->m_engine->getCharge(ui->m_charges_list->currentIndex())->acceleration().module());
+      m_info_charge_acceleration_x.setValue(ui->m_engine->getCharge(ui->m_charges_list->currentIndex())->acceleration().x());
+      m_info_charge_acceleration_y.setValue(ui->m_engine->getCharge(ui->m_charges_list->currentIndex())->acceleration().y());
       m_info_charge_energy.setValue(ui->m_engine->calculateKineticEnergy(ui->m_charges_list->currentIndex()));
     }
 
