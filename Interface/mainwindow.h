@@ -54,17 +54,27 @@ public:
     ~MainWindow();
 
 public slots:
+    // Buttons for edit charges
+    void addCharge();
+    void editCharge();
+    void rmCharge();
+
+    // CheckBox control
     void showGrid(int);
     void showElectroStaticField(int);
 
+    // Main slot for update phisics values
     void recountPhysics();
 
-    void addCharge();
-    void ignoreCharges();
-    void editCharge();
-    void rmCharge();
     void resetCameraChange();
     void resetChargeInfoList();
+
+    // Main menu
+    void open();
+    void save();
+    void saveAs();
+    void exit();
+
     void help();
     void about();
 

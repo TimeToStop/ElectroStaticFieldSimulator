@@ -26,6 +26,12 @@ ValueRepresenter::~ValueRepresenter()
 
 void ValueRepresenter::setValue(float val)
 {
+    bool is_positive = (val > 0);
+    if(!is_positive)
+    {
+        val = -val;
+    }
+
     int indx = 4;
 
     if(val > 0.0000000000000001f)
@@ -46,6 +52,11 @@ void ValueRepresenter::setValue(float val)
                 indx += 1;
             }
         }
+    }
+
+    if(!is_positive)
+    {
+        val = -val;
     }
 
     m_box->setCurrentIndex(indx);

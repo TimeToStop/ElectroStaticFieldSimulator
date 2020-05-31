@@ -86,7 +86,7 @@ MainWindow::MainWindow(QWidget *parent) :
     Translator::registerWidget<QPushButton, Words::SPEED>(m_id, ui->m_speed_button, &QPushButton::setText);
 
     Translator::registerWidget<QPushButton, Words::EDIT_CHARGE>(m_id, ui->m_edit_charge_button, &QPushButton::setText);
-    Translator::registerWidget<QPushButton, Words::IGNORE_CHARGE>(m_id, ui->m_ignore_charge_button, &QPushButton::setText);
+    //Translator::registerWidget<QPushButton, Words::IGNORE_CHARGE>(m_id, ui->m_ignore_charge_button, &QPushButton::setText);
     Translator::registerWidget<QPushButton, Words::ADD_CHARGE>(m_id, ui->m_add_charge_button, &QPushButton::setText);
     Translator::registerWidget<QPushButton, Words::REMOVE_CHARGE>(m_id, ui->m_remove_charge_button, &QPushButton::setText);
 
@@ -148,11 +148,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->m_engine, SIGNAL(recountPhysics()), this, SLOT(recountPhysics()));
 
+    connect(ui->actionOpen, SIGNAL(triggered(bool)), this, SLOT(open()));
+    connect(ui->actionSave, SIGNAL(triggered(bool)), this, SLOT(save()));
+    connect(ui->actionSave_as, SIGNAL(triggered(bool)), this, SLOT(saveAs()));
+    connect(ui->actionExit, SIGNAL(triggered(bool)), this, SLOT(exit()));
+
     connect(ui->actionEnglish, SIGNAL(triggered(bool)), this, SLOT(setEnglish()));
     connect(ui->actionRussian, SIGNAL(triggered(bool)), this, SLOT(setRussian()));
-
-    connect(ui->actionDark, SIGNAL(triggered(bool)), this, SLOT(setDarkTheme()));
-    connect(ui->actionLight, SIGNAL(triggered(bool)), this, SLOT(setLightTheme()));
 
     connect(ui->actionAbout_Programm, SIGNAL(triggered(bool)), this, SLOT(about()));
     connect(ui->actionHow_To, SIGNAL(triggered(bool)), this, SLOT(help()));
@@ -264,22 +266,22 @@ void MainWindow::editCharge()
     }
 }
 
-void MainWindow::ignoreCharges()
-{
-    if(ui->m_engine->hasCharges())
-    {
-        EngineState e = ui->m_engine->engineState();
-        ui->m_engine->setEngineState(EngineState::PAUSE);
-        IgnoreChargesDialog d(ui->m_engine->chargeNames(), this);
+//void MainWindow::ignoreCharges()
+//{
+//    if(ui->m_engine->hasCharges())
+//    {
+//        EngineState e = ui->m_engine->engineState();
+//        ui->m_engine->setEngineState(EngineState::PAUSE);
+//        IgnoreChargesDialog d(ui->m_engine->chargeNames(), this);
 
-        if(d.exec() == QDialog::Accepted)
-        {
-            recountPhysics();
-        }
+//        if(d.exec() == QDialog::Accepted)
+//        {
+//            recountPhysics();
+//        }
 
-        ui->m_engine->setEngineState(e);
-    }
-}
+//        ui->m_engine->setEngineState(e);
+//    }
+//}
 
 void MainWindow::rmCharge()
 {
@@ -301,18 +303,42 @@ void MainWindow::rmCharge()
     }
 }
 
-void MainWindow::resetCameraChange() {
+void MainWindow::resetCameraChange()
+{
     ui->m_camera_change->clear();
-    if(ui->m_engine->hasCharges()){
+    if(ui->m_engine->hasCharges())
+    {
         ui->m_camera_change->addItems(ui->m_engine->chargeNames());
     }
 }
 
-void MainWindow::resetChargeInfoList() {
+void MainWindow::resetChargeInfoList()
+{
     ui->m_charges_list->clear();
-    if(ui->m_engine->hasCharges()) {
+    if(ui->m_engine->hasCharges())
+    {
        ui->m_charges_list->addItems(ui->m_engine->chargeNames());
     }
+}
+
+void MainWindow::open()
+{
+
+}
+
+void MainWindow::save()
+{
+
+}
+
+void MainWindow::saveAs()
+{
+
+}
+
+void MainWindow::exit()
+{
+    close();
 }
 
 void MainWindow::help() {

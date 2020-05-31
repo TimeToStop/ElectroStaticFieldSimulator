@@ -52,7 +52,7 @@ signals:
     void cursorMoved(const QPoint&);
 
 public slots:
-    void timeTick();
+    void timeTick();    
 
 private:
     void drawBorder(QPainter&);

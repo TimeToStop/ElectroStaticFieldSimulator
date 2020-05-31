@@ -218,13 +218,6 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="m_ignore_charge_button">
-                  <property name="text">
-                   <string>Ignore Charges</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
                  <widget class="QPushButton" name="m_edit_charge_button">
                   <property name="text">
                    <string>Edit Charge</string>
@@ -1114,7 +1107,7 @@
      <x>0</x>
      <y>0</y>
      <width>1172</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1239,22 +1232,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>actionExit</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>585</x>
-     <y>318</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>m_show_electro_static_field</sender>
    <signal>stateChanged(int)</signal>
    <receiver>MainWindow</receiver>
@@ -1283,22 +1260,6 @@
     <hint type="destinationlabel">
      <x>610</x>
      <y>31</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>m_ignore_charge_button</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>ignoreCharges()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>930</x>
-     <y>123</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>953</x>
-     <y>34</y>
     </hint>
    </hints>
   </connection>

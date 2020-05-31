@@ -91,7 +91,7 @@ const char* const Dictionary::m_langs[Words::LENGTH_OF_WORDS_IN_DICT][Language::
 };
 
 
-const char* const Dictionary::dict(Words w, Language lang)
+const char* Dictionary::dict(Words w, Language lang)
 {
     return m_langs[w][lang];
 }
