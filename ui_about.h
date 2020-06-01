@@ -49,7 +49,7 @@ public:
     {
         if (About->objectName().isEmpty())
             About->setObjectName(QString::fromUtf8("About"));
-        About->resize(616, 369);
+        About->resize(564, 242);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);

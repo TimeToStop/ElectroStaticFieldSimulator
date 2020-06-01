@@ -34,7 +34,7 @@ public:
     {
         if (Help->objectName().isEmpty())
             Help->setObjectName(QString::fromUtf8("Help"));
-        Help->resize(516, 441);
+        Help->resize(857, 446);
         horizontalLayout_2 = new QHBoxLayout(Help);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         verticalLayout = new QVBoxLayout();
