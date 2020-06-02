@@ -45,21 +45,30 @@ public:
     void tick(float);
 
     void setEngineState(EngineState);
+    EngineState engineState() const;
 
     void addCharge(std::unique_ptr<Charge>&&);
     void rmCharge(size_t);
+    void clearCharges();
 
     size_t chargesNum() const;
     bool hasCharges() const;
-    const std::unique_ptr<Charge>& getCharge(size_t i) const;
+    std::unique_ptr<Charge>& getCharge(size_t i);
     QStringList chargeNames() const;
     float lambda() const;
 
-    Vector calculateTension(float x, float y);
-    float calculatePotential(float x, float y);
+    Vector calculateTension(const Vector&) const;
+    float calculatePotential(const Vector&) const;
+    float calculateEnergy(const Vector&) const;
+    float calculateKineticEnergy(const int index) const;
+    float calculateKineticEnergyOfSystem() const;
+    float calculateEnergyOfSystem() const;
+    float calculateWork(const Vector& start, const Vector& dest, float charge) const;
 
     Vector applyCharge(size_t);
     static int sign(float);
+
+
 };
 
 #endif // ENGINE_H

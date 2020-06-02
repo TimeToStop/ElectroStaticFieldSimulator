@@ -40,17 +40,19 @@ public:
     virtual Vector fromXOY(const Vector&) const override;
 
 protected:
-    virtual void paintEvent(QPaintEvent *) override;
+    virtual void paintEvent(QPaintEvent*) override;
 
     virtual void mousePressEvent(QMouseEvent*) override;
     virtual void mouseMoveEvent(QMouseEvent*) override;
     virtual void mouseReleaseEvent(QMouseEvent*) override;
 
 signals:
+    void leftButtonClicked();
+    void recountPhysics();
     void cursorMoved(const QPoint&);
 
 public slots:
-    void timeTick();
+    void timeTick();    
 
 private:
     void drawBorder(QPainter&);

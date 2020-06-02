@@ -36,6 +36,7 @@ SelectCharge::SelectCharge(const QStringList& names, QWidget *parent):
 
     m_box = box;
     m_box->addItems(names);
+    setWindowTitle("Select charge");
 }
 
 SelectCharge::~SelectCharge()

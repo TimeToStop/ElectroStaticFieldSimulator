@@ -1,11 +1,11 @@
 #include "enginewidget.h"
 #include "Engine/charge.h"
-#include <QDebug>
 
 EngineWidget::EngineWidget(QWidget *parent):
     QWidget(parent),
     Engine(),
     m_draw_grid(true),
+    m_draw_field(false),
     m_is_left_mouse_pressed(false),
     m_is_right_mouse_pressed(false),
     m_current_cursor_pos(),
@@ -19,6 +19,7 @@ EngineWidget::EngineWidget(QWidget *parent):
     m_main_timer.start(m_default_time);
     connect(&m_main_timer, SIGNAL(timeout()), this, SLOT(timeTick()));
     setFocusPolicy(Qt::StrongFocus);
+    setMouseTracking(true);
     setMinimumSize(400, 400);
 }
 
@@ -31,17 +32,17 @@ void EngineWidget::paintEvent(QPaintEvent*)
     QPainter painter(this);
 
     drawBorder(painter);
-    Engine::drawCharges(painter);
 
     if(m_draw_grid)
     {
         drawGrid(painter);
     }
 
+    Engine::drawCharges(painter);
+
     if(m_draw_field)
     {
-        // To able this function, increase m_default_time otherwise it will crash
-        //drawElectrostaticField(painter);
+        drawElectrostaticField(painter);
     }
 }
 
@@ -59,6 +60,7 @@ void EngineWidget::mousePressEvent(QMouseEvent* e)
     {
         m_is_left_mouse_pressed = true;
         m_pos_left_mouse_clicked = e->pos();
+        emit(leftButtonClicked());
     }
     else if(e->button() == Qt::RightButton)
     {
@@ -116,6 +118,7 @@ void EngineWidget::timeTick()
     }
 
     Engine::tick(tick);
+    emit(recountPhysics());
     repaint();
 }
 
@@ -171,25 +174,30 @@ void EngineWidget::drawGrid(QPainter& painter)
     painter.setFont(font);
 
     // ОТРИСОВКА ПОЛОСОК КАЖДЫЕ 5 ЕДИНИЦ ПО Х
-
     stepVector = fromXOY(Vector(5, 0));
     step = stepVector.x() - startVector.x();
-    for (int i = startX % step; i < width(); i += step) {
+    for (int i = startX % step; i < width(); i += step)
+    {
         painter.drawLine(i, startY - 5, i, startY + 5);
     }
 
     // ОТРИСОВКА ПОЛОСОК КАЖДЫЕ 5 ЕДИНИЦ ПО У
-    for (int i = startY % step; i < height(); i += step) {
+    for (int i = startY % step; i < height(); i += step)
+    {
         painter.drawLine(startX - 5, i, startX + 5, i);
     }
 
     // ОТРИСОВКА ЧИСЕЛ ПО Х
     Vector vectorX = toXOY(Vector(0, height() / 2));
-    for (int i = vectorX.x() - (int)vectorX.x() % 5; fromXOY(Vector(i, startY)).x() < width(); i += 5) {
+    for (int i = vectorX.x() - (int)vectorX.x() % 5; fromXOY(Vector(i, startY)).x() < width(); i += 5)
+    {
         painter.drawText(fromXOY(Vector(i, 0)).x(), startY - 10, QString::number(i));
-        if (Engine::toXOY(0, 0).y() < 0) {
+        if (Engine::toXOY(0, 0).y() < 0)
+        {
             painter.drawText(Engine::fromXOY(i, 0).x(), 15, QString::number(i));
-        } else if (Engine::toXOY(0, height()).y() > 0) {
+        }
+        else if (Engine::toXOY(0, height()).y() > 0)
+        {
             painter.drawText(Engine::fromXOY(i, 0).x(), height() - 10, QString::number(i));
         }
 
@@ -197,29 +205,40 @@ void EngineWidget::drawGrid(QPainter& painter)
 
     // ОТРИСОВКА ЧИСЕЛ ПО У
     Vector vectorY = toXOY(Vector(width() / 2, 0));
-    qDebug() << vectorY.toPointF();
 
-    for (int i = vectorY.y() - (int)vectorY.y() % 5; fromXOY(Vector(startX, i)).y() < height(); i -= 5) {
+    for (int i = vectorY.y() - (int)vectorY.y() % 5; fromXOY(Vector(startX, i)).y() < height(); i -= 5)
+    {
         if (i != 0)
-            painter.drawText(startX + 10, fromXOY(Vector(startX, i)).y(), QString::number(i));
-        if (Engine::fromXOY(0,0).x() < 0) {
+        {
+             painter.drawText(startX + 10, fromXOY(Vector(startX, i)).y(), QString::number(i));
+        }
+
+        if (Engine::fromXOY(0,0).x() < 0)
+        {
             painter.drawText(4, Engine::fromXOY(0, i).y(), QString::number(i));
-        } else if (Engine::toXOY(width(), 0).x() < 0) {
+        }
+        else if (Engine::toXOY(width(), 0).x() < 0)
+        {
             painter.drawText(width() - 25, Engine::fromXOY(0, i).y(), QString::number(i));
         }
     }
 }
 
-void EngineWidget::drawElectrostaticField(QPainter& painter) { //Перевести в координаты
-    const int stepX = 5;
-    const int stepY = 5;
-    painter.setPen(QPen(Qt::black, 1, Qt::SolidLine));
-    for(int x = 0; x <= width(); x += stepX)
+void EngineWidget::drawElectrostaticField(QPainter& painter)
+{
+    const int stepX = 1;
+    const int stepY = 1;
+    Vector window_size(toXOY(Vector(width(), height())));
+    painter.setPen(QPen(Qt::red, 1.5, Qt::SolidLine));
+    for(int x = toXOY(Vector(0, 0)).x(); x <= window_size.x(); x += stepX)
     {
-        for(int y = 0; y <= height(); y -= stepY)
+        for(int y = toXOY(Vector(0, 0)).y(); y >= window_size.y(); y -= stepY)
         {
-            const Vector tension(Engine::calculateTension(x, y));
-            painter.drawLine(fromXOY(Vector(x, y)).x(), fromXOY(Vector(x, y)).y(), fromXOY(Vector(x, y)).x() + tension.x() / m_lambda, fromXOY(Vector(x, y)).y() + tension.y() / m_lambda);
+            const Vector tension = Engine::calculateTension(Vector(x, y));
+            Vector pos = fromXOY(Vector(x, y));
+            Vector t = tension/ tension.module();
+            t *= 5.f;
+            painter.drawLine(pos.x(), pos.y(), pos.x() + t.x(), pos.y() + t.y());
         }
     }
 }

@@ -2,7 +2,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++11
+CONFIG += c++14
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -19,32 +19,54 @@ SOURCES += \
     Engine/charge.cpp \
     Engine/engine.cpp \
     Engine/vector.cpp \
-    Interface/Charge/createcharge.cpp \
-    Interface/Charge/ignorecharge.cpp \
+    Interface/Charge/createchargedialog.cpp \
+    Interface/Charge/ignorechargesdialog.cpp \
     Interface/Charge/selectcharge.cpp \
-    Interface/ValueRepresener/valueedit.cpp \
-    Interface/ValueRepresener/valuerepresenter.cpp \
-    Interface/ValueRepresener/valuewriter.cpp \
+    Interface/mainwindow.cpp \
+    Interface/ValueRepresenter/valueedit.cpp \
+    Interface/ValueRepresenter/valuerepresenter.cpp \
+    Interface/ValueRepresenter/valuewriter.cpp \
     Interface/enginewidget.cpp \
-    Interface/widget.cpp \
-    main.cpp
+    main.cpp \
+    Options/abstractcontainer.cpp \
+    Options/dictionary.cpp \
+    Options/translator.cpp \
+    Options/colortheme.cpp \
+    about.cpp \
+    Interface/help.cpp
 
 HEADERS += \
     Engine/charge.h \
     Engine/engine.h \
     Engine/vector.h \
-    Interface/Charge/createcharge.h \
-    Interface/Charge/ignorecharge.h \
+    Interface/Charge/createchargedialog.h \
+    Interface/Charge/ignorechargesdialog.h \
     Interface/Charge/selectcharge.h \
-    Interface/ValueRepresener/valueedit.h \
-    Interface/ValueRepresener/valuerepresenter.h \
-    Interface/ValueRepresener/valuewriter.h \
+    Interface/mainwindow.h \
+    Interface/ValueRepresenter/valueedit.h \
+    Interface/ValueRepresenter/valuerepresenter.h \
+    Interface/ValueRepresenter/valuewriter.h \
     Interface/enginewidget.h \
-    Interface/widget.h
+    Options/abstractcontainer.h \
+    Options/container.h \
+    Options/dictionary.h \
+    Options/enums.h \
+    Options/theme.h \
+    Options/translator.h \
+    Options/colortheme.h \
+    about.h \
+    Interface/help.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-FORMS +=
+FORMS += \
+    Interface/Charge/createchargedialog.ui \
+    Interface/Charge/ignorechargesdialog.ui \
+    Interface/mainwindow.ui \
+    about.ui \
+    Interface/help.ui
+
+
