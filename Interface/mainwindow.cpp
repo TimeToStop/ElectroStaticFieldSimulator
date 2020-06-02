@@ -145,6 +145,24 @@ MainWindow::MainWindow(QWidget *parent) :
     Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_METRES>(m_id, &m_dest_pos_x, &ValueRepresenter::setMeasure);
     Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_METRES>(m_id, &m_dest_pos_y, &ValueRepresenter::setMeasure);
 
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_CHARGE>(m_id, &m_charge, &ValueRepresenter::setMeasure);
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_WORK>(m_id, &m_work, &ValueRepresenter::setMeasure);
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_CHARGE>(m_id, &m_info_charge_q, &ValueRepresenter::setMeasure);
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_MASS>(m_id, &m_info_charge_mass, &ValueRepresenter::setMeasure);
+
+
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_VEL>(m_id, &m_info_charge_velocity, &ValueRepresenter::setMeasure);
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_VEL>(m_id, &m_info_charge_velocity_x, &ValueRepresenter::setMeasure);
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_VEL>(m_id, &m_info_charge_velocity_y, &ValueRepresenter::setMeasure);
+
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_ACC>(m_id, &m_info_charge_acceleration, &ValueRepresenter::setMeasure);
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_ACC>(m_id, &m_info_charge_acceleration_x, &ValueRepresenter::setMeasure);
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_ACC>(m_id, &m_info_charge_acceleration_y, &ValueRepresenter::setMeasure);
+
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_WORK>(m_id, &m_info_charge_energy, &ValueRepresenter::setMeasure);
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_WORK>(m_id, &m_info_system_sum_kenergy, &ValueRepresenter::setMeasure);
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_WORK>(m_id, &m_info_system_whole_energy, &ValueRepresenter::setMeasure);
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_WORK>(m_id, &m_info_system_sum_energy, &ValueRepresenter::setMeasure);
 
     Translator::setLanguage();
 

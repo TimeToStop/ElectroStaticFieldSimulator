@@ -1,12 +1,11 @@
 #ifndef CONTAINER_H
 #define CONTAINER_H
 
-#include "AbstractContainer.h"
-#include "QTabWidget.h"
-#include "Enums.h"
+#include "abstractcontainer.h"
+#include "enums.h"
+#include "dictionary.h"
 
-#include "Dictionary.h"
-
+#include <QTabWidget>
 #include <QString>
 
 template<typename T>

@@ -88,13 +88,15 @@ const char* const Dictionary::m_langs[Words::LENGTH_OF_WORDS_IN_DICT][Language::
 
     {"Russian", "Русский"},
 
-    {"c", "c"},
+    {"s", "c"},
     {"m", "м"},
-    {"m/c", "м/c"},
-    {"m/c^2", "м/c^2"},
+    {"m/s", "м/c"},
+    {"m/s^2", "м/c^2"},
     {"V/m", "В/м"},
     {"V", "В"},
-    {"J", "Дж"}
+    {"J", "Дж"},
+    {"C", "Кл"},
+    {"kg", "кг"}
 };
 
 const char* Dictionary::dict(Words w, Language lang)
