@@ -1,4 +1,4 @@
-#include "Translator.h"
+#include "translator.h"
 
 Translator Translator::translator;
 int Translator::m_id = 0;

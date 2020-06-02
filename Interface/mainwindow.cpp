@@ -123,8 +123,6 @@ MainWindow::MainWindow(QWidget *parent) :
     Translator::registerWidget<QMenu, Words::CREDITS>(m_id, ui->menuCredits, &QMenu::setTitle);
     Translator::registerWidget<QMenu, Words::LANGUAGE>(m_id, ui->menuLanguage, &QMenu::setTitle);
 
-
-
     Translator::registerWidget<QAction, Words::OPEN>(m_id, ui->actionOpen, &QAction::setText);
     Translator::registerWidget<QAction, Words::SAVE>(m_id, ui->actionSave, &QAction::setText);
     Translator::registerWidget<QAction, Words::SAVE_AS>(m_id, ui->actionSave_as, &QAction::setText);
@@ -132,6 +130,21 @@ MainWindow::MainWindow(QWidget *parent) :
     Translator::registerWidget<QAction, Words::ENGLISH>(m_id, ui->actionEnglish, &QAction::setText);
     Translator::registerWidget<QAction, Words::RUSSIAN>(m_id, ui->actionRussian, &QAction::setText);
     Translator::registerWidget<QAction, Words::HOW_TO>(m_id, ui->actionHow_To, &QAction::setText);
+
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_METRES>(m_id, &m_pos_x, &ValueRepresenter::setMeasure);
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_METRES>(m_id, &m_pos_y, &ValueRepresenter::setMeasure);
+
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_TENSION>(m_id, &m_tension_val, &ValueRepresenter::setMeasure);
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_TENSION>(m_id, &m_tension_x, &ValueRepresenter::setMeasure);
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_TENSION>(m_id, &m_tension_y, &ValueRepresenter::setMeasure);
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_POTENTIAL>(m_id, &m_potential, &ValueRepresenter::setMeasure);
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_WORK>(m_id, &m_energy, &ValueRepresenter::setMeasure);
+
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_METRES>(m_id, &m_start_pos_x, &ValueRepresenter::setMeasure);
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_METRES>(m_id, &m_start_pos_y, &ValueRepresenter::setMeasure);
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_METRES>(m_id, &m_dest_pos_x, &ValueRepresenter::setMeasure);
+    Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_METRES>(m_id, &m_dest_pos_y, &ValueRepresenter::setMeasure);
+
 
     Translator::setLanguage();
 
@@ -158,7 +171,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionAbout_Programm, SIGNAL(triggered(bool)), this, SLOT(about()));
     connect(ui->actionHow_To, SIGNAL(triggered(bool)), this, SLOT(help()));
-
 
     setMouseTracking(true);
 }

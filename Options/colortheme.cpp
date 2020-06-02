@@ -1,6 +1,7 @@
 #include "Options/colortheme.h"
 
-ColorTheme::ColorTheme() {
+ColorTheme::ColorTheme()
+{
     color.setColor(QPalette::Window, QColor(248, 248, 248));
     color.setColor(QPalette::WindowText, Qt::black);
     color.setColor(QPalette::Base, QColor(248, 243, 240));
@@ -18,6 +19,7 @@ ColorTheme::ColorTheme() {
 
 ColorTheme::~ColorTheme() {}
 
-QPalette ColorTheme::pallete(){
+QPalette ColorTheme::pallete()
+{
     return color;
 }

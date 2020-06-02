@@ -68,6 +68,19 @@ float ValueRepresenter::value() const
     return valueOnly() * power(m_curr_index);
 }
 
+void ValueRepresenter::setMeasure(const QString& m)
+{
+    disconnect(m_box, SIGNAL(currentIndexChanged(int)), this, SLOT(prefixChanged(int)));
+    m_measure = m;
+    m_box->clear();
+    for(const QString& prefix : m_prefix)
+    {
+        m_box->addItem(prefix + m_measure);
+    }
+    m_box->setCurrentIndex(m_curr_index);
+    connect(m_box, SIGNAL(currentIndexChanged(int)), this, SLOT(prefixChanged(int)));
+}
+
 void ValueRepresenter::setWidgets(QLabel* label, QComboBox* box)
 {
     m_header = label;

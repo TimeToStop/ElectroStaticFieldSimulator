@@ -31,6 +31,8 @@ public:
     void setValue(float);
     float value() const;
 
+    void setMeasure(const QString&);
+
 protected:
     void setWidgets(QLabel*, QComboBox*);
     static float power(int);

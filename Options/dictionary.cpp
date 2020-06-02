@@ -1,4 +1,4 @@
-#include "Dictionary.h"
+#include "dictionary.h"
 
 const char* const Dictionary::m_langs[Words::LENGTH_OF_WORDS_IN_DICT][Language::LENGTH_OF_LANGUAGES] =
 {
@@ -86,10 +86,16 @@ const char* const Dictionary::m_langs[Words::LENGTH_OF_WORDS_IN_DICT][Language::
 
     {"English", "Английский"},
 
-    {"Russian", "Русский"}
+    {"Russian", "Русский"},
 
+    {"c", "c"},
+    {"m", "м"},
+    {"m/c", "м/c"},
+    {"m/c^2", "м/c^2"},
+    {"V/m", "В/м"},
+    {"V", "В"},
+    {"J", "Дж"}
 };
-
 
 const char* Dictionary::dict(Words w, Language lang)
 {

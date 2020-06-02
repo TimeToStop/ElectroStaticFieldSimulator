@@ -51,7 +51,6 @@ HEADERS += \
     Options/container.h \
     Options/dictionary.h \
     Options/enums.h \
-    Options/theme.h \
     Options/translator.h \
     Options/colortheme.h \
     about.h \
