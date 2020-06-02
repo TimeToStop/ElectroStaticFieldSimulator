@@ -1156,7 +1156,7 @@ public:
         actionDark->setText(QCoreApplication::translate("MainWindow", "Dark", nullptr));
         actionLight->setText(QCoreApplication::translate("MainWindow", "Light", nullptr));
         actionEnglish->setText(QCoreApplication::translate("MainWindow", "English", nullptr));
-        actionRussian->setText(QCoreApplication::translate("MainWindow", "Russian", nullptr));
+        actionRussian->setText(QCoreApplication::translate("MainWindow", "\320\240\321\203\321\201\321\201\320\272\320\270\320\271", nullptr));
         actionAbout_Programm->setText(QCoreApplication::translate("MainWindow", "About Programm", nullptr));
         m_additional_group_box->setTitle(QCoreApplication::translate("MainWindow", "Additional", nullptr));
         m_scale_label->setText(QCoreApplication::translate("MainWindow", "Scale:", nullptr));

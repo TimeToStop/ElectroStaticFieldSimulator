@@ -1,6 +1,6 @@
 #include "valuewriter.h"
 
-ValueWriter::ValueWriter(const QString& name, const QString& measure,QWidget *parent):
+ValueWriter::ValueWriter(const QString& name, const QString& measure, QWidget *parent):
     ValueRepresenter(name, measure, parent),
     m_label(nullptr)
 {

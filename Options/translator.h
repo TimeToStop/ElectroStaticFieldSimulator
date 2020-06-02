@@ -21,6 +21,7 @@ class Translator
     std::vector<std::pair<int, ContainerHolder>> m_all_containers;
 
 public:
+    static Language currentLang();
 
     template<typename T, Words w>
     static void registerWidget(int id, T* object, void (T::* setText)(const QString&))

@@ -1,4 +1,5 @@
 #include "dictionary.h"
+#include "Options/translator.h"
 
 const char* const Dictionary::m_langs[Words::LENGTH_OF_WORDS_IN_DICT][Language::LENGTH_OF_LANGUAGES] =
 {
@@ -99,9 +100,33 @@ const char* const Dictionary::m_langs[Words::LENGTH_OF_WORDS_IN_DICT][Language::
     {"kg", "кг"}
 };
 
+QStringList Dictionary::m_prefixes[Language::LENGTH_OF_LANGUAGES] =
+{
+    // En default prefixes
+    QStringList() << "p" << "n" << "mc" << "m"
+                  << ""
+                  << "k" << "M" << "G" << "T",
+    // Rus default prefixes
+    QStringList() << "п" << "н" << "мк" << "м"
+                  << ""
+                  << "к" << "М" << "Г" << "Т"
+};
+
 const char* Dictionary::dict(Words w, Language lang)
 {
     return m_langs[w][lang];
+}
+
+QStringList Dictionary::prefix()
+{
+    switch (Translator::currentLang())
+    {
+    case Language::RUS:
+    case Language::EN:
+        return m_prefixes[Translator::currentLang()];
+    default:
+        return QStringList();
+    }
 }
 
 Dictionary::Dictionary()

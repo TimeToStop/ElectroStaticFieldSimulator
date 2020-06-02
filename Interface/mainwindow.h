@@ -84,7 +84,7 @@ public slots:
 
     void setRussian();
     void setEnglish();
-    void changeLanguage();
+    //void changeLanguage();
 
     void play();
     void pause();

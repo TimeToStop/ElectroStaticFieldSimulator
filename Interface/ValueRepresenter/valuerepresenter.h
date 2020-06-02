@@ -9,7 +9,6 @@
 class ValueRepresenter : public QWidget
 {
     Q_OBJECT
-    static const QStringList m_prefix;
 
 protected:
     int m_curr_index;
@@ -31,7 +30,7 @@ public:
     void setValue(float);
     float value() const;
 
-    void setMeasure(const QString&);
+    void setMeasure(const QString&);    
 
 protected:
     void setWidgets(QLabel*, QComboBox*);

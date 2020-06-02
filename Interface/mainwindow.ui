@@ -1196,7 +1196,7 @@
   </action>
   <action name="actionRussian">
    <property name="text">
-    <string>Russian</string>
+    <string>Русский</string>
    </property>
   </action>
   <action name="actionAbout_Programm">

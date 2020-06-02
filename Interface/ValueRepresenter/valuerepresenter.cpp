@@ -5,10 +5,7 @@
 #include <cmath>
 #include <QDebug>
 
-const QStringList ValueRepresenter::m_prefix = QStringList()
-        << "п" << "н" << "мк" << "м"
-        << ""
-        << "к" << "М" << "Г" << "Т";
+#include "Options/dictionary.h"
 
 ValueRepresenter::ValueRepresenter(const QString& name, const QString& measure, QWidget *parent):
     QWidget(parent),
@@ -26,6 +23,7 @@ ValueRepresenter::~ValueRepresenter()
 
 void ValueRepresenter::setValue(float val)
 {
+    static const int prefix_size = 9;
     bool is_positive = (val > 0);
     if(!is_positive)
     {
@@ -46,7 +44,7 @@ void ValueRepresenter::setValue(float val)
         }
         else
         {
-            while(abs(val) > 1000.f && indx != m_prefix.size())
+            while(abs(val) > 1000.f && indx != prefix_size)
             {
                 val /= 1000;
                 indx += 1;
@@ -73,7 +71,8 @@ void ValueRepresenter::setMeasure(const QString& m)
     disconnect(m_box, SIGNAL(currentIndexChanged(int)), this, SLOT(prefixChanged(int)));
     m_measure = m;
     m_box->clear();
-    for(const QString& prefix : m_prefix)
+    QStringList list = Dictionary::prefix();
+    for(const QString& prefix : list)
     {
         m_box->addItem(prefix + m_measure);
     }
@@ -86,7 +85,8 @@ void ValueRepresenter::setWidgets(QLabel* label, QComboBox* box)
     m_header = label;
     m_box = box;
     m_header->setText(m_name + " =");
-    for(const QString& prefix : m_prefix)
+    QStringList list = Dictionary::prefix();
+    for(const QString& prefix : list)
     {
         m_box->addItem(prefix + m_measure);
     }

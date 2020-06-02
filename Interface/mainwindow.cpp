@@ -133,8 +133,6 @@ MainWindow::MainWindow(QWidget *parent) :
     Translator::registerWidget<QAction, Words::SAVE>(m_id, ui->actionSave, &QAction::setText);
     Translator::registerWidget<QAction, Words::SAVE_AS>(m_id, ui->actionSave_as, &QAction::setText);
     Translator::registerWidget<QAction, Words::EXIT>(m_id, ui->actionExit, &QAction::setText);
-    Translator::registerWidget<QAction, Words::ENGLISH>(m_id, ui->actionEnglish, &QAction::setText);
-    Translator::registerWidget<QAction, Words::RUSSIAN>(m_id, ui->actionRussian, &QAction::setText);
     Translator::registerWidget<QAction, Words::HOW_TO>(m_id, ui->actionHow_To, &QAction::setText);
 
     Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_METRES>(m_id, &m_pos_x, &ValueRepresenter::setMeasure);
@@ -156,7 +154,6 @@ MainWindow::MainWindow(QWidget *parent) :
     Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_CHARGE>(m_id, &m_info_charge_q, &ValueRepresenter::setMeasure);
     Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_MASS>(m_id, &m_info_charge_mass, &ValueRepresenter::setMeasure);
 
-
     Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_VEL>(m_id, &m_info_charge_velocity, &ValueRepresenter::setMeasure);
     Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_VEL>(m_id, &m_info_charge_velocity_x, &ValueRepresenter::setMeasure);
     Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_VEL>(m_id, &m_info_charge_velocity_y, &ValueRepresenter::setMeasure);
@@ -170,11 +167,7 @@ MainWindow::MainWindow(QWidget *parent) :
     Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_WORK>(m_id, &m_info_system_whole_energy, &ValueRepresenter::setMeasure);
     Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_WORK>(m_id, &m_info_system_sum_energy, &ValueRepresenter::setMeasure);
 
-    Translator::setLanguage();
-
-
-  //  ui->m_tab_widget->setTabText(0, Translator::Dict<POSITION_INFO>(lang));
-  //  ui->m_tab_widget->setTabText(1, Translator::Dict<WORK>(lang));
+    Translator::setLanguage(Language::EN);
 
     connect(ui->m_engine, SIGNAL(cursorMoved(const QPoint&)), this, SLOT(cursorMoved(const QPoint&)));
     connect(ui->m_engine, SIGNAL(leftButtonClicked()), this, SLOT(leftButtonClicked()));
@@ -360,15 +353,20 @@ void MainWindow::resetChargeInfoList()
 
 void MainWindow::open()
 {
-    ui->m_engine->clearCharges();
+    QString selected = QFileDialog::getOpenFileName(this, "Open XML", "", tr("XML Files (*.xml)"));
+    if(selected == "")
+    {
+        return;
+    }
 
-    filename = QFileDialog::getOpenFileName(this, "Open XML", "", tr("XML Files (*.xml)"));
-
-
-    QFile file(filename);
+    QFile file(selected);
     if (!file.open(QFile::ReadOnly | QFile::Text)) {
         qDebug() << "Error: Cannot read file";
+        return;
     }
+
+    filename = selected;
+    ui->m_engine->clearCharges();
 
     QXmlStreamReader Rxml;
 
@@ -573,15 +571,20 @@ void MainWindow::saveAs()
 
 void MainWindow::saveAsMethod()
 {
-    filename = QFileDialog::getSaveFileName(this, "", "", "");
+    QString selected = QFileDialog::getSaveFileName(this, "", "", "");
+    if(selected == "")
+    {
+        return;
+    }
 
-    QFile file(filename);
+    QFile file(selected);
     if (!file.open(QFile::WriteOnly | QFile::Text))
     {
         qDebug() << "Error saving XML file.";
         file.close();
         return;
     }
+    filename = selected;
     file.open(QIODevice::WriteOnly);
 
     QXmlStreamWriter xmlWriter(&file);
@@ -657,14 +660,6 @@ void MainWindow::setEnglish()
 void MainWindow::setRussian()
 {
   Translator::setLanguage(RUS);
-}
-
-void MainWindow::changeLanguage()
-{
-    //////////MAIN WIDGET/////////
-
-
-
 }
 
 void MainWindow::play()
