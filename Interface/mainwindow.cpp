@@ -11,6 +11,11 @@
 #include "Options/translator.h"
 #include "Options/colortheme.h"
 
+#include <QDebug>
+#include <QFileDialog>
+#include <QtXml/QDomDocument>
+#include <QXmlStreamWriter>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     m_use_cursor(false),
@@ -39,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_info_system_sum_kenergy("Sum Ek", "Дж"),
     m_info_system_sum_energy("Sum W", "Дж"),
     m_info_system_whole_energy("W system", "Дж"),
+    filename(""),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -351,19 +357,275 @@ void MainWindow::resetChargeInfoList()
     }
 }
 
+
 void MainWindow::open()
 {
+    ui->m_engine->clearCharges();
 
+    filename = QFileDialog::getOpenFileName(this, "Open XML", "", tr("XML Files (*.xml)"));
+
+
+    QFile file(filename);
+    if (!file.open(QFile::ReadOnly | QFile::Text)) {
+        qDebug() << "Error: Cannot read file";
+    }
+
+    QXmlStreamReader Rxml;
+
+    Rxml.setDevice(&file);
+    Rxml.readNext();
+
+    Charge chargeObject(ui->m_engine);
+    size_t size = 0;
+    QString name = "default";
+    bool is_ignored = false;
+    bool is_movable = false;
+    double charge = 0;
+    double mass;
+    double xPos;
+    double yPos;
+    double xVel;
+    double yVel;
+    Vector vectorPos;
+    Vector vectorVel = Vector(0, 0);
+
+    while (!Rxml.atEnd()) {
+        if (Rxml.isStartElement()) {
+            if (Rxml.name() == "Charges") {
+                qDebug() << "CHARGES: ";
+            }
+
+            else if (Rxml.name() == "Charge") {
+                size++;
+                while (!Rxml.atEnd()) {
+                    if (Rxml.isEndElement()) {
+                        Rxml.readNext();
+                        break;
+                    }
+                    else if (Rxml.isCharacters()) {
+                        Rxml.readNext();
+                    }
+                    else if (Rxml.isStartElement()) {
+                        if (Rxml.name() == "name") {
+                            name = Rxml.readElementText();
+                        }
+                        else if (Rxml.name() == "is_ignored") {
+                            is_ignored = (Rxml.readElementText() == "true");
+                        }
+                        else if (Rxml.name() == "is_movable") {
+                            is_movable = (Rxml.readElementText() == "true");
+                        }
+                        else if (Rxml.name() == "charge") {
+                            charge = Rxml.readElementText().toDouble();
+                        }
+                        else if (Rxml.name() == "mass") {
+                            mass = Rxml.readElementText().toDouble();
+                        }
+
+                        else if (Rxml.name() == "pos") {
+                            while (!Rxml.atEnd()) {
+                                if (Rxml.isEndElement()) {
+                                    Rxml.readNext();
+                                    break;
+                                }
+
+                                else if (Rxml.isCharacters()) {
+                                    Rxml.readNext();
+                                }
+
+                                else if (Rxml.isStartElement()) {
+                                    if (Rxml.name() == "x") {
+                                        xPos = Rxml.readElementText().toDouble();
+                                        qDebug() << "x: " << xPos;
+                                    }
+                                    else if (Rxml.name() == "y") {
+                                        yPos = Rxml.readElementText().toDouble();
+                                        qDebug() << "y: " << yPos;
+                                    }
+                                    Rxml.readNext();
+                                }
+                                else {
+                                    Rxml.readNext();
+                                }
+                            }
+                        }
+
+                        else if (Rxml.name() == "vel") {
+                            while (!Rxml.atEnd()) {
+                                if (Rxml.isEndElement()) {
+                                    Rxml.readNext();
+                                    break;
+                                }
+
+                                else if (Rxml.isCharacters()) {
+                                    Rxml.readNext();
+                                }
+
+                                else if (Rxml.isStartElement()) {
+                                    if (Rxml.name() == "x") {
+                                        xVel = Rxml.readElementText().toDouble();
+                                    }
+                                    else if (Rxml.name() == "y") {
+                                        yVel = Rxml.readElementText().toDouble();
+                                    }
+                                    Rxml.readNext();
+                                }
+                                else {
+                                    Rxml.readNext();
+                                }
+                            }
+                        }
+
+                        vectorPos = Vector(xPos, yPos);
+                        vectorVel = Vector(xVel, yVel);
+
+                        Rxml.readNext();
+                    }
+                    else {
+                        Rxml.readNext();
+                    }
+                }
+                if (name == "") {
+                    name = "Charge " + QString::number(size);
+                }
+                if (mass <= 0) {
+                    mass = 1;
+                }
+
+                qDebug() << "charge: " << charge;
+                ui->m_engine->addCharge(std::unique_ptr<Charge>(new Charge(name, charge, mass, vectorPos,
+                                                                           vectorVel, is_ignored, is_movable, ui->m_engine)));
+            }
+        }
+        Rxml.readNext();
+    }
+
+    qDebug() << "end";
+    file.close();
 }
 
 void MainWindow::save()
 {
+    if (filename == "") {
+        saveAsMethod();
+    }
 
+    else {
+        QFile file(filename);
+        if (!file.open(QFile::WriteOnly | QFile::Text))
+        {
+            qDebug() << "Error saving XML file.";
+            file.close();
+            return;
+        }
+        file.open(QIODevice::WriteOnly);
+
+        QXmlStreamWriter xmlWriter(&file);
+        xmlWriter.setAutoFormatting(true);
+        xmlWriter.writeStartDocument();
+
+
+        xmlWriter.writeStartElement("Charges");
+
+        for (size_t i = 0; i < ui->m_engine->chargesNum(); i++) {
+            xmlWriter.writeStartElement("Charge");
+
+            xmlWriter.writeTextElement("name", ui->m_engine->getCharge(i)->name());
+
+            xmlWriter.writeTextElement("is_ignored", ui->m_engine->getCharge(i)->is_ignored() ? "true" : "false");
+            xmlWriter.writeTextElement("is_movable", ui->m_engine->getCharge(i)->is_movable() ? "true" : "false");
+
+            xmlWriter.writeTextElement("charge", QString::number(ui->m_engine->getCharge(i)->charge()));
+            xmlWriter.writeTextElement("mass", QString::number(ui->m_engine->getCharge(i)->mass()));
+
+
+            Vector pos = ui->m_engine->getCharge(i)->pos();
+            xmlWriter.writeStartElement("pos");
+            xmlWriter.writeTextElement("x", QString::number(pos.x()));
+            xmlWriter.writeTextElement("y", QString::number(pos.y()));
+            xmlWriter.writeEndElement();
+
+            Vector vel = ui->m_engine->getCharge(i)->velocity();
+            xmlWriter.writeStartElement("vel");
+            xmlWriter.writeTextElement("x", QString::number(vel.x()));
+            xmlWriter.writeTextElement("y", QString::number(vel.y()));
+            xmlWriter.writeEndElement();
+
+            Vector acc = ui->m_engine->getCharge(i)->acceleration();
+            xmlWriter.writeStartElement("acc");
+            xmlWriter.writeTextElement("x", QString::number(acc.x()));
+            xmlWriter.writeTextElement("y", QString::number(acc.y()));
+            xmlWriter.writeEndElement();
+
+            xmlWriter.writeEndElement();
+        }
+
+        xmlWriter.writeEndElement();
+
+        file.close();
+    }
 }
 
 void MainWindow::saveAs()
 {
+    saveAsMethod();
+}
 
+void MainWindow::saveAsMethod()
+{
+    filename = QFileDialog::getSaveFileName(this, "", "", "");
+
+    QFile file(filename);
+    if (!file.open(QFile::WriteOnly | QFile::Text))
+    {
+        qDebug() << "Error saving XML file.";
+        file.close();
+        return;
+    }
+    file.open(QIODevice::WriteOnly);
+
+    QXmlStreamWriter xmlWriter(&file);
+    xmlWriter.setAutoFormatting(true);
+    xmlWriter.writeStartDocument();
+
+
+    xmlWriter.writeStartElement("Charges");
+
+    for (size_t i = 0; i < ui->m_engine->chargesNum(); i++) {
+        xmlWriter.writeStartElement("Charge");
+
+        xmlWriter.writeTextElement("name", ui->m_engine->getCharge(i)->name());
+
+        xmlWriter.writeTextElement("is_ignored", ui->m_engine->getCharge(i)->is_ignored() ? "true" : "false");
+        xmlWriter.writeTextElement("is_movable", ui->m_engine->getCharge(i)->is_movable() ? "true" : "false");
+
+        xmlWriter.writeTextElement("charge", QString::number(ui->m_engine->getCharge(i)->charge()));
+        xmlWriter.writeTextElement("mass", QString::number(ui->m_engine->getCharge(i)->mass()));
+
+
+        Vector pos = ui->m_engine->getCharge(i)->pos();
+        xmlWriter.writeStartElement("pos");
+        xmlWriter.writeTextElement("x", QString::number(pos.x()));
+        xmlWriter.writeTextElement("y", QString::number(pos.y()));
+        xmlWriter.writeEndElement();
+
+        Vector vel = ui->m_engine->getCharge(i)->velocity();
+        xmlWriter.writeStartElement("vel");
+        xmlWriter.writeTextElement("x", QString::number(vel.x()));
+        xmlWriter.writeTextElement("y", QString::number(vel.y()));
+        xmlWriter.writeEndElement();
+
+        Vector acc = ui->m_engine->getCharge(i)->acceleration();
+        xmlWriter.writeStartElement("acc");
+        xmlWriter.writeTextElement("x", QString::number(acc.x()));
+        xmlWriter.writeTextElement("y", QString::number(acc.y()));
+        xmlWriter.writeEndElement();
+
+        xmlWriter.writeEndElement();
+    }
+    xmlWriter.writeEndElement();
+
+    file.close();
 }
 
 void MainWindow::exit()

@@ -17,6 +17,7 @@ class MainWindow: public QMainWindow
     bool m_use_cursor;
 
     int m_id;
+    QString filename;
 
     ValueEdit m_pos_x;
     ValueEdit m_pos_y;
@@ -71,8 +72,11 @@ public slots:
 
     // Main menu
     void open();
+    
     void save();
     void saveAs();
+    void saveAsMethod();
+    
     void exit();
 
     void help();
