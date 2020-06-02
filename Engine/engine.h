@@ -49,10 +49,11 @@ public:
 
     void addCharge(std::unique_ptr<Charge>&&);
     void rmCharge(size_t);
+    void clearCharges();
 
     size_t chargesNum() const;
     bool hasCharges() const;
-    const std::unique_ptr<Charge>& getCharge(size_t i) const;
+    std::unique_ptr<Charge>& getCharge(size_t i);
     QStringList chargeNames() const;
     float lambda() const;
 
@@ -66,6 +67,8 @@ public:
 
     Vector applyCharge(size_t);
     static int sign(float);
+
+
 };
 
 #endif // ENGINE_H

@@ -60,6 +60,11 @@ void Engine::rmCharge(size_t i)
     m_charges.erase(m_charges.begin() + i);
 }
 
+void Engine::clearCharges()
+{
+    m_charges.clear();
+}
+
 size_t Engine::chargesNum() const
 {
     return m_charges.size();
@@ -70,7 +75,7 @@ bool Engine::hasCharges() const
     return m_charges.size() != 0;
 }
 
-const std::unique_ptr<Charge>& Engine::getCharge(size_t i) const
+std::unique_ptr<Charge>& Engine::getCharge(size_t i)
 {
     return m_charges[i];
 }
@@ -240,6 +245,7 @@ int Engine::sign(float x)
 {
     return (x > 0) ? 1 : -1;
 }
+
 
 void Engine::setEngineState(EngineState state)
 {
