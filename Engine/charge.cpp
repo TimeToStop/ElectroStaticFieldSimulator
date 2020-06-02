@@ -60,7 +60,6 @@ Charge::Charge(const QString& name, float q, float mass, Vector pos, Vector vel,
     m_amount++;
 }
 
-
 Charge::~Charge()
 {
     m_amount--;

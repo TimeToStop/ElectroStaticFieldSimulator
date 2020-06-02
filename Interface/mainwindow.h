@@ -72,9 +72,11 @@ public slots:
 
     // Main menu
     void open();
+    
     void save();
     void saveAs();
     void saveAsMethod();
+    
     void exit();
 
     void help();

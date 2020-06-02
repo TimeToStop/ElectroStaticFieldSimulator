@@ -31,7 +31,6 @@ public:
     Charge(float, Vector, Engine * const);
     Charge(const QString&, float, float, Vector, Engine* const);
     Charge(const QString&, float, float, Vector, Vector, bool, bool, Engine* const);
-    //Charge(const QString& name, float q, float mass, Vector pos, Vector vel, Engine * const engine);
     ~Charge();
 
     void draw(QPainter&);

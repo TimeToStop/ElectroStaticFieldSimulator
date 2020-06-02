@@ -327,7 +327,8 @@ void MainWindow::resetChargeInfoList()
     }
 }
 
-void MainWindow::open()         // ДОБАВИТЬ ИСКЛЮЧЕНИЯ ХУЕ-МОЕ
+
+void MainWindow::open()
 {
     ui->m_engine->clearCharges();
 
