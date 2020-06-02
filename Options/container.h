@@ -41,7 +41,6 @@ class Container<QTabWidget> : public AbstractContainer
     QTabWidget* m_object;
     Method m_method;
 
-    //New FIELD !!!!!
     int m_index;
 
 public:
