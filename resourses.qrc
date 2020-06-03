@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>icons/erisdkm28.png</file>
+        <file>icons/winicon.png</file>
+        <file>icons/mcharge.png</file>
+        <file>icons/pcharge.png</file>
+    </qresource>
+</RCC>

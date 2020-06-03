@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../../resourses.qrc">
+    <normaloff>:/icons/icons/winicon.png</normaloff>:/icons/icons/winicon.png</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -26,8 +30,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>775</width>
-          <height>362</height>
+          <width>779</width>
+          <height>372</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -52,7 +56,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../resourses.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

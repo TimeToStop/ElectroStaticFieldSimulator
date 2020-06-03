@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>564</width>
-    <height>242</height>
+    <height>309</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -17,7 +17,11 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>About</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resourses.qrc">
+    <normaloff>:/icons/icons/winicon.png</normaloff>:/icons/icons/winicon.png</iconset>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_7">
    <item>
@@ -25,7 +29,7 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_6">
        <item>
-        <widget class="QLabel" name="label_8">
+        <widget class="QLabel" name="pic">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -36,7 +40,7 @@
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap>icons/erisdkm28.png</pixmap>
+          <pixmap resource="resourses.qrc">:/icons/icons/erisdkm28.png</pixmap>
          </property>
         </widget>
        </item>
@@ -71,7 +75,7 @@
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_2">
              <item>
-              <widget class="QLabel" name="label_2">
+              <widget class="QLabel" name="m_devs_label">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
@@ -85,6 +89,22 @@
                 <set>Qt::AlignCenter</set>
                </property>
               </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Preferred</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
              </item>
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -135,7 +155,7 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_5">
            <item>
-            <widget class="QLabel" name="label_7">
+            <widget class="QLabel" name="m_rights_label">
              <property name="text">
               <string>Все права защищены.</string>
              </property>
@@ -178,7 +198,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="resourses.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>pushButton</sender>

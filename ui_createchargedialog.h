@@ -69,6 +69,9 @@ public:
         if (CreateChargeDialog->objectName().isEmpty())
             CreateChargeDialog->setObjectName(QStringLiteral("CreateChargeDialog"));
         CreateChargeDialog->resize(545, 297);
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/icons/icons/winicon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        CreateChargeDialog->setWindowIcon(icon);
         gridLayout = new QGridLayout(CreateChargeDialog);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         verticalLayout = new QVBoxLayout();

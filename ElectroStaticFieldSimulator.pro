@@ -68,4 +68,7 @@ FORMS += \
     about.ui \
     Interface/help.ui
 
+RESOURCES += \
+    resourses.qrc
+
 

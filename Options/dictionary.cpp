@@ -43,7 +43,11 @@ const char* const Dictionary::m_langs[Words::LENGTH_OF_WORDS_IN_DICT][Language::
 
     {"Energy", "Энергия"},
 
+    {"Charge", "Заряд"},
+
     {"Use Cursor Position", "Использовать Позицию Курсора"},
+
+    {"Position", "Позиция"},
 
     {"Position:", "Позиция:"},
 
@@ -61,7 +65,7 @@ const char* const Dictionary::m_langs[Words::LENGTH_OF_WORDS_IN_DICT][Language::
 
     {"Additional", "Дополнительно"},
 
-    {"Camera:", "Камера:"},
+    {"Camera", "Камера"},
 
     {"Default", "По умолчанию"},
 
@@ -77,11 +81,15 @@ const char* const Dictionary::m_langs[Words::LENGTH_OF_WORDS_IN_DICT][Language::
 
     {"Position Info", "Информация по позиции"},
 
+    {"Charge Info", "Информация о заряде"},
+
+    {"System Info", "Информация о системе"},
+
     {"Name:", "Имя заряда:"},
 
     {"Velocity:", "Скорость:"},
 
-    {"Ignore:", "Игнорировать:"},
+    {"Ignore", "Игнорировать"},
 
     {"Is Movable", "Динамический заряд"},
 
@@ -97,7 +105,10 @@ const char* const Dictionary::m_langs[Words::LENGTH_OF_WORDS_IN_DICT][Language::
     {"V", "В"},
     {"J", "Дж"},
     {"C", "Кл"},
-    {"kg", "кг"}
+    {"kg", "кг"},
+
+    {"Developers:", "Работали Над Проектом:"},
+    {"All Rights Reserved.", "Все Права Защищены."}
 };
 
 QStringList Dictionary::m_prefixes[Language::LENGTH_OF_LANGUAGES] =

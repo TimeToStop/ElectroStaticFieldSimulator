@@ -41,9 +41,9 @@ MainWindow::MainWindow(QWidget *parent) :
     m_info_charge_acceleration_x("a_x", "м/с^2"),
     m_info_charge_acceleration_y("a_y", "м/c^2"),
     m_info_charge_energy("Ek", "Дж"),
-    m_info_system_sum_kenergy("Sum Ek", "Дж"),
-    m_info_system_sum_energy("Sum W", "Дж"),
-    m_info_system_whole_energy("W system", "Дж"),
+    m_info_system_sum_kenergy("Σ Ek", "Дж"),
+    m_info_system_sum_energy("Σ W", "Дж"),
+    m_info_system_whole_energy("Wsys", "Дж"),
     filename(""),
     ui(new Ui::MainWindow)
 {
@@ -92,7 +92,6 @@ MainWindow::MainWindow(QWidget *parent) :
     Translator::registerWidget<QPushButton, Words::SPEED>(m_id, ui->m_speed_button, &QPushButton::setText);
 
     Translator::registerWidget<QPushButton, Words::EDIT_CHARGE>(m_id, ui->m_edit_charge_button, &QPushButton::setText);
-    //Translator::registerWidget<QPushButton, Words::IGNORE_CHARGE>(m_id, ui->m_ignore_charge_button, &QPushButton::setText);
     Translator::registerWidget<QPushButton, Words::ADD_CHARGE>(m_id, ui->m_add_charge_button, &QPushButton::setText);
     Translator::registerWidget<QPushButton, Words::REMOVE_CHARGE>(m_id, ui->m_remove_charge_button, &QPushButton::setText);
 
@@ -109,6 +108,7 @@ MainWindow::MainWindow(QWidget *parent) :
     Translator::registerWidget<QLabel, Words::CAMERA_AT>(m_id, ui->m_camera_change_label, &QLabel::setText);
     Translator::registerWidget<QLabel, Words::SCALE>(m_id, ui->m_scale_label, &QLabel::setText);
     Translator::registerWidget<QLabel, Words::CHANGE_SCENE>(m_id, ui->m_schange_scene_label, &QLabel::setText);
+    Translator::registerWidget<QLabel, Words::CHARGE>(m_id, ui->m_info_charges_label, &QLabel::setText);
 
     //check boxes
     Translator::registerWidget<QCheckBox, Words::USE_CURSOR_POSITION>(m_id, ui->m_use_cursor_dest, &QCheckBox::setText);
@@ -121,6 +121,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     Translator::registerWidget<Words::POSITION_INFO>(0, m_id, ui->m_tab_widget, &QTabWidget::setTabText);
     Translator::registerWidget<Words::WORK>(1, m_id, ui->m_tab_widget, &QTabWidget::setTabText);
+    Translator::registerWidget<Words::CHARGE_INFO>(2, m_id, ui->m_tab_widget, &QTabWidget::setTabText);
+    Translator::registerWidget<Words::SYSTEM_INFO>(3, m_id, ui->m_tab_widget, &QTabWidget::setTabText);
 
     //menu
     Translator::registerWidget<QMenu, Words::FILE_>(m_id, ui->menuFile, &QMenu::setTitle);
@@ -259,6 +261,7 @@ void MainWindow::addCharge()
     }
 
     ui->m_engine->setEngineState(e);
+    repaint();
 }
 
 void MainWindow::editCharge()
@@ -293,6 +296,7 @@ void MainWindow::editCharge()
 
         ui->m_engine->setEngineState(e);
     }
+    repaint();
 }
 
 //void MainWindow::ignoreCharges()
@@ -330,6 +334,7 @@ void MainWindow::rmCharge()
 
         ui->m_engine->setEngineState(e);
     }
+    repaint();
 }
 
 void MainWindow::resetCameraChange()
