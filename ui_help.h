@@ -76,7 +76,7 @@ public:
 
     void retranslateUi(QWidget *Help)
     {
-        Help->setWindowTitle(QApplication::translate("Help", "Help", nullptr));
+        Help->setWindowTitle(QApplication::translate("Help", "\320\237\320\276\320\274\320\276\321\211\321\214", nullptr));
         textBrowser->setHtml(QApplication::translate("Help", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -139,15 +139,14 @@ public:
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">\320\234\320\260\321\200\320\272\320\265\321\200 <span style=\" font-weight:600;\">&quot;\320\237\320\276\320\272\320\260\320\267\320\260\321\202\321\214 \321\215\320\273\320\265\320"
                         "\272\321\202\321\200\320\276\321\201\321\202\320\260\321\202\320\270\321\207\320\265\321\201\320\272\320\276\320\265 \320\277\320\276\320\273\320\265&quot;</span> \321\201\320\273\321\203\320\266\320\270\321\202 \320\264\320\273\321\217 \320\262\321\213\320\262\320\276\320\264\320\260 \321\201\320\276\321\201\321\202\320\276\321\217\320\275\320\270\321\217 \321\215\320\273\320\265\320\272\321\202\321\200\320\276\321\201\321\202\320\260\321\202\320\270\321\207\320\265\321\201\320\272\320\276\320\263\320\276 \320\277\320\276\320\273\321\217 \320\262 \320\264\320\260\320\275\320\275\321\213\320\271 \320\274\320\276\320\274\320\265\320\275\321\202 \320\262\321\200\320\265\320\274\320\265\320\275\320\270.</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">\320\234"
+                        "\320\260\321\200\320\272\320\265\321\200<span style=\" font-weight:600;\"> &quot;\320\234\320\260\321\201\321\210\321\202\320\260\320\261&quot;</span> \321\201\320\273\321\203\320\266\320\270\321\202 \320\264\320\273\321\217 \320\270\320\267\320\274\320\265\320\275\320\270\321\217 \320\265\320\264\320\270\320\275\320\270\321\206\321\213 \320\270\320\267\320\274\320\265\321\200\320\265\320\275\320\270\321\217 \321\204\320\270\320\267\320\270\321\207\320\265\321\201\320\272\320\276\320\271 \321\201\320\270\321\201\321\202\320\265\320\274\321\213 \320\276\321\202\321\201\321\207\320\265\321\202\320\260.</p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">\320\237\320\276\320\273\320"
-                        "\267\321\203\320\275\320\276\320\272 <span style=\" font-weight:600;\">&quot;\320\234\320\260\321\201\321\210\321\202\320\260\320\261&quot;</span> \321\201\320\273\321\203\320\266\320\270\321\202 \320\264\320\273\321\217 \320\277\321\200\320\270\320\261\320\273\320\270\320\266\320\265\320\275\320\270\321\217/\320\276\321\202\320\264\320\260\320\273\320\265\320\275\320\270\321\217 \320\262\320\270\320\264\320\260 \320\276\320\261\320\276\320\267\321\200\320\265\320\262\320\260\320\265\320\274\320\276\320\271 \320\276\320\261\320\273\320\260\321\201\321\202\320\270.</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">( \320\235\320\265 \321\200\320\265\320\260\320\273\320\270\320\267\320\276\320\262\320\260\320\275 :(  )</p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; mar"
-                        "gin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">(\320\222\321\213\320\261\320\276\321\200 \320\272\320\260\320\274\320\265\321\200\321\213 \320\270 \321\201\321\206\320\265\320\275\321\213 \321\202\320\276\320\266\320\265 \320\275\320\265 \321\200\320\265\320\260\320\273\320\270\320\267\320\276\320\262\320\260\320\275 \320\272\320\276\321\200\321\200\320\265\320\272\321\202\320\275\320\276 :( )</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">(\320\222\321\213\320\261\320\276\321\200 \320\272\320\260\320\274\320\265\321\200\321\213 \320\270 \321\201\321\206\320\265\320"
+                        "\275\321\213 \320\275\320\265 \321\200\320\265\320\260\320\273\320\270\320\267\320\276\320\262\320\260\320\275 \320\272\320\276\321\200\321\200\320\265\320\272\321\202\320\275\320\276 :( )</p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-style:italic;\"><br /></p></body></html>", nullptr));
-        pushButton->setText(QApplication::translate("Help", "Okay", nullptr));
+        pushButton->setText(QApplication::translate("Help", "\320\227\320\260\320\272\321\200\321\213\321\202\321\214", nullptr));
     } // retranslateUi
 
 };
