@@ -51,8 +51,8 @@
    <string>Charges Simulator</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>../icons/pcharge.png</normaloff>../icons/pcharge.png</iconset>
+   <iconset resource="../resourses.qrc">
+    <normaloff>:/icons/icons/winicon.png</normaloff>:/icons/icons/winicon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -110,19 +110,6 @@
                 </property>
                </widget>
               </item>
-              <item row="0" column="1">
-               <widget class="QSlider" name="horizontalSlider">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-               </widget>
-              </item>
               <item row="0" column="2">
                <widget class="QCheckBox" name="m_show_grid">
                 <property name="text">
@@ -156,6 +143,61 @@
               </item>
               <item row="1" column="3">
                <widget class="QComboBox" name="m_change_scene"/>
+              </item>
+              <item row="0" column="1">
+               <widget class="QComboBox" name="scale_box">
+                <property name="currentText">
+                 <string>m</string>
+                </property>
+                <property name="currentIndex">
+                 <number>4</number>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>pm</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>nm</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>mcm</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>mm</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>m</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>km</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Mm</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Gm</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Tm</string>
+                 </property>
+                </item>
+               </widget>
               </item>
              </layout>
             </item>
@@ -253,7 +295,7 @@
             </size>
            </property>
            <property name="currentIndex">
-            <number>2</number>
+            <number>3</number>
            </property>
            <widget class="QWidget" name="m_position_info_tab">
             <attribute name="title">
@@ -989,7 +1031,7 @@
                  <item>
                   <widget class="QLabel" name="m_info_system_kenergy_label">
                    <property name="text">
-                    <string>S Ek</string>
+                    <string>Σ Ek</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -999,7 +1041,7 @@
                  <item>
                   <widget class="QLabel" name="m_info_system_sum_energy_label">
                    <property name="text">
-                    <string>S W</string>
+                    <string>Σ W</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -1107,7 +1149,7 @@
      <x>0</x>
      <y>0</y>
      <width>1172</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1213,7 +1255,9 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../resourses.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>m_show_grid</sender>

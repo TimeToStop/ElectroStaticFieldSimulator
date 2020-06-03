@@ -67,8 +67,13 @@ Charge::~Charge()
 
 void Charge::draw(QPainter& painter)
 {
-    painter.setPen(QPen(Qt::black, 1, Qt::SolidLine));
-    painter.setBrush(QBrush(Qt::black, Qt::SolidPattern));
+    if (m_charge < 0) {
+      painter.setPen(QPen(Qt::blue, 1, Qt::SolidLine));
+      painter.setBrush(QBrush(Qt::blue, Qt::SolidPattern));
+    } else {
+      painter.setPen(QPen(Qt::darkRed, 1, Qt::SolidLine));
+      painter.setBrush(QBrush(Qt::darkRed, Qt::SolidPattern));
+    }
     painter.drawEllipse(m_engine->fromXOY(m_pos).toPointF(), m_radius, m_radius);
 }
 

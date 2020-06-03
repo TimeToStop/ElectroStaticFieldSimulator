@@ -12,6 +12,8 @@ class About : public QDialog
     Q_OBJECT
 
 public:
+    int m_id;
+
     explicit About(QWidget *parent = 0);
     ~About();
 

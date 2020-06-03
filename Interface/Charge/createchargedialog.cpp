@@ -25,7 +25,7 @@ CreateChargeDialog::CreateChargeDialog(const QStringList&, QWidget *parent) :
     //Labels
     Translator::registerWidget<QLabel, Words::NAME>(m_id, ui->m_name_label, &QLabel::setText);
     Translator::registerWidget<QLabel, Words::VELOCITY>(m_id, ui->m_vel_label, &QLabel::setText);
-    Translator::registerWidget<QLabel, Words::POSITION>(m_id, ui->m_pos_label, &QLabel::setText);
+    Translator::registerWidget<QLabel, Words::POSITION_>(m_id, ui->m_pos_label, &QLabel::setText);
 
     //CheckBoxes
     Translator::registerWidget<QCheckBox, Words::IS_IGNORE>(m_id, ui->m_is_ignored, &QCheckBox::setText);

@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Charge Constructor</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../../resourses.qrc">
+    <normaloff>:/icons/icons/winicon.png</normaloff>:/icons/icons/winicon.png</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -182,7 +186,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../resourses.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

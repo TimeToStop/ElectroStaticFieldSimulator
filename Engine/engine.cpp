@@ -119,11 +119,13 @@ Vector Engine::calculateTension(const Vector& v)  const
             const float dx = v.x() - m_charges[i]->pos().x();
             const float dy = m_charges[i]->pos().y() - v.y();
             const double distance = sqrt(dx * dx + dy * dy);
+            if (abs(distance) > 0.f) {
             const double tension = (k * (double)m_charges[i]->charge()) / (distance * distance);
             const float tension_x = tension * dx / distance;
             const float tension_y = tension * dy / distance;
             res_tension_x += tension_x;
             res_tension_y += tension_y;
+            }
         }
     }
     return Vector(res_tension_x, res_tension_y);
