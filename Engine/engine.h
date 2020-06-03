@@ -56,6 +56,7 @@ public:
     std::unique_ptr<Charge>& getCharge(size_t i);
     QStringList chargeNames() const;
     float lambda() const;
+    void setLambda(float);
 
     Vector calculateTension(const Vector&) const;
     float calculatePotential(const Vector&) const;
@@ -67,8 +68,6 @@ public:
 
     Vector applyCharge(size_t);
     static int sign(float);
-
-
 };
 
 #endif // ENGINE_H

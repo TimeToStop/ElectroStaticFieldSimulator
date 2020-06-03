@@ -98,6 +98,8 @@ public slots:
     void cursorMoved(const QPoint&);
     void leftButtonClicked();
 
+    void scaleChanged(int);
+
 private:
     Ui::MainWindow *ui;
 };

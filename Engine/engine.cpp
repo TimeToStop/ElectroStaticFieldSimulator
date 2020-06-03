@@ -10,11 +10,15 @@ Engine::Engine():
     m_charges(),
     m_engine_state(EngineState::PAUSE)
 {
-    m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(3, 3), this)));
+//    m_charges.push_back(std::unique_ptr<Charge>(new Charge(1, Vector(0, 5), this)));
+//    m_charges.push_back(std::unique_ptr<Charge>(new Charge(1, Vector(0, 0), this)));
 //    m_charges.push_back(std::unique_ptr<Charge>(new Charge(0.1f, Vector(2, -1), this)));
 //    m_charges.push_back(std::unique_ptr<Charge>(new Charge(1.f, Vector(-1, 0), this)));
 
-    m_charges[0]->setCharge(0.00001);
+//    m_charges[0]->setVelocity(Vector(5, 0));
+
+//    m_charges[0]->setCharge(0.0001);
+//    m_charges[1]->setCharge(-0.0001);
 //    m_charges[1]->setCharge(0.00001);
 //    m_charges[2]->setCharge(0.00001);
 }
@@ -105,6 +109,11 @@ Vector Engine::fromXOY(float x, float y) const
 float Engine::lambda() const
 {
     return m_lambda;
+}
+
+void Engine::setLambda(float lambda)
+{
+    m_lambda = lambda;
 }
 
 Vector Engine::calculateTension(const Vector& v)  const

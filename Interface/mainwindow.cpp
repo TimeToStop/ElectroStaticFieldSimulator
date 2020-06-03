@@ -811,4 +811,8 @@ void MainWindow::leftButtonClicked()
     }
 }
 
-
+void MainWindow::scaleChanged(int indx)
+{
+    ui->m_engine->setLambda(0.1f * pow(10, -12 + 3 * indx));
+    repaint();
+}

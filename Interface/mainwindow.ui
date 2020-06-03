@@ -1149,7 +1149,7 @@
      <x>0</x>
      <y>0</y>
      <width>1172</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -1314,8 +1314,8 @@
    <slot>editCharge()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>959</x>
-     <y>161</y>
+     <x>1134</x>
+     <y>141</y>
     </hint>
     <hint type="destinationlabel">
      <x>1065</x>
@@ -1330,8 +1330,8 @@
    <slot>rmCharge()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1068</x>
-     <y>198</y>
+     <x>1134</x>
+     <y>176</y>
     </hint>
     <hint type="destinationlabel">
      <x>878</x>
@@ -1346,8 +1346,8 @@
    <slot>play()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>636</x>
-     <y>474</y>
+     <x>710</x>
+     <y>470</y>
     </hint>
     <hint type="destinationlabel">
      <x>558</x>
@@ -1362,8 +1362,8 @@
    <slot>pause()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>769</x>
-     <y>474</y>
+     <x>856</x>
+     <y>470</y>
     </hint>
     <hint type="destinationlabel">
      <x>557</x>
@@ -1394,12 +1394,28 @@
    <slot>edit()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1051</x>
-     <y>471</y>
+     <x>1147</x>
+     <y>470</y>
     </hint>
     <hint type="destinationlabel">
      <x>556</x>
      <y>332</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>scale_box</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>scaleChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>771</x>
+     <y>542</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>556</x>
+     <y>598</y>
     </hint>
    </hints>
   </connection>
@@ -1415,5 +1431,6 @@
   <slot>pause()</slot>
   <slot>speed_x_2()</slot>
   <slot>edit()</slot>
+  <slot>scaleChanged(int)</slot>
  </slots>
 </ui>

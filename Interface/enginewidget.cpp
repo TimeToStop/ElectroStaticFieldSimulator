@@ -12,7 +12,7 @@ EngineWidget::EngineWidget(QWidget *parent):
     m_pos_left_mouse_clicked(),
     m_previous_pos_right_mouse_clicked(),
     m_diff_from_start(),
-    m_default_time(1.f),
+    m_default_time(10.f),
     m_main_timer(),
     m_camera(-1)
 {    
@@ -33,17 +33,17 @@ void EngineWidget::paintEvent(QPaintEvent*)
 
     drawBorder(painter);
 
+    if(m_draw_field)
+    {
+        drawElectrostaticField(painter);
+    }
+
     if(m_draw_grid)
     {
         drawGrid(painter);
     }
 
     Engine::drawCharges(painter);
-
-    if(m_draw_field)
-    {
-        drawElectrostaticField(painter);
-    }
 }
 
 void EngineWidget::mousePressEvent(QMouseEvent* e)
@@ -152,7 +152,7 @@ void EngineWidget::drawGrid(QPainter& painter)
     painter.setPen(QPen(QColor(100, 100, 100, 60), 1, Qt::SolidLine));
 
     // ОТРИСОВКА СЕТКИ
-    stepVector = fromXOY(Vector(1, 0));
+    stepVector = fromXOY(Vector(lambda()/0.1f, 0));
     step = stepVector.x() - startVector.x();
     for(int i = startX % step; i < width(); i += step)
     {
@@ -174,7 +174,7 @@ void EngineWidget::drawGrid(QPainter& painter)
     painter.setFont(font);
 
     // ОТРИСОВКА ПОЛОСОК КАЖДЫЕ 5 ЕДИНИЦ ПО Х
-    stepVector = fromXOY(Vector(5, 0));
+    stepVector = fromXOY(Vector(5*lambda()/0.1f, 0));
     step = stepVector.x() - startVector.x();
     for (int i = startX % step; i < width(); i += step)
     {
@@ -187,52 +187,53 @@ void EngineWidget::drawGrid(QPainter& painter)
         painter.drawLine(startX - 5, i, startX + 5, i);
     }
 
+    float f = (lambda()/0.1f);
+
     // ОТРИСОВКА ЧИСЕЛ ПО Х
     Vector vectorX = toXOY(Vector(0, height() / 2));
-    for (int i = vectorX.x() - (int)vectorX.x() % 5; fromXOY(Vector(i, startY)).x() < width(); i += 5)
+    for (int i = vectorX.x()/(f) - ((int)(vectorX.x()/f) % 5); fromXOY(Vector(i*f, startY)).x() < width(); i += 5)
     {
-        painter.drawText(fromXOY(Vector(i, 0)).x(), startY - 10, QString::number(i));
+        painter.drawText(fromXOY(Vector(i*f, 0)).x(), startY - 10, QString::number(i));
         if (Engine::toXOY(0, 0).y() < 0)
         {
-            painter.drawText(Engine::fromXOY(i, 0).x(), 15, QString::number(i));
+            painter.drawText(Engine::fromXOY(i*f, 0).x(), 15, QString::number(i));
         }
         else if (Engine::toXOY(0, height()).y() > 0)
         {
-            painter.drawText(Engine::fromXOY(i, 0).x(), height() - 10, QString::number(i));
+            painter.drawText(Engine::fromXOY(i*f, 0).x(), height() - 10, QString::number(i));
         }
-
     }
 
-    // ОТРИСОВКА ЧИСЕЛ ПО У
+//    // ОТРИСОВКА ЧИСЕЛ ПО У
     Vector vectorY = toXOY(Vector(width() / 2, 0));
 
-    for (int i = vectorY.y() - (int)vectorY.y() % 5; fromXOY(Vector(startX, i)).y() < height(); i -= 5)
+    for (int i = vectorY.y()/f - (int)(vectorY.y()/f) % 5; fromXOY(Vector(startX, i*f)).y() < height(); i -= 5)
     {
         if (i != 0)
         {
-             painter.drawText(startX + 10, fromXOY(Vector(startX, i)).y(), QString::number(i));
+             painter.drawText(startX + 10, fromXOY(Vector(startX, i*f)).y(), QString::number(i));
         }
 
-        if (Engine::fromXOY(0,0).x() < 0)
+        if (Engine::fromXOY(0, 0).x() < 0)
         {
-            painter.drawText(4, Engine::fromXOY(0, i).y(), QString::number(i));
+            painter.drawText(4, Engine::fromXOY(0, i*f).y(), QString::number(i));
         }
         else if (Engine::toXOY(width(), 0).x() < 0)
         {
-            painter.drawText(width() - 25, Engine::fromXOY(0, i).y(), QString::number(i));
+            painter.drawText(width() - 25, Engine::fromXOY(0, i*f).y(), QString::number(i));
         }
     }
 }
 
 void EngineWidget::drawElectrostaticField(QPainter& painter)
 {
-    const int stepX = 1;
-    const int stepY = 1;
+    const float stepX = lambda()/0.1;
+    const float stepY = lambda()/0.1;
     Vector window_size(toXOY(Vector(width(), height())));
     painter.setPen(QPen(Qt::red, 1.5, Qt::SolidLine));
-    for(int x = toXOY(Vector(0, 0)).x(); x <= window_size.x(); x += stepX)
+    for(float x = toXOY(Vector(0, 0)).x(); x <= window_size.x(); x += stepX)
     {
-        for(int y = toXOY(Vector(0, 0)).y(); y >= window_size.y(); y -= stepY)
+        for(float y = toXOY(Vector(0, 0)).y(); y >= window_size.y(); y -= stepY)
         {
             const Vector tension = Engine::calculateTension(Vector(x, y));
             Vector pos = fromXOY(Vector(x, y));
