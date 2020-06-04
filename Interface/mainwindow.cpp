@@ -547,7 +547,11 @@ void MainWindow::saveAs()
 
 void MainWindow::saveAsMethod()
 {
-    QString selected = QFileDialog::getSaveFileName(this, "", "", "");
+    if(!ui->m_engine->hasCharges())
+    {
+        return;
+    }
+    QString selected = QFileDialog::getSaveFileName(this, "Save position", "scene.xml", tr("XML Files (*.xml)"));
     if(selected == "")
     {
         return;
@@ -556,12 +560,10 @@ void MainWindow::saveAsMethod()
     QFile file(selected);
     if (!file.open(QFile::WriteOnly | QFile::Text))
     {
-        qDebug() << "Error saving XML file.";
         file.close();
         return;
     }
     filename = selected;
-    file.open(QIODevice::WriteOnly);
 
     QXmlStreamWriter xmlWriter(&file);
     xmlWriter.setAutoFormatting(true);
@@ -575,7 +577,6 @@ void MainWindow::saveAsMethod()
 
         xmlWriter.writeTextElement("name", ui->m_engine->getCharge(i)->name());
 
-        //xmlWriter.writeTextElement("is_ignored", ui->m_engine->getCharge(i)->is_ignored() ? "true" : "false");
         xmlWriter.writeTextElement("is_movable", ui->m_engine->getCharge(i)->is_movable() ? "true" : "false");
 
         xmlWriter.writeTextElement("charge", QString::number(ui->m_engine->getCharge(i)->charge()));
