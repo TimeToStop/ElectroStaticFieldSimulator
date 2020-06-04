@@ -21,7 +21,7 @@ const char* const Dictionary::m_langs[Words::LENGTH_OF_WORDS_IN_DICT][Language::
 
     {"Help", "Помощь"},
 
-    {"How To", "Мануал"},
+    {"How To Use", "Инструкция по использованию"},
 
     {"About", "О Программе"},
 

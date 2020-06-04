@@ -32,7 +32,8 @@ SOURCES += \
     Options/translator.cpp \
     Options/colortheme.cpp \
     about.cpp \
-    Interface/help.cpp
+    Interface/help.cpp \
+    Interface/help_eng.cpp
 
 HEADERS += \
     Engine/charge.h \
@@ -52,7 +53,8 @@ HEADERS += \
     Options/translator.h \
     Options/colortheme.h \
     about.h \
-    Interface/help.h
+    Interface/help.h \
+    Interface/help_eng.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -63,7 +65,8 @@ FORMS += \
     Interface/Charge/createchargedialog.ui \
     Interface/mainwindow.ui \
     about.ui \
-    Interface/help.ui
+    Interface/help.ui \
+    Interface/help_eng.ui
 
 RESOURCES += \
     resourses.qrc

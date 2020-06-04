@@ -4,6 +4,7 @@
 #include "Interface/Charge/createchargedialog.h"
 #include "Interface/Charge/selectcharge.h"
 #include "Interface/help.h"
+#include "Interface/help_eng.h"
 #include "about.h"
 #include "Engine/charge.h"
 
@@ -135,6 +136,7 @@ MainWindow::MainWindow(QWidget *parent) :
     Translator::registerWidget<QAction, Words::SAVE_AS>(m_id, ui->actionSave_as, &QAction::setText);
     Translator::registerWidget<QAction, Words::EXIT>(m_id, ui->actionExit, &QAction::setText);
     Translator::registerWidget<QAction, Words::HOW_TO>(m_id, ui->actionHow_To, &QAction::setText);
+    Translator::registerWidget<QAction, Words::CREDITS>(m_id, ui->actionAbout_Programm, &QAction::setText);
 
     Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_METRES>(m_id, &m_pos_x, &ValueRepresenter::setMeasure);
     Translator::registerWidget<ValueRepresenter, Words::PHY_VAL_METRES>(m_id, &m_pos_y, &ValueRepresenter::setMeasure);
@@ -613,8 +615,15 @@ void MainWindow::exit()
 void MainWindow::help() {
     EngineState e = ui->m_engine->engineState();
     ui->m_engine->setEngineState(EngineState::PAUSE);
-    Help d(this);
-    d.exec();
+    if (Translator::currentLang() == EN) {
+        Help_eng d(this);
+        d.exec();
+    }
+    else {
+      Help d(this);
+      d.exec();
+    }
+
     ui->m_engine->setEngineState(e);
 }
 
