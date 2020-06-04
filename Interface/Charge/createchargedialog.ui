@@ -144,13 +144,6 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_7">
        <item>
-        <widget class="QCheckBox" name="m_is_ignored">
-         <property name="text">
-          <string>Check Box</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QCheckBox" name="m_is_movable">
          <property name="text">
           <string>CheckBox</string>

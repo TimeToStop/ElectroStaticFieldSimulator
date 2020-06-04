@@ -28,7 +28,7 @@ CreateChargeDialog::CreateChargeDialog(const QStringList&, QWidget *parent) :
     Translator::registerWidget<QLabel, Words::POSITION_>(m_id, ui->m_pos_label, &QLabel::setText);
 
     //CheckBoxes
-    Translator::registerWidget<QCheckBox, Words::IS_IGNORE>(m_id, ui->m_is_ignored, &QCheckBox::setText);
+    //Translator::registerWidget<QCheckBox, Words::IS_IGNORE>(m_id, ui->m_is_ignored, &QCheckBox::setText);
     Translator::registerWidget<QCheckBox, Words::IS_MOVABLE>(m_id, ui->m_is_movable, &QCheckBox::setText);
 
     //Translator::registerWidget<QCheckBox, Words::IS_IGNORE>(m_id, ui->m_, &QCheckBox::setText);
@@ -71,10 +71,10 @@ float CreateChargeDialog::charge() const
     return m_charge.value();
 }
 
-bool CreateChargeDialog::is_ignored() const
-{
-    return ui->m_is_ignored->isChecked();
-}
+//bool CreateChargeDialog::is_ignored() const
+//{
+//    return ui->m_is_ignored->isChecked();
+//}
 
 bool CreateChargeDialog::is_movable() const
 {
@@ -108,10 +108,10 @@ void CreateChargeDialog::setCharge(float q)
     m_charge.setValue(q);
 }
 
-void CreateChargeDialog::setIgnored(bool ignore)
-{
-    ui->m_is_ignored->setChecked(ignore);
-}
+//void CreateChargeDialog::setIgnored(bool ignore)
+//{
+//    ui->m_is_ignored->setChecked(ignore);
+//}
 
 void CreateChargeDialog::setMovable(bool movable)
 {

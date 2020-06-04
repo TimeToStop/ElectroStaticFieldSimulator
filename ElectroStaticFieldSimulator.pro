@@ -20,7 +20,6 @@ SOURCES += \
     Engine/engine.cpp \
     Engine/vector.cpp \
     Interface/Charge/createchargedialog.cpp \
-    Interface/Charge/ignorechargesdialog.cpp \
     Interface/Charge/selectcharge.cpp \
     Interface/mainwindow.cpp \
     Interface/ValueRepresenter/valueedit.cpp \
@@ -40,7 +39,6 @@ HEADERS += \
     Engine/engine.h \
     Engine/vector.h \
     Interface/Charge/createchargedialog.h \
-    Interface/Charge/ignorechargesdialog.h \
     Interface/Charge/selectcharge.h \
     Interface/mainwindow.h \
     Interface/ValueRepresenter/valueedit.h \
@@ -63,7 +61,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 FORMS += \
     Interface/Charge/createchargedialog.ui \
-    Interface/Charge/ignorechargesdialog.ui \
     Interface/mainwindow.ui \
     about.ui \
     Interface/help.ui

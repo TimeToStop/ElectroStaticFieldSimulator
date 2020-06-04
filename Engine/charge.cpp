@@ -9,7 +9,6 @@ long long Charge::m_amount = 0;
 Charge::Charge(Engine* const engine):
     m_engine(engine),
     m_name("Charge " + QString::number(m_amount++)),
-    m_is_ignored(false),
     m_is_movable(true),
     m_charge(0.f),
     m_mass(1.f),
@@ -22,7 +21,6 @@ Charge::Charge(Engine* const engine):
 Charge::Charge(float mass, Vector pos, Engine * const engine):
     m_engine(engine),
     m_name("Charge " + QString::number(m_amount++)),
-    m_is_ignored(false),
     m_is_movable(true),
     m_charge(0.f),
     m_mass(mass),
@@ -35,7 +33,6 @@ Charge::Charge(float mass, Vector pos, Engine * const engine):
 Charge::Charge(const QString& name, float q, float mass, Vector pos, Engine * const engine):
     m_engine(engine),
     m_name(name),
-    m_is_ignored(false),
     m_is_movable(true),
     m_charge(q),
     m_mass(mass),
@@ -46,10 +43,9 @@ Charge::Charge(const QString& name, float q, float mass, Vector pos, Engine * co
     m_amount++;
 }
 
-Charge::Charge(const QString& name, float q, float mass, Vector pos, Vector vel, bool ignore, bool movable, Engine * const engine):
+Charge::Charge(const QString& name, float q, float mass, Vector pos, Vector vel, bool movable, Engine * const engine):
     m_engine(engine),
     m_name(name),
-    m_is_ignored(ignore),
     m_is_movable(movable),
     m_charge(q),
     m_mass(mass),
@@ -79,16 +75,11 @@ void Charge::draw(QPainter& painter)
 
 void Charge::tick(float deltatime)
 {
-    if(!m_is_ignored && m_is_movable)
+    if(m_is_movable)
     {
         m_velocity += m_acceleration * deltatime;
         m_pos += m_velocity * deltatime;
     }
-}
-
-void Charge::setIgnore(bool b)
-{
-    m_is_ignored = b;
 }
 
 void Charge::setMovable(bool b)
@@ -133,15 +124,10 @@ void Charge::movePos(const Vector& pos)
 
 void Charge::addForce(const Vector& force)
 {
-    if(!m_is_ignored && m_is_movable)
+    if(m_is_movable)
     {
         m_acceleration += force/m_mass;
     }
-}
-
-bool Charge::is_ignored() const
-{
-    return m_is_ignored;
 }
 
 bool Charge::is_movable() const

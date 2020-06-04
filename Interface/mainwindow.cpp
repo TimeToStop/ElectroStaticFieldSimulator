@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 
 #include "Interface/Charge/createchargedialog.h"
-#include "Interface/Charge/ignorechargesdialog.h"
 #include "Interface/Charge/selectcharge.h"
 #include "Interface/help.h"
 #include "about.h"
@@ -255,7 +254,7 @@ void MainWindow::addCharge()
 
     if(d.exec() == QDialog::Accepted)
     {
-        ui->m_engine->addCharge(std::unique_ptr<Charge>(new Charge(d.name(), d.charge(), d.mass(), d.pos(), d.vel(), d.is_ignored(), d.is_movable(), ui->m_engine)));
+        ui->m_engine->addCharge(std::unique_ptr<Charge>(new Charge(d.name(), d.charge(), d.mass(), d.pos(), d.vel(), d.is_movable(), ui->m_engine)));
         resetCameraChange();
         resetChargeInfoList();
     }
@@ -283,13 +282,12 @@ void MainWindow::editCharge()
             d1.setVel(ui->m_engine->getCharge(d.getSelected())->velocity());
             d1.setMass(ui->m_engine->getCharge(d.getSelected())->mass());
             d1.setCharge(ui->m_engine->getCharge(d.getSelected())->charge());
-            d1.setIgnored(ui->m_engine->getCharge(d.getSelected())->is_ignored());
             d1.setMovable(ui->m_engine->getCharge(d.getSelected())->is_movable());
 
             if(d1.exec() == QDialog::Accepted)
             {
                 ui->m_engine->rmCharge(d.getSelected());
-                ui->m_engine->addCharge(std::unique_ptr<Charge>(new Charge(d1.name(), d1.charge(), d1.mass(), d1.pos(), d1.vel(), d1.is_ignored(), d1.is_movable(), ui->m_engine)));
+                ui->m_engine->addCharge(std::unique_ptr<Charge>(new Charge(d1.name(), d1.charge(), d1.mass(), d1.pos(), d1.vel(), d1.is_movable(), ui->m_engine)));
                 recountPhysics();
             }
         }
@@ -298,23 +296,6 @@ void MainWindow::editCharge()
     }
     repaint();
 }
-
-//void MainWindow::ignoreCharges()
-//{
-//    if(ui->m_engine->hasCharges())
-//    {
-//        EngineState e = ui->m_engine->engineState();
-//        ui->m_engine->setEngineState(EngineState::PAUSE);
-//        IgnoreChargesDialog d(ui->m_engine->chargeNames(), this);
-
-//        if(d.exec() == QDialog::Accepted)
-//        {
-//            recountPhysics();
-//        }
-
-//        ui->m_engine->setEngineState(e);
-//    }
-//}
 
 void MainWindow::rmCharge()
 {
@@ -381,24 +362,19 @@ void MainWindow::open()
     Charge chargeObject(ui->m_engine);
     size_t size = 0;
     QString name = "default";
-    bool is_ignored = false;
     bool is_movable = false;
-    double charge = 0;
-    double mass;
-    double xPos;
-    double yPos;
-    double xVel;
-    double yVel;
+    double charge = 0.;
+    double mass = 0.;
+    double xPos = 0.;
+    double yPos = 0.;
+    double xVel = 0.;
+    double yVel = 0.;
     Vector vectorPos;
-    Vector vectorVel = Vector(0, 0);
+    Vector vectorVel;
 
     while (!Rxml.atEnd()) {
         if (Rxml.isStartElement()) {
-            if (Rxml.name() == "Charges") {
-                qDebug() << "CHARGES: ";
-            }
-
-            else if (Rxml.name() == "Charge") {
+            if (Rxml.name() == "Charge") {
                 size++;
                 while (!Rxml.atEnd()) {
                     if (Rxml.isEndElement()) {
@@ -412,9 +388,6 @@ void MainWindow::open()
                         if (Rxml.name() == "name") {
                             name = Rxml.readElementText();
                         }
-                        else if (Rxml.name() == "is_ignored") {
-                            is_ignored = (Rxml.readElementText() == "true");
-                        }
                         else if (Rxml.name() == "is_movable") {
                             is_movable = (Rxml.readElementText() == "true");
                         }
@@ -424,7 +397,6 @@ void MainWindow::open()
                         else if (Rxml.name() == "mass") {
                             mass = Rxml.readElementText().toDouble();
                         }
-
                         else if (Rxml.name() == "pos") {
                             while (!Rxml.atEnd()) {
                                 if (Rxml.isEndElement()) {
@@ -439,11 +411,9 @@ void MainWindow::open()
                                 else if (Rxml.isStartElement()) {
                                     if (Rxml.name() == "x") {
                                         xPos = Rxml.readElementText().toDouble();
-                                        qDebug() << "x: " << xPos;
                                     }
                                     else if (Rxml.name() == "y") {
                                         yPos = Rxml.readElementText().toDouble();
-                                        qDebug() << "y: " << yPos;
                                     }
                                     Rxml.readNext();
                                 }
@@ -495,25 +465,24 @@ void MainWindow::open()
                     mass = 1;
                 }
 
-                qDebug() << "charge: " << charge;
                 ui->m_engine->addCharge(std::unique_ptr<Charge>(new Charge(name, charge, mass, vectorPos,
-                                                                           vectorVel, is_ignored, is_movable, ui->m_engine)));
+                                                                           vectorVel, is_movable, ui->m_engine)));
             }
         }
         Rxml.readNext();
     }
 
-    qDebug() << "end";
     file.close();
 }
 
 void MainWindow::save()
 {
-    if (filename == "") {
+    if (filename == "")
+    {
         saveAsMethod();
     }
-
-    else {
+    else
+    {
         QFile file(filename);
         if (!file.open(QFile::WriteOnly | QFile::Text))
         {
@@ -530,12 +499,12 @@ void MainWindow::save()
 
         xmlWriter.writeStartElement("Charges");
 
-        for (size_t i = 0; i < ui->m_engine->chargesNum(); i++) {
+        for (size_t i = 0; i < ui->m_engine->chargesNum(); i++)
+        {
             xmlWriter.writeStartElement("Charge");
 
             xmlWriter.writeTextElement("name", ui->m_engine->getCharge(i)->name());
 
-            xmlWriter.writeTextElement("is_ignored", ui->m_engine->getCharge(i)->is_ignored() ? "true" : "false");
             xmlWriter.writeTextElement("is_movable", ui->m_engine->getCharge(i)->is_movable() ? "true" : "false");
 
             xmlWriter.writeTextElement("charge", QString::number(ui->m_engine->getCharge(i)->charge()));
@@ -604,7 +573,7 @@ void MainWindow::saveAsMethod()
 
         xmlWriter.writeTextElement("name", ui->m_engine->getCharge(i)->name());
 
-        xmlWriter.writeTextElement("is_ignored", ui->m_engine->getCharge(i)->is_ignored() ? "true" : "false");
+        //xmlWriter.writeTextElement("is_ignored", ui->m_engine->getCharge(i)->is_ignored() ? "true" : "false");
         xmlWriter.writeTextElement("is_movable", ui->m_engine->getCharge(i)->is_movable() ? "true" : "false");
 
         xmlWriter.writeTextElement("charge", QString::number(ui->m_engine->getCharge(i)->charge()));

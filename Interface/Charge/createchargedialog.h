@@ -33,7 +33,6 @@ public:
     Vector vel() const;
     float mass() const;
     float charge() const;
-    bool is_ignored() const;
     bool is_movable() const;
 
     void setName(const QString&);
@@ -41,7 +40,6 @@ public:
     void setVel(const Vector&);
     void setMass(float);
     void setCharge(float);
-    void setIgnored(bool);
     void setMovable(bool);
 
 private:
