@@ -61,7 +61,7 @@ const char* const Dictionary::m_langs[Words::LENGTH_OF_WORDS_IN_DICT][Language::
 
     {"Speed x2", "Скорость x2"},
 
-    {"Edit", "Изменить"},
+    {"Edit", "Редактировать"},
 
     {"Additional", "Дополнительно"},
 
